@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="container mt-5">
+        <div class="card text-black">
+            <div class="card-header bg-dark d-flex justify-content-between">
+				<h2>{{ recipe.Name }}</h2>
+				<div>
+					<button class="btn btn-secondary btn-change-factor" data-factor="2">Double</button>
+					<button class="btn btn-secondary btn-change-factor" data-factor="0.5">Halve</button>
+					<button class="btn btn-secondary btn-change-factor" data-factor="3">Triple</button>
+					<!-- <button class="btn btn-secondary btn-change-factor" data-factor="0.3333">Third</button> -->
+				</div>
+            </div>
+            <div class="card-body text-body">               
+				<div class="row">
+					<div class="col bg-light">
+		                <h4>Ingredients:</h4>
+		                <ul id="ingredients">
+		                    {% for ingredient in recipe.Ingredients %}
+		                        <li>{{ ingredient }}</li>
+		                    {% endfor %}
+		                </ul>
+					</div>
+					<div class="col-8">
+		                <h4>Steps:</h4>
+		                <ul>
+		                    {% for step in recipe.Steps %}
+		                        <li>{{ step }}</li>
+		                    {% endfor %}
+						</ul>
+						{% if recipe.AdditionalInfo %}
+							<h5>Additional information</h5>
+							<p>{{ recipe.AdditionalInfo }}</p>
+						{% else %}
+							<!-- <img src="https://placekitten.com/480/240" alt="480x240 kitten" /> -->
+						{% endif %}
+						{% if recipe.BasedOnLink %}
+							<hr />	
+							<p>Based on <a href="{{ recipe.BasedOnLink }}" target="_blank">this</a>.</p>
+						{% endif %}
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block end_scripts %}
+	<script>
+		window.addEventListener("DOMContentLoaded", () => {
+			document.querySelectorAll(".btn-change-factor").forEach((button) => {
+				button.addEventListener("click", (event) => {
+					const factor = button.getAttribute("data-factor");
+					multiplyIngredientAmountsBy(factor);
+				});
+			});
+		});
+
+		function multiplyIngredientAmountsBy(factor) {
+			// NOTE - should use fraction.js if I'm seriously going to do that
+			// Don't reinvent the wheel please
+			// https://github.com/infusion/Fraction.js/
+			// also could get super complex with this... and I'm not sure if I want to do that. Hmm.
+
+			// Also - this feature is not needed for an MVP launch
+
+			const ingredientList = document.querySelector("ul#ingredients");
+			for (let ingListItem of ingredientList.children) {
+				const currentQuantity = ingListItem.textContent.split(' ', 1)[0];
+				const isQuantityFraction = isFraction(currentQuantity);
+			
+				if (isNaN(currentQuantity) && !isQuantityFraction)
+					continue;
+
+				const newQuantity = isQuantityFraction 
+					? multiplyFractionBy(factor, currentQuantity) 
+					: currentQuantity * factor;
+
+				ingListItem.textContent = ingListItem.textContent.replace(currentQuantity, newQuantity);
+			}
+		}
+
+		function isFraction(quantity) {
+			const fractionList = quantity.split("/");
+			return fractionList.length == 2 && !fractionList.some(frac => isNaN(frac));
+		}
+
+		function multiplyFractionBy(factor, fraction) {
+			const fractionList = fraction.split("/");
+			
+			const newNumerator = factor > 1 ? factor * fractionList[0] : fractionList[0];
+			const denominator = fractionList[1];
+
+			const newValue = newNumerator / denominator;
+
+			return Number.isInteger(newValue) ? newValue : `${newNumerator}/${denominator}`;
+		}
+	</script>
+{% endblock %}

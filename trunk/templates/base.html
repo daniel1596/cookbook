@@ -1,0 +1,26 @@
+{% import 'header.html' as header %}
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="/static/styles/css/vendor/bootstrap.min.css" />
+		<link rel="stylesheet" href="/static/styles/css/main.css" />
+	</head>
+	<body class="d-flex flex-column h-100 mx-auto p-3">
+		{{ header.make_header() }}
+        <main>
+            {% block main %}{% endblock %}
+		</main>
+		<!-- <footer class="text-center text-white-50">
+			<p></p>
+		</footer> -->
+		
+		{% block end_scripts %}{% endblock %}
+
+		<!-- Bootstrap JS dependencies - need to be in this order-->
+		<script src="/static/scripts/vendor/jquery-3.3.1.slim.min.js"></script>
+		<script src="/static/scripts/vendor/popper.min.js"></script>
+		<script src="/static/scripts/vendor/bootstrap.min.js"></script>
+	</body>
+</html>

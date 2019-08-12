@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block main %}
+	<div id="vue-homepage" class="container text-center" style="margin-top: 20%">
+		<!-- <h4 class="mb-4">Recipes app</h4> -->
+		<div class="my-4">
+			<h4>Search by recipe or ingredient:</h4>
+			<input id="searchBox" type="text" class="form-control mx-auto w-50" v-model="recipeNameSearch" />
+		</div>
+		<div>
+			<div id="searchResults" class="d-none">
+				<h5>Recipes</h5>
+				<div v-if="filteredResults && filteredResults.length > 0">
+					<div v-for="recipe in filteredResults">
+						<a class="index-ingredient-link" :href="getDetailLink(recipe)">[[ recipe.Name ]]</a>
+					</div>
+				</div>
+				<div v-else-if="!recipeNameSearch">
+					<p>Please enter search text.</p>
+				</div>
+				<div v-else>
+					<p>There were no results.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block end_scripts %}
+	<!-- Vue.js - trying it out -->
+	<script src="https://vuejs.org/js/vue.js"></script>
+<!--	<script src="{{ url_for('static', filename='js/index.js') }}"></script> -->
+	<script>
+		const index = new Vue({
+			el: "#vue-homepage",
+			data: {
+				recipeNameSearch: "",
+
+				// these need to be initialized, but can't be initialized as AJAX-acquired results, according to Vue docs
+				// see https://vuejs.org/v2/guide/reactivity.html#Declaring-Reactive-Properties
+				allRecipes: [],
+				allIngredients: []
+			},
+			delimiters: ['[[', ']]'],
+			computed: {
+				filteredResults() {
+					// Good Codepen example for filtering Vue results: https://codepen.io/AndrewThian/pen/QdeOVa
+
+					if (!this.allRecipes)
+						return [];
+
+					const searchTextLower = this.recipeNameSearch.toLowerCase();
+
+					return this.allRecipes.filter(recipe =>
+						recipe.Name.toLowerCase().includes(searchTextLower) ||
+							this.allIngredients.some(ing =>
+								ing.RecipeID === recipe.RecipeID && ing.FoodItem.toLowerCase().includes(searchTextLower)
+							)
+					);
+				}
+			},
+			methods: {
+				loadData: async function() {
+					this.allRecipes = await fetch("/api/recipes/list").then((response) => response.json());
+					this.allIngredients = await fetch("/api/ingredients/list").then((response) => response.json());
+				},
+				getDetailLink: function(recipe) {
+					return `recipes/${recipe.Name}`;
+				}
+			},
+			mounted: function() {
+				this.loadData();
+				
+				document.querySelector("#searchBox").focus();	
+	
+				document.querySelector("#searchBox").addEventListener("keypress", (event) => {
+					if (event.key === "Enter" && this.filteredResults.length === 1) {
+						// todo for later - have some sort of text display that you can hit "enter"
+						window.location.href = this.getDetailLink(this.filteredResults[0]);
+					}
+					document.querySelector("#searchResults").classList.remove("d-none");
+				});
+			}
+		});
+	</script>
+{% endblock %}

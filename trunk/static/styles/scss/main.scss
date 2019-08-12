@@ -1,0 +1,24 @@
+body {
+    background-color: #333; 
+	color: white; 
+	
+	@media (max-width: 1920px) {
+		width: 60%;
+	}
+
+	@media (max-width: 1366px) {
+		width: 75%;
+	}
+}
+
+
+.index-ingredient-link {
+	$link-color: #dbe9bd;
+
+	color: $link-color;
+	
+	&:hover {
+		color: $link-color;
+		font-weight: 500;
+	}
+}
