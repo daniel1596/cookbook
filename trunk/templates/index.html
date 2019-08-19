@@ -27,8 +27,8 @@
 {% endblock %}
 
 {% block end_scripts %}
-	<!-- Vue.js - trying it out -->
 	<script src="https://vuejs.org/js/vue.js"></script>
+
 <!--	<script src="{{ url_for('static', filename='js/index.js') }}"></script> -->
 	<script>
 		const index = new Vue({
@@ -60,9 +60,11 @@
 				}
 			},
 			methods: {
-				loadData: async function() {
-					this.allRecipes = await fetch("/api/recipes/list").then((response) => response.json());
-					this.allIngredients = await fetch("/api/ingredients/list").then((response) => response.json());
+				loadData: async function() {			
+					[this.allRecipes, this.allIngredients] = (await Promise.all([
+						axios.get("/api/recipes/list"), 
+						axios.get("/api/ingredients/list")
+					])).map(res => res.data);
 				},
 				getDetailLink: function(recipe) {
 					return `recipes/${recipe.Name}`;
@@ -82,5 +84,7 @@
 				});
 			}
 		});
+
+
 	</script>
 {% endblock %}
