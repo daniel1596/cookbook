@@ -15,6 +15,7 @@ def get_all_recipes() -> List[Recipe]:
 
 def get_recipe_by_name(name: str) -> Recipe:
     return Recipe.query\
+        .options(joinedload(Recipe.Ingredients))\
         .filter(Recipe.Name.like(f"%{name}%"))\
         .first()  # making it not a part of a session seems to work... is that bad?
 

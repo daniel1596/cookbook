@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    <div class="container mt-5">
+    <div id="vue-recipe-detail" class="container mt-5" data-recipe-name="{{recipe.Name}}">
         <article class="card text-black">
             <div class="card-header bg-dark d-flex justify-content-between">
 				<h2>{{ recipe.Name }}</h2>
 				<div>
-					<button class="btn btn-secondary btn-change-factor" data-factor="2">Double</button>
+					<button class="btn btn-secondary" @click="multiplyIngredientAmountBy(2)">Double</button>
+
+					<!-- <button class="btn btn-secondary btn-change-factor" data-factor="2">Double</button>
 					<button class="btn btn-secondary btn-change-factor" data-factor="0.5">Halve</button>
-					<button class="btn btn-secondary btn-change-factor" data-factor="3">Triple</button>
+					<button class="btn btn-secondary btn-change-factor" data-factor="3">Triple</button> -->
 					<!-- <button class="btn btn-secondary btn-change-factor" data-factor="0.3333">Third</button> -->
 				</div>
             </div>
@@ -17,9 +19,12 @@
 					<div class="col bg-light">
 		                <h4>Ingredients:</h4>
 		                <ul id="ingredients">
-		                    {% for ingredient in recipe.Ingredients %}
+							<li v-for="ingredient of ingredients">
+								[[ ingredient.Quantity ]] | [[ ingredient.FoodItem ]]
+							</li>
+		                    <!-- {% for ingredient in recipe.Ingredients %}
 		                        <li>{{ ingredient }}</li>
-		                    {% endfor %}
+		                    {% endfor %} -->
 		                </ul>
 					</div>
 					<div class="col-8">
@@ -47,6 +52,36 @@
 {% endblock %}
 
 {% block end_scripts %}
+	<script src="https://vuejs.org/js/vue.js"></script>
+	<script>
+		const recipe_detail = new Vue({
+			el: "#vue-recipe-detail",
+			delimiters: ['[[', ']]'],
+			data: {
+				recipe: [],
+				ingredients: []
+			},
+			methods: {
+				loadData: async function() {
+					const recipeName = document.querySelector("#vue-recipe-detail").getAttribute("data-recipe-name");
+					this.recipe = (await axios.get(`/api/recipes/${recipeName}`)).data;
+					this.ingredients = this.recipe.Ingredients["py/seq"]; // seems hacky but JSON.parse() didn't work so just leave it as is
+				},
+				multiplyIngredientAmountBy: function(factor) {
+					for (ing of this.ingredients) {
+						// todo start here
+						
+						ing.Quantity = "2 * " + ing.Quantity;
+					}
+				}
+			},
+			mounted: async function() {
+				this.loadData();
+			}
+		})
+	</script>
+
+	<!-- Going to attempt to deprecate the below script -->
 	<script>
 		window.addEventListener("DOMContentLoaded", () => {
 			document.querySelectorAll(".btn-change-factor").forEach((button) => {
