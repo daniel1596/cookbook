@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 from jsonpickle import encode
 
-from database.Main import get_all_ingredients, get_all_recipes
+from database.Main import get_all_ingredients, get_all_recipes, get_recipe_by_name
 
 
 API = Blueprint("API", __name__, url_prefix='/api')
@@ -21,6 +21,11 @@ def list_unmade():
 @API.route("recipes/list")
 def list_from_db():
 	return encode(get_all_recipes())
+
+
+@API.route("recipes/<recipe_name>")
+def get_recipe(recipe_name: str):
+	return encode(get_recipe_by_name(recipe_name))
 
 
 @API.route("ingredients/list")

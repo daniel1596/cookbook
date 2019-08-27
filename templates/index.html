@@ -29,10 +29,11 @@
 {% block end_scripts %}
 	<script src="https://vuejs.org/js/vue.js"></script>
 
-<!--	<script src="{{ url_for('static', filename='js/index.js') }}"></script> -->
+	<!-- <script src="{{ url_for('static', filename='js/index.js') }}"></script> -->
 	<script>
 		const index = new Vue({
 			el: "#vue-homepage",
+			delimiters: ['[[', ']]'],
 			data: {
 				recipeNameSearch: "",
 
@@ -41,7 +42,6 @@
 				allRecipes: [],
 				allIngredients: []
 			},
-			delimiters: ['[[', ']]'],
 			computed: {
 				filteredResults() {
 					// Good Codepen example for filtering Vue results: https://codepen.io/AndrewThian/pen/QdeOVa
