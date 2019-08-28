@@ -22,11 +22,11 @@ class Recipe(Base):
 class Ingredient(Base):
     __tablename__ = "Ingredient"
 
-    def __init__(self, foodItem: str, quantity: float, unitOfMeasure, doesScale=True):
+    def __init__(self, foodItem: str, quantity: float, unitOfMeasure="", *, doesScale=True):
         self.FoodItem = foodItem
         self.Quantity = quantity if quantity else -1
         self.UnitOfMeasure = unitOfMeasure.__repr__() if isinstance(unitOfMeasure, Unit) else unitOfMeasure
-        self.DoesScale = doesScale
+        self.DoesScale = doesScale and self.Quantity > -1
 
     IngredientID = PrimaryKey()
     FoodItem = StringNotNull()
