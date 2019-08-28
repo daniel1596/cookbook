@@ -32,7 +32,6 @@ def __make_bean_based():
         Ingredient("Beans", 1, "15-oz can"),
         Ingredient("Quinoa", 1/4, Unit.CUP),
         Ingredient("Oats", 1/2, Unit.CUP),
-        Ingredient("Oats", 1/2, Unit.CUP),
         Ingredient("Water", 1/2, Unit.CUP),
         Ingredient("Bell pepper (or tomato), minced", 1/4, Unit.CUP),
         Ingredient("Onion, minced", 2, Unit.TBSP),
@@ -52,25 +51,23 @@ def __make_bean_based():
     additional_info="These save fine a couple days, at least, in the fridge.",
     based_on_link="https://www.allrecipes.com/recipe/220661/quinoa-black-bean-burgers/")
 
-    return
-
     __make_recipe("Mexican bean salad", [
-        "Canned beans (Simple Truth organic three-bean)": "2 cans",
-        "Green bell pepper, diced": "1",
-        "Onion, diced": "1",
-        "Corn, frozen": "10 oz",
-        "Diced tomatoes, canned": "14.5 oz",
-        "Olive oil": "1/4 cup",
-        "Cilantro, dried": "1/4 cup",
-        "Apple cider vinegar": "3 tbsp",
-        "Lime juice": "2 tbsp",
-        "Lemon juice": "1 tbsp",
-        "Cumin, ground": "2 tsp",
-        "Dried minced garlic": "1 tsp",
-        "Sugar": "1 tsp",
-        "Salt": "1 tsp",
-        "Cayenne pepper": "1/2 tsp",
-        "Black pepper": "A few sprinkles"
+        Ingredient("Canned beans (Simple Truth organic three-bean)", 2, "cans"),
+        Ingredient("Green bell pepper, diced", 1, ""),
+        Ingredient("Onion, diced", 1, ""),
+        Ingredient("Corn, frozen", 10, Unit.DRY_OZ),
+        Ingredient("Diced tomatoes, canned", 14.5, Unit.DRY_OZ),
+        Ingredient("Olive oil", 1/4, Unit.CUP),
+        Ingredient("Cilantro, dried", 1/4, Unit.CUP),
+        Ingredient("Apple cider vinegar", 3, Unit.TBSP),
+        Ingredient("Lime juice", 2, Unit.TBSP),
+        Ingredient("Lemon juice", 1, Unit.TBSP),
+        Ingredient("Cumin, ground", 2, Unit.TSP),
+        Ingredient("Dried minced garlic", 1, Unit.TSP),
+        Ingredient("Sugar", 1, Unit.TSP),
+        Ingredient("Salt", 1, Unit.TSP),
+        Ingredient("Cayenne pepper", 1/2, Unit.TSP),
+        Ingredient("Black pepper", None, "A few sprinkles", doesScale=False),
     ], [
         "Dice bell pepper and onion. Drain beans and diced tomatoes. Heat up frozen corn.",
         "Mix these ingredients (top half of the list) together in a large bowl.",
@@ -80,14 +77,14 @@ def __make_bean_based():
     based_on_link="http://allrecipes.com/recipe/14169/mexican-bean-salad/")
 
     __make_recipe("Roasted chickpeas", {
-        "Chickpeas": "2 cups",
-        "Olive oil": "2 tbsp",
-        "Ground cumin": "1 tbsp",
-        "Garlic powder": "1 tbsp",
-        "Chili powder": "1/2 tsp",
-        "Sea salt": "1 pinch",
-        "Pepper": "1 pinch",
-        "Red pepper flakes": "1 sprinkle"
+        Ingredient("Chickpeas", 2, Unit.CUP),
+        Ingredient("Olive oil", 2, Unit.TBSP),
+        Ingredient("Ground cumin", 1, Unit.TBSP),
+        Ingredient("Garlic powder", 1, Unit.TBSP),
+        Ingredient("Chili powder", 1/2, Unit.TBSP),
+        Ingredient("Sea salt", 1, "pinch"),
+        Ingredient("Pepper", 1, "pinch"),
+        Ingredient("Red pepper flakes", 1, "pinch")
     }, [
         "Preheat an oven to 350 degrees F",
         "Whisk the oil, cumin, garlic powder, chili powder, sea salt, black pepper, and red pepper together in a small bowl; add the chickpeas and toss to coat.",
@@ -132,7 +129,7 @@ def __make_breads():
     __make_recipe("Cranberry walnut bread", {
         "Cranberries/raisins": "1/2 cup",
         "Flour": "2 cups",
-        "Eggs": "1",
+        "Eggs": 1,
         "Olive oil": "2 tbsp",
         "Milk": "3/4 cup",
         "Brown sugar": "5/8 cup",
@@ -183,7 +180,7 @@ def __make_breads():
         "Canola oil": "2 tbsp",
         "Milk": "2 tbsp",
         "Sugar": "1/2 cup",
-        "Egg": "1",
+        "Egg": 1,
         "Vanilla extract": "1 tsp"
     }, [
         "Preheat oven to 350F and lightly coat a 9x5 loaf pan with baking spray.",
