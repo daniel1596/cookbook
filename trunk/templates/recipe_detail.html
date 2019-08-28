@@ -75,9 +75,7 @@
 				},
 				multiplyIngredientAmountBy: function(factor) {
 					// somehow this updates both this.ingredients and this.ingredientsInitial
-					for (ing of this.ingredients) {
-						ing.Quantity *= factor;
-					}
+					this.ingredients.forEach(ing => ing.Quantity *= factor);
 				}
 			},
 			mounted: async function() {
