@@ -9,7 +9,6 @@ New way of doing things - importing the session from Setup and not using the lov
 """
 
 def __make_recipe(name: str, ingredients: List[Ingredient], steps_list: List[str], *, based_on_link: str = "", additional_info: str = ""):
-    #ingredients = [Ingredient(FoodItem=k, Quantity=v) for k, v in ingredients_kv.items()]
     steps = [Step(StepOrder=i, Description=description) for i, description in enumerate(steps_list)]
 
     recipe = Recipe(Name=name, Steps=steps, Ingredients=ingredients, BasedOnLink=based_on_link, AdditionalInfo=additional_info)
@@ -21,10 +20,8 @@ def __make_recipe(name: str, ingredients: List[Ingredient], steps_list: List[str
 def insert_all():  
     reset_data()
     __make_bean_based()
-    #__make_breads()
-    #__make_breakfast()
-
-#def Ing()
+    __make_breads()
+    __make_breakfast()
 
 
 def __make_bean_based():
@@ -38,7 +35,7 @@ def __make_bean_based():
         Ingredient("Garlic, minced", 2, "cloves"),
         Ingredient("Cumin, ground", 3/2, Unit.TSP),
         Ingredient("Salt", 1/2, Unit.TSP),
-        Ingredient("Paprika/cayenne", None, "A bit of", doesScale=False),
+        Ingredient("Paprika/cayenne", None, "A bit of"),
         Ingredient("Egg", 1, ""),
         Ingredient("Oil (for sauteeing)", 3, Unit.TBSP, doesScale=False)
     ], [
@@ -49,7 +46,7 @@ def __make_bean_based():
         "Cook the patties in the oil in a large skillet for a few minutes per side."
     ],
     additional_info="These save fine a couple days, at least, in the fridge.",
-    based_on_link="https://www.allrecipes.com/recipe/220661/quinoa-black-bean-burgers/")
+    based_on_link="https,//www.allrecipes.com/recipe/220661/quinoa-black-bean-burgers/")
 
     __make_recipe("Mexican bean salad", [
         Ingredient("Canned beans (Simple Truth organic three-bean)", 2, "cans"),
@@ -67,25 +64,25 @@ def __make_bean_based():
         Ingredient("Sugar", 1, Unit.TSP),
         Ingredient("Salt", 1, Unit.TSP),
         Ingredient("Cayenne pepper", 1/2, Unit.TSP),
-        Ingredient("Black pepper", None, "A few sprinkles", doesScale=False),
+        Ingredient("Black pepper", None, "A few sprinkles"),
     ], [
         "Dice bell pepper and onion. Drain beans and diced tomatoes. Heat up frozen corn.",
         "Mix these ingredients (top half of the list) together in a large bowl.",
         "Mix the lower half of the ingredients (wet + spices/herbs) together in a small bowl.",
         "Pour wet over dry and stir."
     ],
-    based_on_link="http://allrecipes.com/recipe/14169/mexican-bean-salad/")
+    based_on_link="http,//allrecipes.com/recipe/14169/mexican-bean-salad/")
 
-    __make_recipe("Roasted chickpeas", {
+    __make_recipe("Roasted chickpeas", [
         Ingredient("Chickpeas", 2, Unit.CUP),
         Ingredient("Olive oil", 2, Unit.TBSP),
         Ingredient("Ground cumin", 1, Unit.TBSP),
         Ingredient("Garlic powder", 1, Unit.TBSP),
         Ingredient("Chili powder", 1/2, Unit.TBSP),
-        Ingredient("Sea salt", 1, "pinch"),
-        Ingredient("Pepper", 1, "pinch"),
-        Ingredient("Red pepper flakes", 1, "pinch")
-    }, [
+        Ingredient("Sea salt", 1, "pinch", doesScale=False),
+        Ingredient("Pepper", 1, "pinch", doesScale=False),
+        Ingredient("Red pepper flakes", 1, "pinch", doesScale=False)
+    ], [
         "Preheat an oven to 350 degrees F",
         "Whisk the oil, cumin, garlic powder, chili powder, sea salt, black pepper, and red pepper together in a small bowl; add the chickpeas and toss to coat.",
         "Spread into a single layer on a baking sheet.",
@@ -97,146 +94,147 @@ def __make_bean_based():
     But at the same time I wonder if it would be a good idea to let the spices (after being coated) soak in a little more before baking?\
     Apparently it is actually a good idea not to add the olive oil until partway through baking (and probably spices too). I should try that.\
     Also - before putting in the oven originally, should rinse the beans and pat them dry.",
-    based_on_link="https://www.allrecipes.com/recipe/197683/simple-roasted-chickpea-snack")
+    based_on_link="https,//www.allrecipes.com/recipe/197683/simple-roasted-chickpea-snack")
 
 
 def __make_breads():
-    __make_recipe("Banana oat bread", {
-        "bananas": "3",
-        "rolled oats": "1 cup",
-        "flour": "1 cup",
-        "flaxseed meal": "1/4 cup",
-        "eggs": "2",
-        "olive oil": "1/4 cup",
-        "milk": "1/4 cup",
-        "margarine": "1/4 cup",
-        "brown sugar": "1/2 cup",
-        "walnuts": "1/2 cup",
-        "vanilla": "1 tsp",
-        "cinnamon": "1 tsp",
-        "baking soda" :"1 tsp",
-        "nutmeg": "1/2 tsp",
-        "salt": "1/2 tsp"    
-    }, [
+    __make_recipe("Banana oat bread", [
+        Ingredient("bananas", 3),
+        Ingredient("rolled oats", 1, Unit.CUP),
+        Ingredient("flour", 1, Unit.CUP),
+        Ingredient("flaxseed meal", 1/4, Unit.CUP),
+        Ingredient("eggs", 2),
+        Ingredient("olive oil", 1/4, Unit.CUP),
+        Ingredient("milk", 1/4, Unit.CUP),
+        Ingredient("margarine", 1/4, Unit.CUP),
+        Ingredient("brown sugar", 1/2, Unit.CUP),
+        Ingredient("walnuts", 1/2, Unit.CUP),
+        Ingredient("vanilla", 1, Unit.TSP),
+        Ingredient("cinnamon", 1, Unit.TSP),
+        Ingredient("baking soda" ,1, Unit.TSP),
+        Ingredient("nutmeg", 1/2, Unit.TSP),
+        Ingredient("salt", 1/2, Unit.TSP)    
+    ], [
         "Preheat oven to 350 degrees F (175 degrees C). Grease a 9x5-inch loaf pan and set aside.",
         "Beat together the oil, sugar, eggs, and vanilla.",
         "Add all dry ingredients, alternating with bananas and milk.", 
         "Fold in walnuts/chocolate chips and pour into prepared pan. Bake for 55 minutes."
     ],
-    based_on_link="http://allrecipes.com/Recipe/Banana-Oatmeal-Bread/",
-    additional_info="Variation on this per Molly Kate's wishes: reducing sugar to 1/4 cup and adding 1/2 cup chocolate chips")
+    based_on_link="http,//allrecipes.com/Recipe/Banana-Oatmeal-Bread/",
+    additional_info="Variation on this per Molly Kate's wishes, reducing sugar to 1/4 cup and adding 1/2 cup chocolate chips")
 
-    __make_recipe("Cranberry walnut bread", {
-        "Cranberries/raisins": "1/2 cup",
-        "Flour": "2 cups",
-        "Eggs": 1,
-        "Olive oil": "2 tbsp",
-        "Milk": "3/4 cup",
-        "Brown sugar": "5/8 cup",
-        "Walnuts": "1/2 cup",
-        "Salt": "1/2 tsp",
-        "Baking soda": "1/2 tsp",
-        "Baking powder": "3/2 tsp",
-        "Cinnamon": "A few sprinkles",
-        "Nutmeg": "One sprinkle or so"
-    }, [
+    __make_recipe("Cranberry walnut bread", [
+        Ingredient("Cranberries/raisins", 1/2, Unit.CUP),
+        Ingredient("Flour", 2, Unit.CUP),
+        Ingredient("Eggs", 1, ""),
+        Ingredient("Olive oil", 2, Unit.TBSP),
+        Ingredient("Milk", 3/4, Unit.CUP),
+        Ingredient("Brown sugar", 5/8, Unit.CUP),
+        Ingredient("Walnuts", 1/2, Unit.CUP),
+        Ingredient("Salt", 1/2, Unit.TSP),
+        Ingredient("Baking soda", 1/2, Unit.TSP),
+        Ingredient("Baking powder", 3/2, Unit.TSP),
+        Ingredient("Cinnamon", None, "A few sprinkles"),
+        Ingredient("Nutmeg", 1, "sprinkle")
+    ], [
         "Combine dry, add wet",
         "Sprinkle a few oats/berries on top (can reserve 1/4c of the 1/2c of berries/raisins for the top)",
         "Bake at 350 for 45 minutes"
     ])
 
-    __make_recipe("Pumpkin bread", {
-        "Pumpkin puree": "1 cup",
-        "Flour": "1.75 cups - note - haven't tried with gf flour apparently? not sure if that's still true",
-        "Eggs": "2",
-        "Canola oil": "1/3 cup",
-        "Milk (or water)": "1/4 cup",
-        "Maple syrup": "1/2 cup",
-        "Walnuts": "1/3 cup",
-        "Salt": "1/2 tsp",
-        "Baking soda": "1/2 tsp",
-        "Cinnamon": "1 tsp",
-        "Nutmeg": "1/4 tsp (suggested: move to 1/2 tsp maybe and add ginger or pumpkin pie spice or something",
-        "Vanilla extract": "1 tsp"
-    }, [
+    __make_recipe("Pumpkin bread", [
+        Ingredient("Pumpkin puree", 1, Unit.CUP),
+        Ingredient("Flour", 1.75, Unit.CUP),
+        Ingredient("Eggs", 2),
+        Ingredient("Canola oil", 1/3, Unit.CUP),
+        Ingredient("Milk (or water)", 1/4, Unit.CUP),
+        Ingredient("Maple syrup", 1/2, Unit.CUP),
+        Ingredient("Walnuts", 1/3, Unit.CUP),
+        Ingredient("Salt", 1/2, Unit.TSP),
+        Ingredient("Baking soda", 1/2, Unit.TSP),
+        Ingredient("Cinnamon", 1, Unit.TSP),
+        Ingredient("Nutmeg", 1/4, Unit.TSP),
+        Ingredient("Vanilla extract", 1, Unit.TSP)
+    ], [
         "Preheat oven to 325",
         "Beat together oil, syrup, eggs",
         "Stir in pumpkin and vanilla, then all dry",
         "Stir in the water and mix well",
         "Bake for 60-65 minutes"
     ],
-    based_on_link="http://cookieandkate.com/2011/whole-wheat-pumpkin-bread/")
+    based_on_link="http,//cookieandkate.com/2011/whole-wheat-pumpkin-bread/",
+    additional_info="Have not tried this yet with gluten-free flour. Also, should go up to 1/2 tsp nutmeg and maybe ginger or pumpkin pie spice.")
 
-    __make_recipe("Apple bread", {
-        "Apples": "2",
-        "Buckwheat flour": "2/3 cup", 
-        "Sorghum flour": "2/3 cup",
-        "Tapioca starch": "1/3 cup",
-        "Walnuts": "1/2 cup",
-        "Baking soda": "1 tsp",
-        "Cinnamon": "1 tsp",
-        "Salt": "1/4 tsp",
-        "Unsweetened applesauce": "1/2 cup",
-        "Canola oil": "2 tbsp",
-        "Milk": "2 tbsp",
-        "Sugar": "1/2 cup",
-        "Egg": 1,
-        "Vanilla extract": "1 tsp"
-    }, [
+    __make_recipe("Apple bread", [
+       Ingredient("Apples", 2),
+       Ingredient("Buckwheat flour", 2/3, Unit.CUP), 
+       Ingredient("Sorghum flour", 2/3, Unit.CUP),
+       Ingredient("Tapioca starch", 1/3, Unit.CUP),
+       Ingredient("Walnuts", 1/2, Unit.CUP),
+       Ingredient("Baking soda", 1, Unit.TSP),
+       Ingredient("Cinnamon", 1, Unit.TSP),
+       Ingredient("Salt", 1/4, Unit.TSP),
+       Ingredient("Unsweetened applesauce", 1/2, Unit.CUP),
+       Ingredient("Canola oil", 2, Unit.TBSP),
+       Ingredient("Milk", 2, Unit.TBSP),
+       Ingredient("Sugar", 1/2, Unit.CUP),
+       Ingredient("Egg", 1),
+       Ingredient("Vanilla extract", 1, Unit.TSP)
+    ], [
         "Preheat oven to 350F and lightly coat a 9x5 loaf pan with baking spray.",
         "In a large mixing bowl, combine flour, baking soda, cinnamon, and salt. Separately, mix all wet ingredients + sugar.",
         "Add wet to dry. Fold in apples and walnuts.",
         "Pour batter into loaf pan. Bake for 45 minutes."
     ],
-    based_on_link="https://www.wellplated.com/apple-bread/")
+    based_on_link="https,//www.wellplated.com/apple-bread/")
 
 
 def __make_breakfast():
-    __make_recipe("Berry-oatmeal bake", {
+    __make_recipe("Berry-oatmeal bake", [
         # for the oatmeal
-        "Unsalted butter": "2 tbsp",
-        "Rolled oats": "5/4 cups",
-        "Brown sugar": "2 tbsp", 
-        "Salt": "A pinch",
-        "Unsweetened almond milk": "5/3 cups",
-        "Egg": "1 (large)",
-        "vanilla extract": "1 tsp",
+        Ingredient("Unsalted butter", 2, Unit.TBSP),
+        Ingredient("Rolled oats", 5/4, Unit.CUP),
+        Ingredient("Brown sugar", 2, Unit.TBSP), 
+        Ingredient("Salt", 1, "pinch"),
+        Ingredient("Unsweetened almond milk", 5/3, Unit.CUP),
+        Ingredient("Egg", 1),
+        Ingredient("vanilla extract", 1, Unit.TSP),
 
         # for the topping
-        "Mixed berries": "12 oz frozen (5/2 cups frozen; 3/2 cups thawed)",
-        "Sliced almonds or pecans": "1/3 cup",
-        "Old-fashioned rolled oats": "1/3 cup",
-        "Light brown sugar": "1/3 cup",
-        "Unsalted butter, melted": "2 tbsp",
-        "Gf flour": "1 tbsp",
-        "Ground cinnamon": "1/8 tsp",
-        "Salt": "A pinch"
-    }, [
+        Ingredient("Mixed berries", 12, "oz frozen (5/2 cups frozen; 3/2 cups thawed)"),
+        Ingredient("Sliced almonds or pecans", 1/3, Unit.CUP),
+        Ingredient("Old-fashioned rolled oats", 1/3, Unit.CUP),
+        Ingredient("Light brown sugar", 1/3, Unit.CUP),
+        Ingredient("Unsalted butter, melted", 2, Unit.TBSP),
+        Ingredient("Gf flour", 1, Unit.TBSP),
+        Ingredient("Ground cinnamon", 1/8, Unit.TSP),
+        Ingredient("Salt", None, "A pinch")
+    ], [
         "Preheat the oven to 350 degrees F. Grease a 2-quart baking dish or 8-inch square baking pan with the butter.",
-        "For the oatmeal: Stir together the oats, sugar and 1/8 teaspoon salt in a large bowl. Whisk together the almond milk, egg, vanilla and almond extract in a medium bowl.\
+        "For the oatmeal, Stir together the oats, sugar and 1/8 teaspoon salt in a large bowl. Whisk together the almond milk, egg, vanilla and almond extract in a medium bowl.\
          Pour the milk mixture into the oat mixture and stir well to combine.",
-        "For the topping: Stir together the almonds, oats, sugar, butter, flour, cinnamon and 1/8 teaspoon salt in a medium bowl until evenly combined.",
-        "To assemble: Pour the oatmeal into the prepared baking dish. Arrange the berries (including any juices) over the oatmeal. Sprinkle with the topping.\
+        "For the topping, Stir together the almonds, oats, sugar, butter, flour, cinnamon and 1/8 teaspoon salt in a medium bowl until evenly combined.",
+        "To assemble, Pour the oatmeal into the prepared baking dish. Arrange the berries (including any juices) over the oatmeal. Sprinkle with the topping.\
          Bake until lightly browned and just set, about 50 minutes. Let cool on a rack for 10 to 15 minutes. Serve warm with a dollop of yogurt or a splash of milk if using."
     ],
-    based_on_link="https://www.foodnetwork.com/recipes/food-network-kitchen/berry-oatmeal-bake-3362604")
+    based_on_link="https,//www.foodnetwork.com/recipes/food-network-kitchen/berry-oatmeal-bake-3362604")
 
-    __make_recipe("Pumpkin Oat Pancakes", {
-        "Pumpkin puree": "1 cup (or 3/4 cup, finishing off a can, and add 1/8 cup milk or something)",
-        "Milk of choice": "1/4 cup",
-        "Coconut oil (or butter), melted": "2 tbsp",
-        "Lemon juice": "1 tbsp",
-        'Maple syrup (or honey)': '1 tsp',
-        'Vanilla extract': '1 tsp',
-        "Eggs": "2",
-        "Sorghum flour": "1 cup",
-        "Baking soda": "1/2 tsp",
-        "Salt": "1/2 tsp",
-        "Ground cinnamon": "1/2 tsp",
-        "Ground ginger": "1/2 tsp",
-        "Ground nutmeg": "1/4 tsp",
-        "Ground cloves or allspice": "1/4 tsp"
-    }, [
+    __make_recipe("Pumpkin Oat Pancakes", [
+        Ingredient("Pumpkin puree", 1, Unit.CUP), 
+        Ingredient("Milk of choice", 1/4, Unit.CUP),
+        Ingredient("Coconut oil (or butter), melted", 2, Unit.TBSP),
+        Ingredient("Lemon juice", 1, Unit.TBSP),
+        Ingredient('Maple syrup (or honey)', 1, Unit.TSP),
+        Ingredient('Vanilla extract', 1, Unit.TSP),
+        Ingredient("Eggs", 2),
+        Ingredient("Sorghum flour", 1, Unit.CUP),
+        Ingredient("Baking soda", 1/2, Unit.TSP),
+        Ingredient("Salt", 1/2, Unit.TSP),
+        Ingredient("Ground cinnamon", 1/2, Unit.TSP),
+        Ingredient("Ground ginger", 1/2, Unit.TSP),
+        Ingredient("Ground nutmeg", 1/4, Unit.TSP),
+        Ingredient("Ground cloves or allspice", 1/4, Unit.TSP)
+    ], [
         "In a small mixing bowl, stir together the pumpkin puree, milk, coconut oil, lemon juice, maple syrup and vanilla. Beat in the eggs. \
          (If your coconut oil goes back to its solid state like mine did at this point, just warm the mixture for short 20 second bursts in the microwave, \
          stirring between each, until it is melted again.)",
@@ -251,4 +249,5 @@ def __make_breakfast():
          You may need to adjust the heat up or down at this point.",
         "Serve the pancakes immediately or keep warm in a 200 degree Fahrenheit oven."
     ],
-    based_on_link="https://cookieandkate.com/pumpkin-oat-pancakes/")
+    based_on_link="https,//cookieandkate.com/pumpkin-oat-pancakes/",
+    additional_info="Have also done this with 3/4 cup pumpkin puree and 1/8 extra cup of almond milk, and that worked fine.")
