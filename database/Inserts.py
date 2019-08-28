@@ -2,13 +2,14 @@ from typing import List
 
 from database.Models import *
 from database.Setup import reset_data, session # create_session  
+from database.Unit import Unit
 
 """ 
 New way of doing things - importing the session from Setup and not using the lovely contextmanager. At least, for now.
 """
 
-def __make_recipe(name: str, ingredients_kv: dict, steps_list: List[str], *, based_on_link: str = "", additional_info: str = ""):
-    ingredients = [Ingredient(FoodItem=k, Quantity=v) for k, v in ingredients_kv.items()]
+def __make_recipe(name: str, ingredients: List[Ingredient], steps_list: List[str], *, based_on_link: str = "", additional_info: str = ""):
+    #ingredients = [Ingredient(FoodItem=k, Quantity=v) for k, v in ingredients_kv.items()]
     steps = [Step(StepOrder=i, Description=description) for i, description in enumerate(steps_list)]
 
     recipe = Recipe(Name=name, Steps=steps, Ingredients=ingredients, BasedOnLink=based_on_link, AdditionalInfo=additional_info)
@@ -20,25 +21,28 @@ def __make_recipe(name: str, ingredients_kv: dict, steps_list: List[str], *, bas
 def insert_all():  
     reset_data()
     __make_bean_based()
-    __make_breads()
-    __make_breakfast()
+    #__make_breads()
+    #__make_breakfast()
+
+#def Ing()
 
 
 def __make_bean_based():
-    __make_recipe("Bean burgers", {
-        "Beans": "1 15-oz can",
-        "Quinoa": "1/4 cup",
-        "Oats": "1/2 cup",
-        "Water": "1/2 cup",
-        "Bell pepper (or tomato), minced": "1/4 cup",
-        "Onion, minced": "2 tbsp",
-        "Garlic, minced": "2 cloves",
-        "Cumin, ground": "3/2 tsp",
-        "Salt": "1/2 tsp",
-        "Papkrika or cayenne": "A bit",
-        "Egg": "1",
-        "Oil": "3 tbsp (for sauteeing)"
-    }, [
+    __make_recipe("Bean burgers", [
+        Ingredient("Beans", 1, "15-oz can"),
+        Ingredient("Quinoa", 1/4, Unit.CUP),
+        Ingredient("Oats", 1/2, Unit.CUP),
+        Ingredient("Oats", 1/2, Unit.CUP),
+        Ingredient("Water", 1/2, Unit.CUP),
+        Ingredient("Bell pepper (or tomato), minced", 1/4, Unit.CUP),
+        Ingredient("Onion, minced", 2, Unit.TBSP),
+        Ingredient("Garlic, minced", 2, "cloves"),
+        Ingredient("Cumin, ground", 3/2, Unit.TSP),
+        Ingredient("Salt", 1/2, Unit.TSP),
+        Ingredient("Paprika/cayenne", None, "A bit of", doesScale=False),
+        Ingredient("Egg", 1, ""),
+        Ingredient("Oil (for sauteeing)", 3, Unit.TBSP, doesScale=False)
+    ], [
         "Heat up the quinoa (bring to boil, simmer for 15-20 minutes)",
         "Mash the beans with a fork",
         "Mix all dry ingredients + egg",
@@ -48,7 +52,9 @@ def __make_bean_based():
     additional_info="These save fine a couple days, at least, in the fridge.",
     based_on_link="https://www.allrecipes.com/recipe/220661/quinoa-black-bean-burgers/")
 
-    __make_recipe("Mexican bean salad", {
+    return
+
+    __make_recipe("Mexican bean salad", [
         "Canned beans (Simple Truth organic three-bean)": "2 cans",
         "Green bell pepper, diced": "1",
         "Onion, diced": "1",
@@ -65,7 +71,7 @@ def __make_bean_based():
         "Salt": "1 tsp",
         "Cayenne pepper": "1/2 tsp",
         "Black pepper": "A few sprinkles"
-    }, [
+    ], [
         "Dice bell pepper and onion. Drain beans and diced tomatoes. Heat up frozen corn.",
         "Mix these ingredients (top half of the list) together in a large bowl.",
         "Mix the lower half of the ingredients (wet + spices/herbs) together in a small bowl.",
