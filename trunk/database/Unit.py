@@ -1,0 +1,15 @@
+from enum import Enum
+
+class Unit(Enum):
+	CUP = (1, "cup")
+	FL_OZ = (1/8, "oz")
+	TBSP = (1/16, "tbsp")
+	TSP = (1/(16*3), "tsp")
+
+	def __init__(self, conversion_factor: float, unit_ui: str):
+		self.conversion_factor = conversion_factor
+		self.unit_ui = unit_ui
+
+
+	def __repr__(self):
+		return self.unit_ui

@@ -1,8 +1,9 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Boolean
 from sqlalchemy.orm import relationship
 
 from database.Columns import PrimaryKey, IntegerForeignKey, IntegerNotNull, FloatNotNull, StringNotNull
 from database.Setup import Base
+from database.Unit import Unit
 
 
 class Recipe(Base):
@@ -17,21 +18,24 @@ class Recipe(Base):
     BasedOnLink = Column(String, nullable=True)
     AdditionalInfo = Column(String, nullable=True)
 
-    # maybe could have another property here to determine if there are "ingredient sets"? I.e. two collections of ingredients
-
 
 class Ingredient(Base):
     __tablename__ = "Ingredient"
 
+    def __init__(self, foodItem: str, quantity: float, unitOfMeasure, doesScale=True):
+        self.FoodItem = foodItem
+        self.Quantity = quantity if quantity else -1
+        self.UnitOfMeasure = unitOfMeasure.__repr__() if isinstance(unitOfMeasure, Unit) else unitOfMeasure
+        self.DoesScale = doesScale
+
     IngredientID = PrimaryKey()
     FoodItem = StringNotNull()
-    Quantity = StringNotNull()  # this includes unit of measure
+    Quantity = FloatNotNull()
+    UnitOfMeasure = StringNotNull()
+    DoesScale = Column(Boolean, nullable=True)
 
     RecipeID = IntegerForeignKey(Recipe, nullable=True)
     Recipe = relationship("Recipe", back_populates="Ingredients")
-
-    def __repr__(self):
-        return f"{self.Quantity} {self.FoodItem}"
 
 
 class Step(Base):
