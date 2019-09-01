@@ -11,6 +11,7 @@ class Recipe(Base):
 
     RecipeID = PrimaryKey()
     Name = StringNotNull()
+    # Todo at some point: add images to the db. Might just be the file path of the images.
 
     Ingredients = relationship("Ingredient", back_populates="Recipe")
     Steps = relationship("Step", back_populates="Recipe")

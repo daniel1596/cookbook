@@ -22,6 +22,7 @@ def insert_all():
     __make_bean_based()
     __make_breads()
     __make_breakfast()
+    __make_vegetable_based()
 
 
 def __make_bean_based():
@@ -219,7 +220,7 @@ def __make_breakfast():
     ],
     based_on_link="https,//www.foodnetwork.com/recipes/food-network-kitchen/berry-oatmeal-bake-3362604")
 
-    __make_recipe("Pumpkin Oat Pancakes", [
+    __make_recipe("Pumpkin oat pancakes", [
         Ingredient("Pumpkin puree", 1, Unit.CUP), 
         Ingredient("Milk of choice", 1/4, Unit.CUP),
         Ingredient("Coconut oil (or butter), melted", 2, Unit.TBSP),
@@ -251,3 +252,20 @@ def __make_breakfast():
     ],
     based_on_link="https,//cookieandkate.com/pumpkin-oat-pancakes/",
     additional_info="Have also done this with 3/4 cup pumpkin puree and 1/8 extra cup of almond milk, and that worked fine.")
+
+
+def __make_vegetable_based():
+    __make_recipe("Greek salad", [
+        Ingredient("Cucumber", 1, "large"),
+        Ingredient("Cherry tomatoes", 1, "cup or so?"),
+        Ingredient("Onion", 1, "cup or so?"),
+        Ingredient("Feta", 4, Unit.DRY_OZ),
+        Ingredient("Olive oil", None, "not sure"),
+        Ingredient("Basil", None, "ask MK"),
+        Ingredient("Oregano", None, "ask MK")
+    ], [
+        "Chop up the onion, cherry tomatoes (or regular tomato), and cucumber",
+        "Mix together the olive oil and spices",
+        "Cut an 8 oz block of feta in half, vertically",
+        "Pour olive oil/spice mixture over the feta and serve"
+    ])
