@@ -13,6 +13,8 @@ app.register_blueprint(API)
 app.register_blueprint(Pages)
 
 
+# Todo should reorganize the app folder-wise in PyCharm, not VS Code (where I am rn)
+
 def main():
 	insert_all()
 	
