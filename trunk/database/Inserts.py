@@ -22,7 +22,7 @@ def insert_all():
     __make_bean_based()
     __make_breads()
     __make_breakfast()
-    __make_vegetable_based()
+    __make_salads()
 
 
 def __make_bean_based():
@@ -254,7 +254,47 @@ def __make_breakfast():
     additional_info="Have also done this with 3/4 cup pumpkin puree and 1/8 extra cup of almond milk, and that worked fine.")
 
 
-def __make_vegetable_based():
+def __make_salads():
+    __make_recipe("Broccoli salad", [
+        Ingredient("Bacon", 10, "slices"),
+        Ingredient("Broccoli", 1, "10 oz bag (frozen)"),
+        Ingredient("Onion, red or yellow", 1/4, Unit.CUP),
+        Ingredient("Raisins", 1/2, Unit.CUP),
+        Ingredient("Greek yogurt", 1, Unit.CUP),
+        Ingredient("Apple cider vinegar", 3, Unit.TBSP),
+        Ingredient("Sugar", 3/2, Unit.TBSP),
+        Ingredient("Sunflower seeds/slivered almonds/flaxseeds", 1, Unit.CUP)
+    ], [
+        "Place bacon in a large, deep skillet. Cook over medium high heat until evenly brown. Drain, crumble and set aside.",
+        "In a medium bowl, combine the broccoli, onion and raisins. In a small bowl, whisk together the vinegar, sugar and mayonnaise.\
+            Pour over broccoli mixture, and toss until well mixed. Refrigerate for at least two hours.",
+        "Before serving, toss salad with crumbled bacon and sunflower seeds."
+    ],
+    based_on_link="https://www.allrecipes.com/recipe/16098/alysons-broccoli-salad/",
+    additional_info="I had written down to sub in 1 tbsp of oil for one of the tbsps of vinegar.\
+        (The original recipe called for white wine vinegar, btw).\
+        Also note that you may need a big sheet pan or two skillets for the bacon. (I've used a sheet pan.)\
+        Also I've wondered before if a tsp of lemon juice or any other spices would help anything. Not sure what we used last time (July 2019).")
+
+    __make_recipe("Chicken salad", [
+        Ingredient("Chicken", 9, Unit.DRY_OZ),
+        Ingredient("Greek yogurt", 1, Unit.CUP),
+        Ingredient("Apple", 1),
+        Ingredient("Walnuts", 1, Unit.CUP),
+        Ingredient("Cranberries/raisins", 1/3, Unit.CUP),
+        Ingredient("Green pepper/onion", 1.5, Unit.CUP),
+        Ingredient("Lemon juice", 1, Unit.TSP),
+        Ingredient("Salt", 1/2, Unit.TSP),
+        Ingredient("Pepper", 1/2, Unit.TSP),
+        Ingredient("Paprika (or similar)", 1/2, Unit.TSP)
+    ], [
+        "Combine ingredients in large mixing bowl and eat."
+    ], 
+    based_on_link="http://allrecipes.com/Recipe/Holiday-Chicken-Salad/",
+    additional_info="Have done onion w/o green pepper and green pepper w/o onion, or a little bit of both.\
+        Also would be interested in trying this with a meat substitute some time.\
+        Haven't tried toasting the walnuts, although that could be fun. Not sure how noticeable though.")
+
     __make_recipe("Greek salad", [
         Ingredient("Cucumber", 1, "large"),
         Ingredient("Cherry tomatoes", 1, "cup or so?"),
@@ -269,3 +309,21 @@ def __make_vegetable_based():
         "Cut an 8 oz block of feta in half, vertically",
         "Pour olive oil/spice mixture over the feta and serve"
     ])
+
+    """
+    Not going to officially put this one in the cookbook yet, but I did make it.
+    See notes below, and note that the recipe was halved (8 servings on allrecipes instead of 16).
+
+    https://www.allrecipes.com/recipe/215069/tasteful-tahini-salad-dressing/
+    - Put in just a few sprinkles of ground ginger - could have put in more. (Might put in a tad more for the rest of the batch.)
+    - Tried not using a blender, probably a mistake since the tahini did not dissolve very quickly hahaha. Not sure if it will at all in the fridge.
+    - Used about 2 tsp garlic instead of 
+    - Probably dumped in too much apple cider vinegar although I tried not to [PS: don't think this made a big difference
+
+    It's not too bad! At least it is very healthy (primary ingredients are water, organic tahini, and organic EVOO)
+    -- Probably my biggest knock against it is that I'm not used to this sort of thing as a salad dressing. 
+    - I'm curious if it would be good as a chicken marinade or something like that, or maybe in stir fry? Hmm.
+    """
+    
+
+    
