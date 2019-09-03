@@ -22,6 +22,7 @@ def insert_all():
     __make_bean_based()
     __make_breads()
     __make_breakfast()
+    __make_casseroles()
     __make_salads()
 
 
@@ -252,6 +253,54 @@ def __make_breakfast():
     ],
     based_on_link="https,//cookieandkate.com/pumpkin-oat-pancakes/",
     additional_info="Have also done this with 3/4 cup pumpkin puree and 1/8 extra cup of almond milk, and that worked fine.")
+
+
+def __make_casseroles():
+    __make_recipe("Egg casserole", [
+        Ingredient("Eggs", 6),
+        Ingredient("Cubed/diced ham", 8, Unit.DRY_OZ),
+        Ingredient("Shredded cheese (probably any kind - have done Mexican usually)", 1, Unit.CUP),
+        Ingredient("Diced potatoes", 1, Unit.CUP),
+        Ingredient("Diced onion", 1, Unit.CUP),
+        Ingredient("Flour", 1, Unit.TBSP),
+        Ingredient("Milk (almond is fine)", 1/2, Unit.CUP),
+        Ingredient("Canola oil", 2, Unit.TBSP),
+        Ingredient("Italian seasoning", 1, Unit.TSP)
+    ], [
+        "Mix all dry ingredients together",
+        "Spread mixture in 8x8 baking dish (or 9x13 - thinner or thicker, has worked either way)",
+        "Pour canola oil over this",
+        "Whisk eggs and milk, pour on top",
+        "Sprinkle seasoning on top (and cheese - do go over the 1 cup mark suggested here)",
+        "Bake uncovered at 350 for 40 minutes"
+    ],
+    based_on_link="http://pocketchangegourmet.com/ham-and-egg-casserole/")
+    
+    __make_recipe("Green bean casserole", [
+        Ingredient("Green beans", 4, Unit.CUP),
+        Ingredient("Chicken, pre-cooked", 1.5, Unit.CUP),
+        Ingredient("Butter", 3, Unit.TBSP),
+        Ingredient("Flour", 2, Unit.TBSP),
+        Ingredient("Greek yogurt", 5.3, Unit.DRY_OZ),
+        Ingredient("Cheddar cheese", 2, Unit.CUP),
+        Ingredient("Crumbled crackers", 1/2, Unit.CUP),
+        Ingredient("Sugar", 1/4, Unit.TSP),
+        Ingredient("Almonds, slivered", 1/4, Unit.CUP),
+        Ingredient("Cumin, garlic powder, and pepper", None, "A little"),
+    ], [
+        "Preheat the oven to 350 F",
+        "Cook the chicken in a big pan with spices (I used cumin, garlic powder, and pepper last time - great choices, not too much pepper is needed though)",
+        "Sautee the onion in a mixture of flour and 2 (of the 3) tbsp butter",
+        "Stir in the salt, sugar, Greek yogurt, and green beans - and maybe include something else next time? (Internet suggests things like lemon juice, ginger, and red pepper flakes)",
+        "Once mixed, transfer to a 13x9 pan",
+        "Mix together the last tbsp of butter, cracker crumbs, and slivered almonds in a little bowl",
+        "Spread this mixture and the cheese on top of the casserole",
+        "Bake at 350 for for 30 minutes"
+    ],
+    based_on_link="http://allrecipes.com/recipe/13717/grandmas-green-bean-casserole/",
+    additional_info="Chicken has generally been 1 cup but I'm putting it at 1.5 for the future")
+
+# Todo: add the Mexican casserole here
 
 
 def __make_salads():
