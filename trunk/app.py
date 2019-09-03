@@ -1,19 +1,15 @@
-from flask import Flask, render_template
-from webbrowser import open
+from flask import Flask
 
-from blueprints.Api import API
-from blueprints.Pages import Pages
-from database.Inserts import insert_all
-from database.Main import get_recipe_by_name
-from database.Setup import close_session
+from py.blueprints.Api import API
+from py.blueprints.Pages import Pages
+from py.database.Inserts import insert_all
+from py.database.Setup import close_session
 
 
 app = Flask(__name__)
 app.register_blueprint(API)
 app.register_blueprint(Pages)
 
-
-# Todo should reorganize the app folder-wise in PyCharm, not VS Code (where I am rn)
 
 def main():
 	insert_all()

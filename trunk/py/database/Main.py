@@ -1,8 +1,7 @@
 from sqlalchemy.orm import joinedload
 from typing import List
 
-from database.Models import Recipe, Ingredient, Step
-from database.Setup import reset_data, session
+from py.database.Models import Recipe, Ingredient
 
 
 def get_all_ingredients() -> List[Ingredient]:
