@@ -1,15 +1,15 @@
 from typing import List
 
-from database.Models import *
-from database.Setup import reset_data, session # create_session  
-from database.Unit import Unit
+from py.database.Models import *
+from py.database.Setup import reset_data, session
+from py.database.Unit import Unit
 
 """ 
 New way of doing things - importing the session from Setup and not using the lovely contextmanager. At least, for now.
 """
 
-def __make_recipe(name: str, ingredients: List[Ingredient], steps_list: List[str], *, based_on_link: str = "", additional_info: str = ""):
-    steps = [Step(StepOrder=i, Description=description) for i, description in enumerate(steps_list)]
+def __make_recipe(name: str, ingredients: List[Ingredient], steps_description: List[str], *, based_on_link: str = "", additional_info: str = ""):
+    steps = [Step(StepOrder=i, Description=description) for i, description in enumerate(steps_description)]
 
     recipe = Recipe(Name=name, Steps=steps, Ingredients=ingredients, BasedOnLink=based_on_link, AdditionalInfo=additional_info)
 
@@ -17,7 +17,7 @@ def __make_recipe(name: str, ingredients: List[Ingredient], steps_list: List[str
     session.commit()
 
 
-def insert_all():  
+def insert_all():
     reset_data()
     __make_bean_based()
     __make_breads()
@@ -39,7 +39,7 @@ def __make_bean_based():
         Ingredient("Salt", 1/2, Unit.TSP),
         Ingredient("Paprika/cayenne", None, "A bit of"),
         Ingredient("Egg", 1, ""),
-        Ingredient("Oil (for sauteeing)", 3, Unit.TBSP, doesScale=False)
+        Ingredient("Oil (for sauteeing)", 3, Unit.TBSP, does_scale=False)
     ], [
         "Heat up the quinoa (bring to boil, simmer for 15-20 minutes)",
         "Mash the beans with a fork",
@@ -81,9 +81,9 @@ def __make_bean_based():
         Ingredient("Ground cumin", 1, Unit.TBSP),
         Ingredient("Garlic powder", 1, Unit.TBSP),
         Ingredient("Chili powder", 1/2, Unit.TBSP),
-        Ingredient("Sea salt", 1, "pinch", doesScale=False),
-        Ingredient("Pepper", 1, "pinch", doesScale=False),
-        Ingredient("Red pepper flakes", 1, "pinch", doesScale=False)
+        Ingredient("Sea salt", 1, "pinch", does_scale=False),
+        Ingredient("Pepper", 1, "pinch", does_scale=False),
+        Ingredient("Red pepper flakes", 1, "pinch", does_scale=False)
     ], [
         "Preheat an oven to 350 degrees F",
         "Whisk the oil, cumin, garlic powder, chili powder, sea salt, black pepper, and red pepper together in a small bowl; add the chickpeas and toss to coat.",
@@ -115,11 +115,11 @@ def __make_breads():
         Ingredient("cinnamon", 1, Unit.TSP),
         Ingredient("baking soda" ,1, Unit.TSP),
         Ingredient("nutmeg", 1/2, Unit.TSP),
-        Ingredient("salt", 1/2, Unit.TSP)    
+        Ingredient("salt", 1/2, Unit.TSP)
     ], [
         "Preheat oven to 350 degrees F (175 degrees C). Grease a 9x5-inch loaf pan and set aside.",
         "Beat together the oil, sugar, eggs, and vanilla.",
-        "Add all dry ingredients, alternating with bananas and milk.", 
+        "Add all dry ingredients, alternating with bananas and milk.",
         "Fold in walnuts/chocolate chips and pour into prepared pan. Bake for 55 minutes."
     ],
     based_on_link="http,//allrecipes.com/Recipe/Banana-Oatmeal-Bread/",
@@ -169,7 +169,7 @@ def __make_breads():
 
     __make_recipe("Apple bread", [
        Ingredient("Apples", 2),
-       Ingredient("Buckwheat flour", 2/3, Unit.CUP), 
+       Ingredient("Buckwheat flour", 2/3, Unit.CUP),
        Ingredient("Sorghum flour", 2/3, Unit.CUP),
        Ingredient("Tapioca starch", 1/3, Unit.CUP),
        Ingredient("Walnuts", 1/2, Unit.CUP),
@@ -196,7 +196,7 @@ def __make_breakfast():
         # for the oatmeal
         Ingredient("Unsalted butter", 2, Unit.TBSP),
         Ingredient("Rolled oats", 5/4, Unit.CUP),
-        Ingredient("Brown sugar", 2, Unit.TBSP), 
+        Ingredient("Brown sugar", 2, Unit.TBSP),
         Ingredient("Salt", 1, "pinch"),
         Ingredient("Unsweetened almond milk", 5/3, Unit.CUP),
         Ingredient("Egg", 1),
@@ -222,7 +222,7 @@ def __make_breakfast():
     based_on_link="https,//www.foodnetwork.com/recipes/food-network-kitchen/berry-oatmeal-bake-3362604")
 
     __make_recipe("Pumpkin oat pancakes", [
-        Ingredient("Pumpkin puree", 1, Unit.CUP), 
+        Ingredient("Pumpkin puree", 1, Unit.CUP),
         Ingredient("Milk of choice", 1/4, Unit.CUP),
         Ingredient("Coconut oil (or butter), melted", 2, Unit.TBSP),
         Ingredient("Lemon juice", 1, Unit.TBSP),
@@ -275,7 +275,7 @@ def __make_casseroles():
         "Bake uncovered at 350 for 40 minutes"
     ],
     based_on_link="http://pocketchangegourmet.com/ham-and-egg-casserole/")
-    
+
     __make_recipe("Green bean casserole", [
         Ingredient("Green beans", 4, Unit.CUP),
         Ingredient("Chicken, pre-cooked", 1.5, Unit.CUP),
@@ -338,7 +338,7 @@ def __make_salads():
         Ingredient("Paprika (or similar)", 1/2, Unit.TSP)
     ], [
         "Combine ingredients in large mixing bowl and eat."
-    ], 
+    ],
     based_on_link="http://allrecipes.com/Recipe/Holiday-Chicken-Salad/",
     additional_info="Have done onion w/o green pepper and green pepper w/o onion, or a little bit of both.\
         Also would be interested in trying this with a meat substitute some time.\
@@ -373,6 +373,5 @@ def __make_salads():
     -- Probably my biggest knock against it is that I'm not used to this sort of thing as a salad dressing. 
     - I'm curious if it would be good as a chicken marinade or something like that, or maybe in stir fry? Hmm.
     """
-    
 
-    
+

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 #from jsonpickle import encode
 
-from database.Main import get_recipe_by_name
+from py.database.Main import get_recipe_by_name
 
 
 Pages = Blueprint("Pages", __name__)

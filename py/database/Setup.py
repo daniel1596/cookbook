@@ -1,11 +1,12 @@
 from contextlib import contextmanager
-
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 
+from py.Config import Config
 
-engine = create_engine('sqlite:///database/recipes.db?check_same_thread=False', echo=False)
+
+engine = create_engine(Config.DB_LOCATION.value, echo=False)
 
 session = scoped_session(sessionmaker(bind=engine))
 
@@ -25,7 +26,7 @@ and then closed
 """
 @contextmanager
 def create_session(*, is_init: bool = False) -> scoped_session:
-	engine = create_engine('sqlite:///database/recipes.db', echo=True)  # "echo" is verbose mode (default: False)
+	engine = create_engine(Config.DB_LOCATION.value, echo=True)  # "echo" is verbose mode (default: False)
 
 	# I'm keeping the defaults of autoflush=True and autocommit=False.
 	session = scoped_session(sessionmaker(bind=engine))

@@ -1,9 +1,10 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, String, Boolean
 from sqlalchemy.orm import relationship
+from typing import Optional
 
-from database.Columns import PrimaryKey, IntegerForeignKey, IntegerNotNull, FloatNotNull, StringNotNull
-from database.Setup import Base
-from database.Unit import Unit
+from py.database.Columns import PrimaryKey, IntegerForeignKey, IntegerNotNull, FloatNotNull, StringNotNull
+from py.database.Setup import Base
+from py.database.Unit import Unit
 
 
 class Recipe(Base):
@@ -24,11 +25,11 @@ class Recipe(Base):
 class Ingredient(Base):
     __tablename__ = "Ingredient"
 
-    def __init__(self, foodItem: str, quantity: float, unitOfMeasure="", *, doesScale=True):
-        self.FoodItem = foodItem
+    def __init__(self, food_item: str, quantity: Optional[float], unit_of_measure="", *, does_scale=True):
+        self.FoodItem = food_item
         self.Quantity = quantity if quantity else -1
-        self.UnitOfMeasure = unitOfMeasure.__repr__() if isinstance(unitOfMeasure, Unit) else unitOfMeasure
-        self.DoesScale = doesScale and self.Quantity > -1
+        self.UnitOfMeasure = unit_of_measure.__repr__() if isinstance(unit_of_measure, Unit) else unit_of_measure
+        self.DoesScale = does_scale and self.Quantity > -1
 
     IngredientID = PrimaryKey()
     FoodItem = StringNotNull()
