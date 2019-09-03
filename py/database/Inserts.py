@@ -300,7 +300,30 @@ def __make_casseroles():
     based_on_link="http://allrecipes.com/recipe/13717/grandmas-green-bean-casserole/",
     additional_info="Chicken has generally been 1 cup but I'm putting it at 1.5 for the future")
 
-# Todo: add the Mexican casserole here
+    __make_recipe("Mexican casserole", [
+        Ingredient("Ground meat or substitute", 1, Unit.POUND),
+        Ingredient("Medium salsa", 3/2, Unit.CUP),
+        Ingredient("Tortillas (or crushed-up chips)", None, "enough to fill the pan"),
+        Ingredient("Canned beans", 1, Unit.CUP),
+        Ingredient("Greek yogurt", 5.3, Unit.DRY_OZ),
+        Ingredient("Mexican cheese", 2, Unit.CUP),
+        Ingredient("Diced onion", 1/2, "large onion"),
+        Ingredient("Tomatoes, diced, fire-roasted", 1, "can"),
+        Ingredient("Garlic/powder", None, "several sprinkles (of powder) or a few cloves"),
+        Ingredient("Pepper and other spices (last time was: negligable amounts of cumin, Italian seasoning, and cayenne)", None, "as desired")
+    ], [
+        "Brown the meat in a large pan; drain. If using meat substitute, just add it to the pan.",
+        "Add salsa and let simmer",
+        "Add beans, onion, and tomato",
+        "Layer tortillas (or chips) in the bottom of a 9x13 baking dish",
+        "Pour mixture from pan onto tortillas",
+        "Spread Greek yogurt on top of that",
+        "Spread cheese on the top",
+        "Bake at 350 for 30 minutes"
+    ],
+    additional_info="For next time: could (1) add 2 oz black olives, (2) maybe a bell pepper, (3) any other spices?"
+                    "But it also doesn't need a ton of other spices to be tasty - it already has a lot of spices from "
+                    "the salsa (mainly) and fire-roasted diced tomatoes.")
 
 
 def __make_salads():
