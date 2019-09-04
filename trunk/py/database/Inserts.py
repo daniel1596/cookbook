@@ -1,5 +1,6 @@
 from typing import List
 
+from py.database.Ingredients import *
 from py.database.Models import *
 from py.database.Setup import reset_data, session
 from py.database.Unit import Unit
@@ -23,6 +24,7 @@ def insert_all():
     __make_breads()
     __make_breakfast()
     __make_casseroles()
+    __make_desserts()
     __make_salads()
 
 
@@ -350,14 +352,74 @@ def __make_desserts():
     additional_info="The 3/4 cup raisins/chocolate chips is a suggestion for next time. Taking down the sugar to 1/4 cup made it not as tasty as 1/2 haha.")
 
     __make_recipe("Cinnamon apple crumb cake", [
-        Ingredient("TODO", None)  # TODO
+        # for the cake
+        Ingredient("Butter", 6, Unit.TBSP),
+        Ingredient("Sugar", 1/3, Unit.CUP),
+        Ingredient("Eggs", 2),
+        Ingredient("Vanilla extract", 1, Unit.TSP),
+        Cinnamon(1, Unit.TSP),
+        Salt(None, "A pinch"),
+        Ingredient("Almond flour", 1/2, Unit.CUP),
+        Ingredient("Gluten-free baking mix", 1/2, Unit.CUP),
+        Ingredient("Coconut flour", 1/3, Unit.CUP),
+        Ingredient("Ground flaxseed", 1, Unit.TBSP),
+        BakingPowder(2, Unit.TSP),
+        AlmondMilk(1/2, Unit.CUP),
+
+        # for the streusel layer
+        Butter(3, Unit.TBSP),
+        Ingredient("Granny smith apples, peeled and chopped into 1/2 inch pieces", 1, Unit.CUP),
+        Sugar(1/4, Unit.CUP),
+        Cinnamon(1, Unit.TSP),
+        Ingredient("Almond flour", 3/4, Unit.CUP),
+        Walnuts(1/4, Unit.CUP),
+        Salt(None, "A pinch")
     ], [
-        "Make it"
+        "TO MAKE THE CAKE LAYER:",
+        "Cream the butter and sweetener together until smooth and fluffy.",
+        "Add the eggs one at a time, beating well after each, then add the vanilla extract.",
+        "In a medium-sized bowl, combine the almond flour, coconut flour, cinnamon, baking powder, xanthan gum and salt and mix well.",
+        "Add the dry ingredients to the wet ingredients and mix.",
+        "Pour in the almond milk and mix until just blended.",
+        "Spread the batter into a greased 9×9 baking pan.",
+        "TO MAKE THE APPLE STREUSEL LAYER:",
+        "Melt the butter in a medium skillet.",
+        "Add the apples, cinnamon and sweetener and cook for 2 minutes, stirring the entire time.",
+        "Remove from the heat and stir in the almond flour, pinch of salt and chopped walnuts. Stir well until a crumbly dough forms.",
+        "Spoon the topping evenly over the cake batter and spread out.",
+        "Bake the cake in a 375 degree oven for 35 minutes. If you find the topping getting too brown, cover it loosely with parchment or aluminum foil for the final 10 minutes.",
+        "Remove from the oven and cool before slicing into 3 inch squares.",
+        "Alternatively, you can bake these in 9 large muffin cups for about 20 minutes at 375 degrees (F) or until a knife inserted in the center comes out clean."
     ],
     based_on_link="https://www.ibreatheimhungry.com/cinnamon-apple-crumb-cake-low-carb/print/16669/",
-    additional_info="Will do this later.")
+    additional_info="Eat within 5 days. It didn't have a ton of crumb topping, like an apple crisp would, so be prepared for that")
 
-    # todo more desserts here
+    __make_recipe("Apple oat cookies", [
+        Oats(1, Unit.CUP),
+        Ingredient("Flour (1/2c sorghum, 1/8c each flaxseed meal and tapioca starch)", 3/4, Unit.CUP),
+        BakingPowder(1/2, Unit.TSP),
+        Salt(1/4, Unit.TSP),
+        Cinnamon(1/4, Unit.TSP),
+        Ingredient("Apple", 1/3, Unit.CUP),
+        BrownSugar(1/3, Unit.CUP),
+        Ingredient("Walnuts or pecans", 1/4, Unit.CUP),
+        Ingredient("Chia seeds", 1, Unit.TBSP),
+        Ingredient("Oil/margarine", 1/4, Unit.CUP),
+        AlmondMilk(1/4, Unit.CUP)
+    ], [
+        "Preheat oven to 350F",
+        "Mix dry in bowl",
+        "Mix wet in tiny bowl and then add to dry.",
+        "Mix it all up.",
+        "Drop about a tbsp-sized mound of cookie onto a baking sheet.",
+        "Bake at 350F for 12-15 minutes or until edges of cookies are slightly browned"
+    ],
+    additional_info="The amount of sugar is experimental, but 1/2 cup of honey was far too sweet, so this should be decent now.")
+
+    __make_recipe("Pumpkin chocolate chip cookies", [
+        
+    ])
+
 
 
 def __make_salads():
