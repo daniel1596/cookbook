@@ -25,7 +25,7 @@ class Recipe(Base):
 class Ingredient(Base):
     __tablename__ = "Ingredient"
 
-    def __init__(self, food_item: str, quantity: Optional[float], unit_of_measure="", *, does_scale=True):
+    def __init__(self, food_item: str, quantity: Optional[float], unit_of_measure="", does_scale=True):
         self.FoodItem = food_item
         self.Quantity = quantity if quantity else -1
         self.UnitOfMeasure = unit_of_measure.__repr__() if isinstance(unit_of_measure, Unit) else unit_of_measure
