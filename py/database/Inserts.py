@@ -326,6 +326,40 @@ def __make_casseroles():
                     "the salsa (mainly) and fire-roasted diced tomatoes.")
 
 
+def __make_desserts():
+    __make_recipe("Oatmeal raisin / chocolate chip cookies", [
+        Ingredient("Oats", 3/2, Unit.CUP),
+        Ingredient("Flour", 3/4, Unit.CUP),
+        Ingredient("Sugar", 1/4, Unit.CUP),
+        Ingredient("Butter", 1/2, Unit.CUP),
+        Ingredient("Baking soda", 1/2, Unit.TSP),
+        Ingredient("Cinnamon", 1/2, Unit.TSP),
+        Ingredient("Salt", 1/4, Unit.TSP),
+        Ingredient("Vanilla", 1, Unit.TSP),
+        Ingredient("Egg", 1),
+        Ingredient("Pecans", 1/4, Unit.CUP),
+        Ingredient("Raisins or chocolate chips", 3/4, Unit.CUP)
+    ], [
+        "Heat oven to 350°F.",
+        "In large bowl, stir sugars, butter, baking soda, cinnamon, salt, vanilla and eggs with spoon until well blended.",
+        "Stir in oats, flour and raisins.",
+        "Place the dough in tablespoonfuls about 2 inches apart on cookie sheets",
+        "Bake 9-11 minutes or until golden brown."
+    ],
+    based_on_link="https://www.bettycrocker.com/recipes/best-whole-wheat-oatmeal-raisin-cookies/8331bf27-c5f8-4f89-8883-90296373b701",
+    additional_info="The 3/4 cup raisins/chocolate chips is a suggestion for next time. Taking down the sugar to 1/4 cup made it not as tasty as 1/2 haha.")
+
+    __make_recipe("Cinnamon apple crumb cake", [
+        Ingredient("TODO", None)  # TODO
+    ], [
+        "Make it"
+    ],
+    based_on_link="https://www.ibreatheimhungry.com/cinnamon-apple-crumb-cake-low-carb/print/16669/",
+    additional_info="Will do this later.")
+
+    # todo more desserts here
+
+
 def __make_salads():
     __make_recipe("Broccoli salad", [
         Ingredient("Bacon", 10, "slices"),
