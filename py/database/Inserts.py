@@ -417,8 +417,30 @@ def __make_desserts():
     additional_info="The amount of sugar is experimental, but 1/2 cup of honey was far too sweet, so this should be decent now.")
 
     __make_recipe("Pumpkin chocolate chip cookies", [
-        # TODO
-    ])
+        CanolaOil(1/2, Unit.CUP),
+        BrownSugar(2/3, Unit.CUP),
+        Ingredient("Pumpkin puree", 3/4, Unit.CUP),
+        Ingredient("Flour (was all-purpose - haven't made gf)", 4/3, Unit.CUP),
+        Egg(1),
+        Oats(2/3, Unit.CUP),
+        ChocolateChips(2/3, Unit.CUP),
+        Walnuts(1/4, Unit.CUP),
+        Cinnamon(3/4, Unit.TSP),
+        Salt(1/4, Unit.TSP),
+        BakingSoda(1/4, Unit.TSP),
+        BakingPowder(3/4, Unit.TSP)
+    ], [
+        "Beat oil, brown sugar, pumpkin, eggs together",
+        "In separate bowl: mix dry (except chips/walnuts)",
+        "Add wet to dry, then chips/walnuts",
+        "Drop 1-2 tbsp per cookie onto a baking sheet",
+        "Bake at 375F for 10-12 minutes"
+    ],
+    based_on_link="http://allrecipes.com/Recipe/Pumpkin-Oatmeal-Chocolate-Chip-Cookies",
+    additional_info="Add some vanilla extract or maybe nutmeg or pumpkin pie spice if making again")
+
+    # TODO: peach crisp, fruit cobbler
+
 
 
 
