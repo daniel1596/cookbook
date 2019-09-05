@@ -56,6 +56,9 @@ def Walnuts(quantity: Optional[float], unit_of_measure="", *, does_scale=True):
 def Oats(quantity: Optional[float], unit_of_measure="", *, does_scale=True):
     return Ingredient("Oats", quantity, unit_of_measure, does_scale)
 
+def RolledOats(quantity: Optional[float], unit_of_measure="", *, does_scale=True):
+    return Ingredient("Rolled oats", quantity, unit_of_measure, does_scale)
+
 # endregion
 
 
@@ -95,5 +98,16 @@ def BrownSugar(quantity: Optional[float], unit_of_measure="", *, does_scale=True
 
 def Sugar(quantity: Optional[float], unit_of_measure="", *, does_scale=True):
     return Ingredient("Sugar", quantity, unit_of_measure, does_scale)
+
+# endregion
+
+
+# region Vegetables
+
+def DicedOnion(quantity: Optional[float], unit_of_measure="", *, does_scale=True):
+    return Ingredient("Onion, diced", quantity, unit_of_measure, does_scale)
+
+def DicedTomato(quantity: Optional[float], unit_of_measure="", *, does_scale=True):
+    return Ingredient("Tomato, diced", quantity, unit_of_measure, does_scale)
 
 # endregion

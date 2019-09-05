@@ -77,7 +77,8 @@
 	
 				document.querySelector("#searchBox").addEventListener("keypress", (event) => {
 					if (event.key === "Enter" && this.filteredResults.length === 1) {
-						// todo for later - have some sort of text display that you can hit "enter"
+						// todo for later - have some sort of text display on-screen that you can hit the "enter" button
+                        //  though I also would love to be able to navigate using the arrow keys... but maybe that's not necessary?
 						window.location.href = this.getDetailLink(this.filteredResults[0]);
 					}
 					document.querySelector("#searchResults").classList.remove("d-none");
