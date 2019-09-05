@@ -25,6 +25,17 @@ def insert_all():
     __make_breakfast()
     __make_casseroles()
     __make_desserts()
+
+    """
+    Haven't made yet:
+    - dips/guac
+    - granola/trail mix
+    - meats
+    - pasta 
+    - rice
+    - smoothies
+    - soups
+    """
     __make_salads()
 
 
@@ -439,9 +450,43 @@ def __make_desserts():
     based_on_link="http://allrecipes.com/Recipe/Pumpkin-Oatmeal-Chocolate-Chip-Cookies",
     additional_info="Add some vanilla extract or maybe nutmeg or pumpkin pie spice if making again")
 
-    # TODO: peach crisp, fruit cobbler
+    __make_recipe("Peach crisp", [
+        Ingredient("Peaches", 5, Unit.CUP),
+        BrownSugar(1/2, Unit.CUP),
+        Ingredient("Flour", 1/4, Unit.CUP),
+        CanolaOil(1/4, Unit.CUP),
+        RolledOats(1, Unit.CUP),
+        Ingredient("Slivered almonds", 1/4, Unit.CUP),
+        Cinnamon(1, Unit.TSP)
+    ], [
+        "In a medium bowl, combine everything but the peaches",
+        "Place peach slices in 8x8 dish",
+        "Sprinkle topping over peaches",
+        "Bake at 375 for 30 minutes"
+    ],
+    based_on_link="http://allrecipes.com/Recipe/Peach-Crisp-III/",
+    additional_info="For next time: Add another 1/4c of oats, use nutmeg, reduce brown sugar to 3/8c, add 2 tbsp flour for 3/8 cup?\
+     Haven't tried this with apples or any fruit besides peaches (at least, not yet)")
 
-
+    __make_recipe("Fruit cobbler", [
+        Ingredient("Fruit, frozen", 12, Unit.DRY_OZ),
+        Sugar(5/8, Unit.CUP),
+        Ingredient("Flour, all-purpose (gf substitute)", 3/4, Unit.CUP),
+        Butter(3, Unit.TBSP),
+        AlmondMilk(3/4, Unit.CUP),
+        Ingredient("Slivered almonds", 1/4, Unit.CUP),
+        BakingPowder(1, Unit.TSP),
+        Salt(1/4, Unit.TSP)
+    ], [
+        "Heat oven to 350 degrees",
+        "Put butter in an 8-inch square or 9-inch round pan; set in oven to melt. When butter has melted, remove pan from oven.",
+        "Whisk flour, sugar, baking powder and salt in small bowl. Add milk; whisk to form a smooth batter.",
+        "Pour batter into pan, then scatter fruit over batter.",
+        "Sprinkle with remaining 1 Tb. of sugar.",
+        "Bake until batter browns and fruit bubbles, 50 to 60 minutes."
+    ],
+    based_on_link="https://www.allrecipes.com/recipe/88354/easy-batter-fruit-cobbler/",
+    additional_info="For next time: Possibly add some oats to the top? And possibly substitute oil for butter?")
 
 
 def __make_salads():
