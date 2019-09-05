@@ -417,7 +417,7 @@ def __make_desserts():
     additional_info="The amount of sugar is experimental, but 1/2 cup of honey was far too sweet, so this should be decent now.")
 
     __make_recipe("Pumpkin chocolate chip cookies", [
-        
+        # TODO
     ])
 
 
