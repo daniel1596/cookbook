@@ -25,12 +25,13 @@ def insert_all():
     __make_breakfast()
     __make_casseroles()
     __make_desserts()
+    __make_dips()
+    __make_granola()
 
     """
     Haven't made yet:
-    - dips/guac
-    - granola/trail mix
-    - meats
+    - granola/trail mix (in progress)
+    - meats (not sure if I'll add all these but we'll see)
     - pasta 
     - rice
     - smoothies
@@ -70,7 +71,7 @@ def __make_bean_based():
         Ingredient("Corn, frozen", 10, Unit.DRY_OZ),
         Ingredient("Diced tomatoes, canned", 14.5, Unit.DRY_OZ),
         Ingredient("Olive oil", 1/4, Unit.CUP),
-        Ingredient("Cilantro, dried", 1/4, Unit.CUP),
+        Cilantro(1/4, Unit.CUP, is_fresh=False),
         Ingredient("Apple cider vinegar", 3, Unit.TBSP),
         Ingredient("Lime juice", 2, Unit.TBSP),
         Ingredient("Lemon juice", 1, Unit.TBSP),
@@ -489,6 +490,78 @@ def __make_desserts():
     additional_info="For next time: Possibly add some oats to the top? And possibly substitute oil for butter?")
 
 
+def __make_dips():
+    __make_recipe("Guacamole", [
+        Avocado(3),
+        LimeJuice(2, Unit.TBSP),
+        Salt(1, Unit.TSP),
+        DicedOnion(1/2, Unit.CUP),
+        Cilantro(3, Unit.TBSP, is_fresh=True),
+        FireRoastedDicedTomatoes(1/2, "can"),
+        Ingredient("Minced garlic", 1, Unit.TSP),
+        CayennePepper(1, "pinch")
+    ], [
+        "In a medium bowl, mash together the avocados, lime juice, and salt. Mix in the rest of the ingredients.",
+        "Refrigerate 1 hour for best flavor, or serve immediately."
+    ],
+    based_on_link="https://www.allrecipes.com/recipe/14231/guacamole/",
+    additional_info="Need to add 1/2 tsp cumin next time! Based on what other reviewers have said.\
+    Had a little too much lime flavor - probably take down salt from 1 tsp --> 1/2 tsp. \
+    Didn't use onion in this rendition.")
+
+
+def __make_granola():
+    __make_recipe("Original granola", [
+        RolledOats(5/2, Unit.CUP),
+        FlaxSeeds(1/2, Unit.CUP),
+        PeanutButter(1/4, Unit.CUP),
+        Ingredient("Almonds/pecans", 3/4, Unit.CUP),
+        OliveOil(1/3, Unit.CUP),
+        MapleSyrup(1/3, Unit.CUP),
+        Salt(1/2, Unit.TSP),
+        Cinnamon(1, Unit.TSP),
+        Nutmeg(1/4, Unit.TSP),
+        Ginger(1, "pinch"),
+        Cloves(1, "pinch"),
+    ], [
+      "Mix all dry ingredients, then add wet and stir",
+      "Bake at 300 for 35ish minutes total",
+      "Stir in the pan after about 20 minutes",
+      "Use wax paper on the pan!"
+    ],
+    additional_info="Can also sub in 1/2 cup peanuts for 1/4 cup peanut butter; I've switched to peanut butter lately simply so I can buy organic.")
+
+    __make_recipe("Coconut granola", [
+        RolledOats(5/2, Unit.CUP),
+        FlaxSeeds(1/4, Unit.CUP),
+        Walnuts(1/4, Unit.CUP),
+        UnsweetenedCoconutFlakes(1, Unit.CUP),
+        Almonds(1/2, Unit.CUP),
+        PumpkinSeeds(1/2, Unit.CUP),
+        Pecans(3/4, Unit.CUP),
+        SunflowerSeeds(1/4, Unit.CUP),
+        Salt(1/2, Unit.TSP),
+        CoconutOil(1/3, Unit.CUP),
+        MapleSyrup(1/3, Unit.CUP),
+        AlmondButter(2, Unit.TBSP)
+    ], [
+        "Preheat oven to 325 degrees F (162 C).",
+        "Add all dry (and I added the almond butter, too) to a large mixing bowl and stir to combine.",
+        "To a small saucepan, add coconut oil and maple syrup. Warm over medium heat for 2-3 minutes, whisking frequently until the two are \
+          totally combined and there is no visible separation.",
+        "Immediately pour over the dry ingredients and stir to combine until all oats and nuts are thoroughly coated.",
+        "Arrange on a large baking sheet and spread into an even layer.",
+        "Bake for 20 minutes, then remove from oven and turn the pan around so the other end goes into the oven first (so it bakes evenly).",
+        "Bake 5-7 minutes more, watching carefully as to not let it burn. You'll know it's done when the granola is golden brown and very fragrant."
+    ],
+    based_on_link="https://minimalistbaker.com/super-chunky-coconut-granola/",
+    additional_info="Can also sub in 1/2 cup peanuts for 1/4 cup peanut butter; I've switched to peanut butter lately simply so I can buy organic.")
+
+    # __make_recipe("Premium granola", [
+    #
+    # ])
+
+
 def __make_salads():
     __make_recipe("Broccoli salad", [
         Ingredient("Bacon", 10, "slices"),
@@ -536,7 +609,7 @@ def __make_salads():
         Ingredient("Onion", 1, "cup or so?"),
         Ingredient("Feta", 4, Unit.DRY_OZ),
         Ingredient("Olive oil", None, "not sure"),
-        Ingredient("Basil", None, "ask MK"),
+        Basil(None, "ask MK", is_fresh=False),
         Ingredient("Oregano", None, "ask MK")
     ], [
         "Chop up the onion, cherry tomatoes (or regular tomato), and cucumber",
