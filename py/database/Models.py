@@ -13,7 +13,10 @@ class Recipe(Base):
     RecipeID = PrimaryKey()
     Name = StringNotNull()
     # Todo at some point: add images to the db? Probably good to do, presumably just the file path of the images.
-    #  Also a little concerned about taking up a bunch of space in RiouxSVN with images... maybe I'd need the Raspberry Pi, then, as a home server
+    #  Also a little concerned about taking up a bunch of space in RiouxSVN with images... maybe I'd need the Pi, then, as a home server
+
+    # todo - want to have sections in the list of ingredients (nullable).
+    #  If not null, this would be just something to insert an end of a </ul>, the title of a new section, and then a starting <ul>.
 
     Ingredients = relationship("Ingredient", back_populates="Recipe")
     Steps = relationship("Step", back_populates="Recipe")

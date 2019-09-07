@@ -16,11 +16,20 @@
 				<div class="row">
 					<div class="col bg-light">
 		                <h4>Ingredients:</h4>
-		                <ul id="ingredients">
+						<!-- todo implement "ingredient sections" on the model -->
+
+		                <ul id="ingredients"> <!-- v-if="!recipe.IngredientSections"  or something similar-->
 							<li v-for="ingredient of ingredients">
-								[[ ingredient.QuantityUI ]] [[ ingredient.UnitOfMeasure ]] [[ ingredient.FoodItem.toLowerCase() ]]
+								[[ displayIngredient(ingredient) ]]
 							</li>
 		                </ul>
+						<!--
+						<ul v-else v-for="ingredientSection of recipe.IngredientSections">
+							<li v-for="ingredient of ingredientSection">
+								[[ ingredient.QuantityUI ]] [[ ingredient.UnitOfMeasure ]] [[ ingredient.FoodItem.toLowerCase() ]]
+							</li>
+						</ul>
+						-->
 					</div>
 					<div class="col-8">
 		                <h4>Steps:</h4>
@@ -67,6 +76,9 @@
 				}
 			},
 			methods: {
+				displayIngredient: function(ingredient) {
+					return `${ingredient.QuantityUI} ${ingredient.UnitOfMeasure} ${ingredient.FoodItem.toLowerCase()}`;
+				},
 				loadData: async function() {
 					const recipeName = document.querySelector("#vue-recipe-detail").getAttribute("data-recipe-name");
 					this.recipe = (await axios.get(`/api/recipes/${recipeName}`)).data;
@@ -81,57 +93,5 @@
 				this.loadData();
 			}
 		})
-	</script>
-
-	<!-- Going to attempt to deprecate the below script -->
-	<script>
-		window.addEventListener("DOMContentLoaded", () => {
-			document.querySelectorAll(".btn-change-factor").forEach((button) => {
-				button.addEventListener("click", (event) => {
-					const factor = button.getAttribute("data-factor");
-					multiplyIngredientAmountsBy(factor);
-				});
-			});
-		});
-
-		function multiplyIngredientAmountsBy(factor) {
-			// NOTE - should use fraction.js if I'm seriously going to do that
-			// Don't reinvent the wheel please
-			// https://github.com/infusion/Fraction.js/
-			// also could get super complex with this... and I'm not sure if I want to do that. Hmm.
-
-			// Also - this feature is not needed for an MVP launch
-
-			const ingredientList = document.querySelector("ul#ingredients");
-			for (let ingListItem of ingredientList.children) {
-				const currentQuantity = ingListItem.textContent.split(' ', 1)[0];
-				const isQuantityFraction = isFraction(currentQuantity);
-			
-				if (isNaN(currentQuantity) && !isQuantityFraction)
-					continue;
-
-				const newQuantity = isQuantityFraction 
-					? multiplyFractionBy(factor, currentQuantity) 
-					: currentQuantity * factor;
-
-				ingListItem.textContent = ingListItem.textContent.replace(currentQuantity, newQuantity);
-			}
-		}
-
-		function isFraction(quantity) {
-			const fractionList = quantity.split("/");
-			return fractionList.length == 2 && !fractionList.some(frac => isNaN(frac));
-		}
-
-		function multiplyFractionBy(factor, fraction) {
-			const fractionList = fraction.split("/");
-			
-			const newNumerator = factor > 1 ? factor * fractionList[0] : fractionList[0];
-			const denominator = fractionList[1];
-
-			const newValue = newNumerator / denominator;
-
-			return Number.isInteger(newValue) ? newValue : `${newNumerator}/${denominator}`;
-		}
 	</script>
 {% endblock %}

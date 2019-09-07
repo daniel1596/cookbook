@@ -10,6 +10,11 @@
 		<div>
 			<div id="searchResults" class="d-none">
 				<h5>Recipes</h5>
+
+				<!-- Todo - have separate sections for name search and ingredient search -->
+				<!-- like if the search text is "cinnamon", put recipes with name "cinnamon" in it above those with \
+					ingredient cinnamon in it -->
+
 				<div v-if="filteredResults && filteredResults.length > 0">
 					<div v-for="recipe in filteredResults">
 						<a class="index-ingredient-link" :href="getDetailLink(recipe)">[[ recipe.Name ]]</a>
