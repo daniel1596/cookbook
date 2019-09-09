@@ -40,6 +40,14 @@ def FireRoastedDicedTomatoes(quantity: Optional[float], unit_of_measure="", *, d
 # endregion
 
 
+# region Fruit
+
+def DriedFruit(quantity: Optional[float], unit_of_measure="", *, does_scale=True):
+    return Ingredient("Dried fruit", quantity, unit_of_measure, does_scale)
+
+# endregion
+
+
 # region Ingredients with no units of measure
 
 def Avocado(quantity: float):
@@ -102,6 +110,9 @@ def Almonds(quantity: Optional[float], unit_of_measure="", *, does_scale=True):
 
 def Pecans(quantity: Optional[float], unit_of_measure="", *, does_scale=True):
     return Ingredient("Pecans", quantity, unit_of_measure, does_scale)
+
+def Pistachios(quantity: Optional[float], unit_of_measure="", *, does_scale=True):
+    return Ingredient("Pistachios", quantity, unit_of_measure, does_scale)
 
 def Walnuts(quantity: Optional[float], unit_of_measure="", *, does_scale=True):
     return Ingredient("Walnuts", quantity, unit_of_measure, does_scale)
@@ -173,6 +184,9 @@ def get_name_fresh_or_dried(name: str, is_fresh: bool) -> str:
 
 
 # region Seeds
+
+def GroundFlaxSeed(quantity: Optional[float], unit_of_measure="", *, does_scale=True):
+    return Ingredient("Ground flaxseed", quantity, unit_of_measure, does_scale)
 
 def FlaxSeeds(quantity: Optional[float], unit_of_measure="", *, does_scale=True):
     return Ingredient("Flax seeds", quantity, unit_of_measure, does_scale)

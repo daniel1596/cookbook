@@ -3,7 +3,7 @@ from typing import List
 from py.database.Ingredients import *
 from py.database.Models import *
 from py.database.Setup import reset_data, session
-from py.database.Unit import Unit
+from py.database.Unit import *
 
 """ 
 New way of doing things - importing the session from Setup and not using the lovely contextmanager. At least, for now.
@@ -43,17 +43,17 @@ def insert_all():
 def __make_bean_based():
     __make_recipe("Bean burgers", [
         Ingredient("Beans", 1, "15-oz can"),
-        Ingredient("Quinoa", 1/4, Unit.CUP),
-        Ingredient("Oats", 1/2, Unit.CUP),
-        Ingredient("Water", 1/2, Unit.CUP),
-        Ingredient("Bell pepper (or tomato), minced", 1/4, Unit.CUP),
-        Ingredient("Onion, minced", 2, Unit.TBSP),
+        Ingredient("Quinoa", *OneQuarterCup),
+        Ingredient("Oats", *OneHalfCup),
+        Ingredient("Water", *OneHalfCup),
+        Ingredient("Bell pepper (or tomato), minced", *OneQuarterCup),
+        Ingredient("Onion, minced", *TwoTablespoons),
         Ingredient("Garlic, minced", 2, "cloves"),
-        Ingredient("Cumin, ground", 3/2, Unit.TSP),
-        Ingredient("Salt", 1/2, Unit.TSP),
+        Ingredient("Cumin, ground", *ThreeHalvesTeaspoons),
+        Ingredient("Salt", *OneHalfTeaspoon),
         Ingredient("Paprika/cayenne", None, "A bit of"),
-        Ingredient("Egg", 1, ""),
-        Ingredient("Oil (for sauteeing)", 3, Unit.TBSP, does_scale=False)
+        Egg(1),
+        Ingredient("Oil (for sauteeing)", *ThreeTablespoons, does_scale=False)
     ], [
         "Heat up the quinoa (bring to boil, simmer for 15-20 minutes)",
         "Mash the beans with a fork",
@@ -67,19 +67,19 @@ def __make_bean_based():
     __make_recipe("Mexican bean salad", [
         Ingredient("Canned beans (Simple Truth organic three-bean)", 2, "cans"),
         Ingredient("Green bell pepper, diced", 1, ""),
-        Ingredient("Onion, diced", 1, ""),
+        DicedOnion(1, ""),
         Ingredient("Corn, frozen", 10, Unit.DRY_OZ),
         Ingredient("Diced tomatoes, canned", 14.5, Unit.DRY_OZ),
-        Ingredient("Olive oil", 1/4, Unit.CUP),
-        Cilantro(1/4, Unit.CUP, is_fresh=False),
-        Ingredient("Apple cider vinegar", 3, Unit.TBSP),
-        Ingredient("Lime juice", 2, Unit.TBSP),
-        Ingredient("Lemon juice", 1, Unit.TBSP),
-        Ingredient("Cumin, ground", 2, Unit.TSP),
-        Ingredient("Dried minced garlic", 1, Unit.TSP),
-        Ingredient("Sugar", 1, Unit.TSP),
-        Ingredient("Salt", 1, Unit.TSP),
-        Ingredient("Cayenne pepper", 1/2, Unit.TSP),
+        Ingredient("Olive oil", *OneQuarterCup),
+        Cilantro(*OneQuarterCup, is_fresh=False),
+        Ingredient("Apple cider vinegar", *ThreeTablespoons),
+        Ingredient("Lime juice", *TwoTablespoons),
+        Ingredient("Lemon juice", *OneTablespoon),
+        Ingredient("Cumin, ground", *TwoTeaspoons),
+        Ingredient("Dried minced garlic", *OneTeaspoon),
+        Ingredient("Sugar", *OneTeaspoon),
+        Ingredient("Salt", *OneTeaspoon),
+        Ingredient("Cayenne pepper", *OneHalfTeaspoon),
         Ingredient("Black pepper", None, "A few sprinkles"),
     ], [
         "Dice bell pepper and onion. Drain beans and diced tomatoes. Heat up frozen corn.",
@@ -90,11 +90,11 @@ def __make_bean_based():
     based_on_link="http,//allrecipes.com/recipe/14169/mexican-bean-salad/")
 
     __make_recipe("Roasted chickpeas", [
-        Ingredient("Chickpeas", 2, Unit.CUP),
-        Ingredient("Olive oil", 2, Unit.TBSP),
-        Ingredient("Ground cumin", 1, Unit.TBSP),
-        Ingredient("Garlic powder", 1, Unit.TBSP),
-        Ingredient("Chili powder", 1/2, Unit.TBSP),
+        Ingredient("Chickpeas", *TwoCups),
+        Ingredient("Olive oil", *TwoTablespoons),
+        Ingredient("Ground cumin", *OneTablespoon),
+        Ingredient("Garlic powder", *OneTablespoon),
+        Ingredient("Chili powder", *OneHalfTablespoon),
         Ingredient("Sea salt", 1, "pinch", does_scale=False),
         Ingredient("Pepper", 1, "pinch", does_scale=False),
         Ingredient("Red pepper flakes", 1, "pinch", does_scale=False)
@@ -116,20 +116,20 @@ def __make_bean_based():
 def __make_breads():
     __make_recipe("Banana oat bread", [
         Ingredient("bananas", 3),
-        Ingredient("rolled oats", 1, Unit.CUP),
-        Ingredient("flour", 1, Unit.CUP),
-        Ingredient("flaxseed meal", 1/4, Unit.CUP),
-        Ingredient("eggs", 2),
-        Ingredient("olive oil", 1/4, Unit.CUP),
-        Ingredient("milk", 1/4, Unit.CUP),
-        Ingredient("margarine", 1/4, Unit.CUP),
-        Ingredient("brown sugar", 1/2, Unit.CUP),
-        Ingredient("walnuts", 1/2, Unit.CUP),
-        Ingredient("vanilla", 1, Unit.TSP),
-        Ingredient("cinnamon", 1, Unit.TSP),
-        Ingredient("baking soda" ,1, Unit.TSP),
-        Ingredient("nutmeg", 1/2, Unit.TSP),
-        Ingredient("salt", 1/2, Unit.TSP)
+        RolledOats(*OneCup),
+        Ingredient("flour", *OneCup),
+        Ingredient("flaxseed meal", *OneQuarterCup),
+        Egg(2),
+        Ingredient("olive oil", *OneQuarterCup),
+        Ingredient("milk", *OneQuarterCup),
+        Ingredient("margarine", *OneQuarterCup),
+        Ingredient("brown sugar", *OneHalfCup),
+        Ingredient("walnuts", *OneHalfCup),
+        Ingredient("vanilla", *OneTeaspoon),
+        Ingredient("cinnamon", *OneTeaspoon),
+        Ingredient("baking soda" ,*OneTeaspoon),
+        Ingredient("nutmeg", *OneHalfTeaspoon),
+        Ingredient("salt", *OneHalfTeaspoon)
     ], [
         "Preheat oven to 350 degrees F (175 degrees C). Grease a 9x5-inch loaf pan and set aside.",
         "Beat together the oil, sugar, eggs, and vanilla.",
@@ -140,16 +140,16 @@ def __make_breads():
     additional_info="Variation on this per Molly Kate's wishes, reducing sugar to 1/4 cup and adding 1/2 cup chocolate chips")
 
     __make_recipe("Cranberry walnut bread", [
-        Ingredient("Cranberries/raisins", 1/2, Unit.CUP),
-        Ingredient("Flour", 2, Unit.CUP),
+        Ingredient("Cranberries/raisins", *OneHalfCup),
+        Ingredient("Flour", *TwoCups),
         Ingredient("Eggs", 1, ""),
-        Ingredient("Olive oil", 2, Unit.TBSP),
-        Ingredient("Milk", 3/4, Unit.CUP),
+        Ingredient("Olive oil", *TwoTablespoons),
+        Ingredient("Milk", *ThreeQuartersCup),
         Ingredient("Brown sugar", 5/8, Unit.CUP),
-        Ingredient("Walnuts", 1/2, Unit.CUP),
-        Ingredient("Salt", 1/2, Unit.TSP),
-        Ingredient("Baking soda", 1/2, Unit.TSP),
-        Ingredient("Baking powder", 3/2, Unit.TSP),
+        Ingredient("Walnuts", *OneHalfCup),
+        Ingredient("Salt", *OneHalfTeaspoon),
+        Ingredient("Baking soda", *OneHalfTeaspoon),
+        Ingredient("Baking powder", *ThreeHalvesTeaspoons),
         Ingredient("Cinnamon", None, "A few sprinkles"),
         Ingredient("Nutmeg", 1, "sprinkle")
     ], [
@@ -159,18 +159,18 @@ def __make_breads():
     ])
 
     __make_recipe("Pumpkin bread", [
-        Ingredient("Pumpkin puree", 1, Unit.CUP),
+        Ingredient("Pumpkin puree", *OneCup),
         Ingredient("Flour", 1.75, Unit.CUP),
         Ingredient("Eggs", 2),
-        Ingredient("Canola oil", 1/3, Unit.CUP),
-        Ingredient("Milk (or water)", 1/4, Unit.CUP),
-        Ingredient("Maple syrup", 1/2, Unit.CUP),
-        Ingredient("Walnuts", 1/3, Unit.CUP),
-        Ingredient("Salt", 1/2, Unit.TSP),
-        Ingredient("Baking soda", 1/2, Unit.TSP),
-        Ingredient("Cinnamon", 1, Unit.TSP),
-        Ingredient("Nutmeg", 1/4, Unit.TSP),
-        Ingredient("Vanilla extract", 1, Unit.TSP)
+        Ingredient("Canola oil", *OneThirdCup),
+        Ingredient("Milk (or water)", *OneQuarterCup),
+        Ingredient("Maple syrup", *OneHalfCup),
+        Ingredient("Walnuts", *OneThirdCup),
+        Ingredient("Salt", *OneHalfTeaspoon),
+        Ingredient("Baking soda", *OneHalfTeaspoon),
+        Ingredient("Cinnamon", *OneTeaspoon),
+        Ingredient("Nutmeg", *OneQuarterTeaspoon),
+        Ingredient("Vanilla extract", *OneTeaspoon)
     ], [
         "Preheat oven to 325",
         "Beat together oil, syrup, eggs",
@@ -183,19 +183,19 @@ def __make_breads():
 
     __make_recipe("Apple bread", [
        Ingredient("Apples", 2),
-       Ingredient("Buckwheat flour", 2/3, Unit.CUP),
-       Ingredient("Sorghum flour", 2/3, Unit.CUP),
-       Ingredient("Tapioca starch", 1/3, Unit.CUP),
-       Ingredient("Walnuts", 1/2, Unit.CUP),
-       Ingredient("Baking soda", 1, Unit.TSP),
-       Ingredient("Cinnamon", 1, Unit.TSP),
-       Ingredient("Salt", 1/4, Unit.TSP),
-       Ingredient("Unsweetened applesauce", 1/2, Unit.CUP),
-       Ingredient("Canola oil", 2, Unit.TBSP),
-       Ingredient("Milk", 2, Unit.TBSP),
-       Ingredient("Sugar", 1/2, Unit.CUP),
+       Ingredient("Buckwheat flour", *TwoThirdsCup),
+       Ingredient("Sorghum flour", *TwoThirdsCup),
+       Ingredient("Tapioca starch", *OneThirdCup),
+       Ingredient("Walnuts", *OneHalfCup),
+       Ingredient("Baking soda", *OneTeaspoon),
+       Ingredient("Cinnamon", *OneTeaspoon),
+       Ingredient("Salt", *OneQuarterTeaspoon),
+       Ingredient("Unsweetened applesauce", *OneHalfCup),
+       Ingredient("Canola oil", *TwoTablespoons),
+       Ingredient("Milk", *TwoTablespoons),
+       Ingredient("Sugar", *OneHalfCup),
        Ingredient("Egg", 1),
-       Ingredient("Vanilla extract", 1, Unit.TSP)
+       Ingredient("Vanilla extract", *OneTeaspoon)
     ], [
         "Preheat oven to 350F and lightly coat a 9x5 loaf pan with baking spray.",
         "In a large mixing bowl, combine flour, baking soda, cinnamon, and salt. Separately, mix all wet ingredients + sugar.",
@@ -208,22 +208,22 @@ def __make_breads():
 def __make_breakfast():
     __make_recipe("Berry-oatmeal bake", [
         # for the oatmeal
-        Ingredient("Unsalted butter", 2, Unit.TBSP),
-        Ingredient("Rolled oats", 5/4, Unit.CUP),
-        Ingredient("Brown sugar", 2, Unit.TBSP),
+        Ingredient("Unsalted butter", *TwoTablespoons),
+        Ingredient("Rolled oats", *FiveFourthsCup),
+        Ingredient("Brown sugar", *TwoTablespoons),
         Ingredient("Salt", 1, "pinch"),
-        Ingredient("Unsweetened almond milk", 5/3, Unit.CUP),
+        Ingredient("Unsweetened almond milk", *FiveThirdsCup),
         Ingredient("Egg", 1),
-        Ingredient("vanilla extract", 1, Unit.TSP),
+        Ingredient("vanilla extract", *OneTeaspoon),
 
         # for the topping
         Ingredient("Mixed berries", 12, "oz frozen (5/2 cups frozen; 3/2 cups thawed)"),
-        Ingredient("Sliced almonds or pecans", 1/3, Unit.CUP),
-        Ingredient("Old-fashioned rolled oats", 1/3, Unit.CUP),
-        Ingredient("Light brown sugar", 1/3, Unit.CUP),
-        Ingredient("Unsalted butter, melted", 2, Unit.TBSP),
-        Ingredient("Gf flour", 1, Unit.TBSP),
-        Ingredient("Ground cinnamon", 1/8, Unit.TSP),
+        Ingredient("Sliced almonds or pecans", *OneThirdCup),
+        Ingredient("Old-fashioned rolled oats", *OneThirdCup),
+        Ingredient("Light brown sugar", *OneThirdCup),
+        Ingredient("Unsalted butter, melted", *TwoTablespoons),
+        Ingredient("Gf flour", *OneTablespoon),
+        Ingredient("Ground cinnamon", *OneEighthTeaspoon),
         Ingredient("Salt", None, "A pinch")
     ], [
         "Preheat the oven to 350 degrees F. Grease a 2-quart baking dish or 8-inch square baking pan with the butter.",
@@ -236,20 +236,20 @@ def __make_breakfast():
     based_on_link="https,//www.foodnetwork.com/recipes/food-network-kitchen/berry-oatmeal-bake-3362604")
 
     __make_recipe("Pumpkin oat pancakes", [
-        Ingredient("Pumpkin puree", 1, Unit.CUP),
-        Ingredient("Milk of choice", 1/4, Unit.CUP),
-        Ingredient("Coconut oil (or butter), melted", 2, Unit.TBSP),
-        Ingredient("Lemon juice", 1, Unit.TBSP),
-        Ingredient('Maple syrup (or honey)', 1, Unit.TSP),
-        Ingredient('Vanilla extract', 1, Unit.TSP),
+        Ingredient("Pumpkin puree", *OneCup),
+        Ingredient("Milk of choice", *OneQuarterCup),
+        Ingredient("Coconut oil (or butter), melted", *TwoTablespoons),
+        Ingredient("Lemon juice", *OneTablespoon),
+        Ingredient('Maple syrup (or honey)', *OneTeaspoon),
+        Ingredient('Vanilla extract', *OneTeaspoon),
         Ingredient("Eggs", 2),
-        Ingredient("Sorghum flour", 1, Unit.CUP),
-        Ingredient("Baking soda", 1/2, Unit.TSP),
-        Ingredient("Salt", 1/2, Unit.TSP),
-        Ingredient("Ground cinnamon", 1/2, Unit.TSP),
-        Ingredient("Ground ginger", 1/2, Unit.TSP),
-        Ingredient("Ground nutmeg", 1/4, Unit.TSP),
-        Ingredient("Ground cloves or allspice", 1/4, Unit.TSP)
+        Ingredient("Sorghum flour", *OneCup),
+        Ingredient("Baking soda", *OneHalfTeaspoon),
+        Ingredient("Salt", *OneHalfTeaspoon),
+        Ingredient("Ground cinnamon", *OneHalfTeaspoon),
+        Ingredient("Ground ginger", *OneHalfTeaspoon),
+        Ingredient("Ground nutmeg", *OneQuarterTeaspoon),
+        Ingredient("Ground cloves or allspice", *OneQuarterTeaspoon)
     ], [
         "In a small mixing bowl, stir together the pumpkin puree, milk, coconut oil, lemon juice, maple syrup and vanilla. Beat in the eggs. \
          (If your coconut oil goes back to its solid state like mine did at this point, just warm the mixture for short 20 second bursts in the microwave, \
@@ -273,13 +273,13 @@ def __make_casseroles():
     __make_recipe("Egg casserole", [
         Ingredient("Eggs", 6),
         Ingredient("Cubed/diced ham", 8, Unit.DRY_OZ),
-        Ingredient("Shredded cheese (probably any kind - have done Mexican usually)", 1, Unit.CUP),
-        Ingredient("Diced potatoes", 1, Unit.CUP),
-        Ingredient("Diced onion", 1, Unit.CUP),
-        Ingredient("Flour", 1, Unit.TBSP),
-        Ingredient("Milk (almond is fine)", 1/2, Unit.CUP),
-        Ingredient("Canola oil", 2, Unit.TBSP),
-        Ingredient("Italian seasoning", 1, Unit.TSP)
+        Ingredient("Shredded cheese (probably any kind - have done Mexican usually)", *OneCup),
+        Ingredient("Diced potatoes", *OneCup),
+        Ingredient("Diced onion", *OneCup),
+        Ingredient("Flour", *OneTablespoon),
+        Ingredient("Milk (almond is fine)", *OneHalfCup),
+        Ingredient("Canola oil", *TwoTablespoons),
+        Ingredient("Italian seasoning", *OneTeaspoon)
     ], [
         "Mix all dry ingredients together",
         "Spread mixture in 8x8 baking dish (or 9x13 - thinner or thicker, has worked either way)",
@@ -291,15 +291,15 @@ def __make_casseroles():
     based_on_link="http://pocketchangegourmet.com/ham-and-egg-casserole/")
 
     __make_recipe("Green bean casserole", [
-        Ingredient("Green beans", 4, Unit.CUP),
-        Ingredient("Chicken, pre-cooked", 1.5, Unit.CUP),
-        Ingredient("Butter", 3, Unit.TBSP),
-        Ingredient("Flour", 2, Unit.TBSP),
+        Ingredient("Green beans", *FourCups),
+        Ingredient("Chicken, pre-cooked", *ThreeHalvesCup),
+        Ingredient("Butter", *ThreeTablespoons),
+        Ingredient("Flour", *TwoTablespoons),
         Ingredient("Greek yogurt", 5.3, Unit.DRY_OZ),
-        Ingredient("Cheddar cheese", 2, Unit.CUP),
-        Ingredient("Crumbled crackers", 1/2, Unit.CUP),
-        Ingredient("Sugar", 1/4, Unit.TSP),
-        Ingredient("Almonds, slivered", 1/4, Unit.CUP),
+        Ingredient("Cheddar cheese", *TwoCups),
+        Ingredient("Crumbled crackers", *OneHalfCup),
+        Ingredient("Sugar", *OneQuarterTeaspoon),
+        Ingredient("Almonds, slivered", *OneQuarterCup),
         Ingredient("Cumin, garlic powder, and pepper", None, "A little"),
     ], [
         "Preheat the oven to 350 F",
@@ -316,11 +316,11 @@ def __make_casseroles():
 
     __make_recipe("Mexican casserole", [
         Ingredient("Ground meat or substitute", 1, Unit.POUND),
-        Ingredient("Medium salsa", 3/2, Unit.CUP),
+        Ingredient("Medium salsa", *ThreeHalvesCup),
         Ingredient("Tortillas (or crushed-up chips)", None, "enough to fill the pan"),
-        Ingredient("Canned beans", 1, Unit.CUP),
+        Ingredient("Canned beans", *OneCup),
         Ingredient("Greek yogurt", 5.3, Unit.DRY_OZ),
-        Ingredient("Mexican cheese", 2, Unit.CUP),
+        Ingredient("Mexican cheese", *TwoCups),
         Ingredient("Diced onion", 1/2, "large onion"),
         Ingredient("Tomatoes, diced, fire-roasted", 1, "can"),
         Ingredient("Garlic/powder", None, "several sprinkles (of powder) or a few cloves"),
@@ -342,17 +342,17 @@ def __make_casseroles():
 
 def __make_desserts():
     __make_recipe("Oatmeal raisin / chocolate chip cookies", [
-        Ingredient("Oats", 3/2, Unit.CUP),
-        Ingredient("Flour", 3/4, Unit.CUP),
-        Ingredient("Sugar", 1/4, Unit.CUP),
-        Ingredient("Butter", 1/2, Unit.CUP),
-        Ingredient("Baking soda", 1/2, Unit.TSP),
-        Ingredient("Cinnamon", 1/2, Unit.TSP),
-        Ingredient("Salt", 1/4, Unit.TSP),
-        Ingredient("Vanilla", 1, Unit.TSP),
-        Ingredient("Egg", 1),
-        Ingredient("Pecans", 1/4, Unit.CUP),
-        Ingredient("Raisins or chocolate chips", 3/4, Unit.CUP)
+        Ingredient("Oats", *ThreeHalvesCup),
+        Ingredient("Flour", *ThreeQuartersCup),
+        Ingredient("Sugar", *OneQuarterCup),
+        Ingredient("Butter", *OneHalfCup),
+        Ingredient("Baking soda", *OneHalfTeaspoon),
+        Ingredient("Cinnamon", *OneHalfTeaspoon),
+        Ingredient("Salt", *OneQuarterTeaspoon),
+        Ingredient("Vanilla", *OneTeaspoon),
+        Egg(1),
+        Ingredient("Pecans", *OneQuarterCup),
+        Ingredient("Raisins or chocolate chips", *ThreeQuartersCup)
     ], [
         "Heat oven to 350°F.",
         "In large bowl, stir sugars, butter, baking soda, cinnamon, salt, vanilla and eggs with spoon until well blended.",
@@ -366,25 +366,25 @@ def __make_desserts():
     __make_recipe("Cinnamon apple crumb cake", [
         # for the cake
         Ingredient("Butter", 6, Unit.TBSP),
-        Ingredient("Sugar", 1/3, Unit.CUP),
-        Ingredient("Eggs", 2),
-        Ingredient("Vanilla extract", 1, Unit.TSP),
-        Cinnamon(1, Unit.TSP),
+        Ingredient("Sugar", *OneThirdCup),
+        Egg(2),
+        Ingredient("Vanilla extract", *OneTeaspoon),
+        Cinnamon(*OneTeaspoon),
         Salt(None, "A pinch"),
-        Ingredient("Almond flour", 1/2, Unit.CUP),
-        Ingredient("Gluten-free baking mix", 1/2, Unit.CUP),
-        Ingredient("Coconut flour", 1/3, Unit.CUP),
-        Ingredient("Ground flaxseed", 1, Unit.TBSP),
-        BakingPowder(2, Unit.TSP),
-        AlmondMilk(1/2, Unit.CUP),
+        Ingredient("Almond flour", *OneHalfCup),
+        Ingredient("Gluten-free baking mix", *OneHalfCup),
+        Ingredient("Coconut flour", *OneThirdCup),
+        Ingredient("Ground flaxseed", *OneTablespoon),
+        BakingPowder(*TwoTeaspoons),
+        AlmondMilk(*OneHalfCup),
 
         # for the streusel layer
-        Butter(3, Unit.TBSP),
-        Ingredient("Granny smith apples, peeled and chopped into 1/2 inch pieces", 1, Unit.CUP),
-        Sugar(1/4, Unit.CUP),
-        Cinnamon(1, Unit.TSP),
-        Ingredient("Almond flour", 3/4, Unit.CUP),
-        Walnuts(1/4, Unit.CUP),
+        Butter(*ThreeTablespoons),
+        Ingredient("Granny smith apples, peeled and chopped into 1/2 inch pieces", *OneCup),
+        Sugar(*OneQuarterCup),
+        Cinnamon(*OneTeaspoon),
+        Ingredient("Almond flour", *ThreeQuartersCup),
+        Walnuts(*OneQuarterCup),
         Salt(None, "A pinch")
     ], [
         "TO MAKE THE CAKE LAYER:",
@@ -407,17 +407,17 @@ def __make_desserts():
     additional_info="Eat within 5 days. It didn't have a ton of crumb topping, like an apple crisp would, so be prepared for that")
 
     __make_recipe("Apple oat cookies", [
-        Oats(1, Unit.CUP),
-        Ingredient("Flour (1/2c sorghum, 1/8c each flaxseed meal and tapioca starch)", 3/4, Unit.CUP),
-        BakingPowder(1/2, Unit.TSP),
-        Salt(1/4, Unit.TSP),
-        Cinnamon(1/4, Unit.TSP),
-        Ingredient("Apple", 1/3, Unit.CUP),
-        BrownSugar(1/3, Unit.CUP),
-        Ingredient("Walnuts or pecans", 1/4, Unit.CUP),
-        Ingredient("Chia seeds", 1, Unit.TBSP),
-        Ingredient("Oil/margarine", 1/4, Unit.CUP),
-        AlmondMilk(1/4, Unit.CUP)
+        Oats(*OneCup),
+        Ingredient("Flour (1/2c sorghum, 1/8c each flaxseed meal and tapioca starch)", *ThreeQuartersCup),
+        BakingPowder(*OneHalfTeaspoon),
+        Salt(*OneQuarterTeaspoon),
+        Cinnamon(*OneQuarterTeaspoon),
+        Ingredient("Apple", *OneThirdCup),
+        BrownSugar(*OneThirdCup),
+        Ingredient("Walnuts or pecans", *OneQuarterCup),
+        Ingredient("Chia seeds", *OneTablespoon),
+        Ingredient("Oil/margarine", *OneQuarterCup),
+        AlmondMilk(*OneQuarterCup)
     ], [
         "Preheat oven to 350F",
         "Mix dry in bowl",
@@ -429,17 +429,17 @@ def __make_desserts():
     additional_info="The amount of sugar is experimental, but 1/2 cup of honey was far too sweet, so this should be decent now.")
 
     __make_recipe("Pumpkin chocolate chip cookies", [
-        CanolaOil(1/2, Unit.CUP),
-        BrownSugar(2/3, Unit.CUP),
-        Ingredient("Pumpkin puree", 3/4, Unit.CUP),
+        CanolaOil(*OneHalfCup),
+        BrownSugar(*TwoThirdsCup),
+        Ingredient("Pumpkin puree", *ThreeQuartersCup),
         Ingredient("Flour (was all-purpose - haven't made gf)", 4/3, Unit.CUP),
         Egg(1),
-        Oats(2/3, Unit.CUP),
-        ChocolateChips(2/3, Unit.CUP),
-        Walnuts(1/4, Unit.CUP),
+        Oats(*TwoThirdsCup),
+        ChocolateChips(*TwoThirdsCup),
+        Walnuts(*OneQuarterCup),
         Cinnamon(3/4, Unit.TSP),
-        Salt(1/4, Unit.TSP),
-        BakingSoda(1/4, Unit.TSP),
+        Salt(*OneQuarterTeaspoon),
+        BakingSoda(*OneQuarterTeaspoon),
         BakingPowder(3/4, Unit.TSP)
     ], [
         "Beat oil, brown sugar, pumpkin, eggs together",
@@ -453,12 +453,12 @@ def __make_desserts():
 
     __make_recipe("Peach crisp", [
         Ingredient("Peaches", 5, Unit.CUP),
-        BrownSugar(1/2, Unit.CUP),
-        Ingredient("Flour", 1/4, Unit.CUP),
-        CanolaOil(1/4, Unit.CUP),
-        RolledOats(1, Unit.CUP),
-        Ingredient("Slivered almonds", 1/4, Unit.CUP),
-        Cinnamon(1, Unit.TSP)
+        BrownSugar(*OneHalfCup),
+        Ingredient("Flour", *OneQuarterCup),
+        CanolaOil(*OneQuarterCup),
+        RolledOats(*OneCup),
+        Ingredient("Slivered almonds", *OneQuarterCup),
+        Cinnamon(*OneTeaspoon)
     ], [
         "In a medium bowl, combine everything but the peaches",
         "Place peach slices in 8x8 dish",
@@ -472,12 +472,12 @@ def __make_desserts():
     __make_recipe("Fruit cobbler", [
         Ingredient("Fruit, frozen", 12, Unit.DRY_OZ),
         Sugar(5/8, Unit.CUP),
-        Ingredient("Flour, all-purpose (gf substitute)", 3/4, Unit.CUP),
-        Butter(3, Unit.TBSP),
-        AlmondMilk(3/4, Unit.CUP),
-        Ingredient("Slivered almonds", 1/4, Unit.CUP),
-        BakingPowder(1, Unit.TSP),
-        Salt(1/4, Unit.TSP)
+        Ingredient("Flour, all-purpose (gf substitute)", *ThreeQuartersCup),
+        Butter(*ThreeTablespoons),
+        AlmondMilk(*ThreeQuartersCup),
+        Ingredient("Slivered almonds", *OneQuarterCup),
+        BakingPowder(*OneTeaspoon),
+        Salt(*OneQuarterTeaspoon)
     ], [
         "Heat oven to 350 degrees",
         "Put butter in an 8-inch square or 9-inch round pan; set in oven to melt. When butter has melted, remove pan from oven.",
@@ -493,12 +493,12 @@ def __make_desserts():
 def __make_dips():
     __make_recipe("Guacamole", [
         Avocado(3),
-        LimeJuice(2, Unit.TBSP),
-        Salt(1, Unit.TSP),
-        DicedOnion(1/2, Unit.CUP),
-        Cilantro(3, Unit.TBSP, is_fresh=True),
+        LimeJuice(*TwoTablespoons),
+        Salt(*OneTeaspoon),
+        DicedOnion(*OneHalfCup),
+        Cilantro(*ThreeTablespoons, is_fresh=True),
         FireRoastedDicedTomatoes(1/2, "can"),
-        Ingredient("Minced garlic", 1, Unit.TSP),
+        Ingredient("Minced garlic", *OneTeaspoon),
         CayennePepper(1, "pinch")
     ], [
         "In a medium bowl, mash together the avocados, lime juice, and salt. Mix in the rest of the ingredients.",
@@ -512,15 +512,15 @@ def __make_dips():
 
 def __make_granola():
     __make_recipe("Original granola", [
-        RolledOats(5/2, Unit.CUP),
-        FlaxSeeds(1/2, Unit.CUP),
-        PeanutButter(1/4, Unit.CUP),
-        Ingredient("Almonds/pecans", 3/4, Unit.CUP),
-        OliveOil(1/3, Unit.CUP),
-        MapleSyrup(1/3, Unit.CUP),
-        Salt(1/2, Unit.TSP),
-        Cinnamon(1, Unit.TSP),
-        Nutmeg(1/4, Unit.TSP),
+        RolledOats(*FiveHalvesCup),
+        FlaxSeeds(*OneHalfCup),
+        PeanutButter(*OneQuarterCup),
+        Ingredient("Almonds/pecans", *ThreeQuartersCup),
+        OliveOil(*OneThirdCup),
+        MapleSyrup(*OneThirdCup),
+        Salt(*OneHalfTeaspoon),
+        Cinnamon(*OneTeaspoon),
+        Nutmeg(*OneQuarterTeaspoon),
         Ginger(1, "pinch"),
         Cloves(1, "pinch"),
     ], [
@@ -532,18 +532,18 @@ def __make_granola():
     additional_info="Can also sub in 1/2 cup peanuts for 1/4 cup peanut butter; I've switched to peanut butter lately simply so I can buy organic.")
 
     __make_recipe("Coconut granola", [
-        RolledOats(5/2, Unit.CUP),
-        FlaxSeeds(1/4, Unit.CUP),
-        Walnuts(1/4, Unit.CUP),
-        UnsweetenedCoconutFlakes(1, Unit.CUP),
-        Almonds(1/2, Unit.CUP),
-        PumpkinSeeds(1/2, Unit.CUP),
-        Pecans(3/4, Unit.CUP),
-        SunflowerSeeds(1/4, Unit.CUP),
-        Salt(1/2, Unit.TSP),
-        CoconutOil(1/3, Unit.CUP),
-        MapleSyrup(1/3, Unit.CUP),
-        AlmondButter(2, Unit.TBSP)
+        RolledOats(*FiveHalvesCup),
+        FlaxSeeds(*OneQuarterCup),
+        Walnuts(*OneQuarterCup),
+        UnsweetenedCoconutFlakes(*OneCup),
+        Almonds(*OneHalfCup),
+        PumpkinSeeds(*OneHalfCup),
+        Pecans(*ThreeQuartersCup),
+        SunflowerSeeds(*OneQuarterCup),
+        Salt(*OneHalfTeaspoon),
+        CoconutOil(*OneThirdCup),
+        MapleSyrup(*OneThirdCup),
+        AlmondButter(*TwoTablespoons)
     ], [
         "Preheat oven to 325 degrees F (162 C).",
         "Add all dry (and I added the almond butter, too) to a large mixing bowl and stir to combine.",
@@ -557,21 +557,50 @@ def __make_granola():
     based_on_link="https://minimalistbaker.com/super-chunky-coconut-granola/",
     additional_info="Can also sub in 1/2 cup peanuts for 1/4 cup peanut butter; I've switched to peanut butter lately simply so I can buy organic.")
 
-    # __make_recipe("Premium granola", [
-    #
-    # ])
+    __make_recipe("Premium granola", [
+        RolledOats(*ThreeHalvesCup),
+        Almonds(*ThreeQuartersCup),
+        DriedFruit(*OneHalfCup),
+        Pistachios(*OneHalfCup),
+        GroundFlaxSeed(*OneThirdCup),
+        Walnuts(*OneThirdCup),
+        PumpkinSeeds(*OneThirdCup),
+    ], [
+        "Line an 8x8 (or so) baking pan with parchment paper",
+        "Combine the dry ingredients in a large bowl and mix to combine.",
+        "Add maple syrup or honey and apple sauce and mix to combine.",
+        "Add almond butter to mixture and mix until combined.",
+        "Place batter in prepared pan pressing down firmly with palm of hands (or mini-roller if you have one) and distributing as evenly as possible.",
+        "Allow pan to sit in freezer for approximately 1 hour."
+    ],
+    based_on_link="https://www.inspirededibles.ca/2013/05/blueberry-bliss-breakfast-bars-raw.html",
+    additional_info="Things stuck together well. We used peanut butter instead of almond butter but I imagine either would be fine.")
+
+    __make_recipe("Trail mix", [
+        Ingredient("Mixed nuts", *ThreeHalvesCup),
+        Ingredient("Seeds", *OneCup),
+        DriedFruit(*OneCup),
+        ChocolateChips(*OneHalfCup),
+        Salt(1, "pinch"),
+        Cinnamon(1, "pinch"),
+    ], [
+        "Mix together"
+    ],
+    additional_info="This wasn't the greatest of all time, but it might be worth another shot at some point."
+                    " The nuts mixture was between peanuts (primary), cashews, and almonds."
+                    " We didn't notice the cinnamon and salt.")
 
 
 def __make_salads():
     __make_recipe("Broccoli salad", [
         Ingredient("Bacon", 10, "slices"),
         Ingredient("Broccoli", 1, "10 oz bag (frozen)"),
-        Ingredient("Onion, red or yellow", 1/4, Unit.CUP),
-        Ingredient("Raisins", 1/2, Unit.CUP),
-        Ingredient("Greek yogurt", 1, Unit.CUP),
-        Ingredient("Apple cider vinegar", 3, Unit.TBSP),
-        Ingredient("Sugar", 3/2, Unit.TBSP),
-        Ingredient("Sunflower seeds/slivered almonds/flaxseeds", 1, Unit.CUP)
+        Ingredient("Onion, red or yellow", *OneQuarterCup),
+        Ingredient("Raisins", *OneHalfCup),
+        Ingredient("Greek yogurt", *OneCup),
+        Ingredient("Apple cider vinegar", *ThreeTablespoons),
+        Ingredient("Sugar", *ThreeHalvesTablespoons),
+        Ingredient("Sunflower seeds/slivered almonds/flaxseeds", *OneCup)
     ], [
         "Place bacon in a large, deep skillet. Cook over medium high heat until evenly brown. Drain, crumble and set aside.",
         "In a medium bowl, combine the broccoli, onion and raisins. In a small bowl, whisk together the vinegar, sugar and mayonnaise.\
@@ -586,15 +615,15 @@ def __make_salads():
 
     __make_recipe("Chicken salad", [
         Ingredient("Chicken", 9, Unit.DRY_OZ),
-        Ingredient("Greek yogurt", 1, Unit.CUP),
+        Ingredient("Greek yogurt", *OneCup),
         Ingredient("Apple", 1),
-        Ingredient("Walnuts", 1, Unit.CUP),
-        Ingredient("Cranberries/raisins", 1/3, Unit.CUP),
-        Ingredient("Green pepper/onion", 1.5, Unit.CUP),
-        Ingredient("Lemon juice", 1, Unit.TSP),
-        Ingredient("Salt", 1/2, Unit.TSP),
-        Ingredient("Pepper", 1/2, Unit.TSP),
-        Ingredient("Paprika (or similar)", 1/2, Unit.TSP)
+        Ingredient("Walnuts", *OneCup),
+        Ingredient("Cranberries/raisins", *OneThirdCup),
+        Ingredient("Green pepper/onion", *ThreeHalvesCup),
+        Ingredient("Lemon juice", *OneTeaspoon),
+        Ingredient("Salt", *OneHalfTeaspoon),
+        Ingredient("Pepper", *OneHalfTeaspoon),
+        Ingredient("Paprika (or similar)", *OneHalfTeaspoon)
     ], [
         "Combine ingredients in large mixing bowl and eat."
     ],

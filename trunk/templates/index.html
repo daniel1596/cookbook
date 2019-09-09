@@ -13,7 +13,9 @@
 
 				<!-- Todo - have separate sections for name search and ingredient search -->
 				<!-- like if the search text is "cinnamon", put recipes with name "cinnamon" in it above those with \
-					ingredient cinnamon in it -->
+					ingredient cinnamon in it
+					 but I guess I'd still display if there are a bunch of results? (but maybe not if >10? hmm)
+					  like what if some cheeky bastard puts in "salt" into the search bar? haha. -->
 
 				<div v-if="filteredResults && filteredResults.length > 0">
 					<div v-for="recipe in filteredResults">
@@ -27,14 +29,16 @@
 					<p>There were no results.</p>
 				</div>
 			</div>
+            <p v-if="filteredResults.length == 1" class="mt-4 text-white-50">
+                <em>(Hit the "Enter" button to view this recipe.)</em>
+            </p>
 		</div>
 	</div>
 {% endblock %}
 
 {% block end_scripts %}
-	<script src="https://vuejs.org/js/vue.js"></script>
-
-	<!-- <script src="{{ url_for('static', filename='js/index.js') }}"></script> -->
+	<!-- will download and eventually use minified version for production -->
+    <script src="https://vuejs.org/js/vue.js"></script>
 	<script>
 		const index = new Vue({
 			el: "#vue-homepage",
@@ -57,7 +61,7 @@
 					const searchTextLower = this.recipeNameSearch.toLowerCase();
 
 					return this.allRecipes.filter(recipe =>
-						recipe.Name.toLowerCase().includes(searchTextLower) ||
+						recipe.Name.toLowerCase().includes(searchTextLower.trim()) ||
 							this.allIngredients.some(ing =>
 								ing.RecipeID === recipe.RecipeID && ing.FoodItem.toLowerCase().includes(searchTextLower)
 							)
@@ -78,19 +82,14 @@
 			mounted: function() {
 				this.loadData();
 				
-				document.querySelector("#searchBox").focus();	
-	
+				document.querySelector("#searchBox").focus();
 				document.querySelector("#searchBox").addEventListener("keypress", (event) => {
 					if (event.key === "Enter" && this.filteredResults.length === 1) {
-						// todo for later - have some sort of text display on-screen that you can hit the "enter" button
-                        //  though I also would love to be able to navigate using the arrow keys... but maybe that's not necessary?
 						window.location.href = this.getDetailLink(this.filteredResults[0]);
 					}
 					document.querySelector("#searchResults").classList.remove("d-none");
 				});
 			}
 		});
-
-
 	</script>
 {% endblock %}
