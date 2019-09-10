@@ -15,9 +15,6 @@ class Recipe(Base):
     # Todo at some point: add images to the db? Probably good to do, presumably just the file path of the images.
     #  Also a little concerned about taking up a bunch of space in RiouxSVN with images... maybe I'd need the Pi, then, as a home server
 
-    # todo - want to have sections in the list of ingredients (nullable).
-    #  If not null, this would be just something to insert an end of a </ul>, the title of a new section, and then a starting <ul>.
-
     Ingredients = relationship("Ingredient", back_populates="Recipe")
     Steps = relationship("Step", back_populates="Recipe")
 
@@ -28,17 +25,22 @@ class Recipe(Base):
 class Ingredient(Base):
     __tablename__ = "Ingredient"
 
-    def __init__(self, food_item: str, quantity: Optional[float], unit_of_measure="", does_scale=True):
+    def __init__(self, food_item: str, quantity: Optional[float], unit_of_measure="", does_scale: bool=True,
+                 is_first_in_section: bool=False, section_name: str=""):
         self.FoodItem = food_item
         self.Quantity = quantity if quantity else -1
         self.UnitOfMeasure = unit_of_measure.__repr__() if isinstance(unit_of_measure, Unit) else unit_of_measure
         self.DoesScale = does_scale and self.Quantity > -1
+        self.IsFirstInSection = is_first_in_section
+        self.SectionName = section_name
 
     IngredientID = PrimaryKey()
     FoodItem = StringNotNull()
     Quantity = FloatNotNull()
     UnitOfMeasure = StringNotNull()
     DoesScale = Column(Boolean, nullable=True)
+    IsFirstInSection = Column(Boolean, nullable=True)
+    SectionName = Column(String, nullable=True)
 
     RecipeID = IntegerForeignKey(Recipe, nullable=True)
     Recipe = relationship("Recipe", back_populates="Ingredients")

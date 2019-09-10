@@ -207,17 +207,14 @@ def __make_breads():
 
 def __make_breakfast():
     __make_recipe("Berry-oatmeal bake", [
-        # for the oatmeal
-        Ingredient("Unsalted butter", *TwoTablespoons),
+        Ingredient("Unsalted butter", *TwoTablespoons, is_first_in_section=True, section_name="Oatmeal"),
         Ingredient("Rolled oats", *FiveFourthsCup),
         Ingredient("Brown sugar", *TwoTablespoons),
         Ingredient("Salt", 1, "pinch"),
         Ingredient("Unsweetened almond milk", *FiveThirdsCup),
         Ingredient("Egg", 1),
         Ingredient("vanilla extract", *OneTeaspoon),
-
-        # for the topping
-        Ingredient("Mixed berries", 12, "oz frozen (5/2 cups frozen; 3/2 cups thawed)"),
+        Ingredient("Mixed berries", 12, "oz frozen (5/2 cups frozen; 3/2 cups thawed)", is_first_in_section=True, section_name="Topping"),
         Ingredient("Sliced almonds or pecans", *OneThirdCup),
         Ingredient("Old-fashioned rolled oats", *OneThirdCup),
         Ingredient("Light brown sugar", *OneThirdCup),

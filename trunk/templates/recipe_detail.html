@@ -16,20 +16,18 @@
 				<div class="row">
 					<div class="col bg-light">
 		                <h4>Ingredients:</h4>
-						<!-- todo implement "ingredient sections" on the model -->
-
-		                <ul id="ingredients"> <!-- v-if="!recipe.IngredientSections"  or something similar-->
+		                <ul v-if="!ingredientsSectionStarters.length" id="ingredients">
 							<li v-for="ingredient of ingredients">
 								[[ displayIngredient(ingredient) ]]
 							</li>
 		                </ul>
-						<!--
-						<ul v-else v-for="ingredientSection of recipe.IngredientSections">
-							<li v-for="ingredient of ingredientSection">
-								[[ displayIngredient(ingredient) ]]
-							</li>
-						</ul>
-						-->
+                        <section v-else v-for="section of ingredientSections">
+                            <h6>[[ section[0].SectionName ]]</h6>
+                            <ul>
+                                <li v-for="ingredient of section">[[ displayIngredient(ingredient) ]]</li>
+                            </ul>
+                            <hr /> <!-- todo make v-if this isn't the last section in the list -->
+                        </section>
 					</div>
 					<div class="col-8">
 		                <h4>Steps:</h4>
@@ -64,7 +62,7 @@
 			delimiters: ['[[', ']]'],
 			data: {
 				recipe: [],
-				ingredientsInitial: []
+                ingredientsInitial: [],
 			},
 			computed: {
 				ingredients() {
@@ -73,7 +71,33 @@
 					});
 
 					return this.ingredientsInitial;
-				}
+				},
+                ingredientSections() {
+                    const ingredients = this.ingredients;
+
+                    const indiciesFirstInSection = ingredients
+                        .filter(ing => ing.IsFirstInSection)
+                        .map(ing => ing.IngredientID)
+                        .map(ingID => ingredients.findIndex(ing => ing.IngredientID === ingID));
+
+                    // A bit of a kludge but should work for 2 or 3 sections
+                    let sections = [];
+
+                    sections.push(ingredients.slice(indiciesFirstInSection[0], indiciesFirstInSection[1]));
+
+                    if (indiciesFirstInSection[2])
+                        sections.push(ingredients.slice(indiciesFirstInSection[1], indiciesFirstInSection[2]));
+                    else
+                        sections.push(ingredients.slice(indiciesFirstInSection[1]));
+
+                    console.log("Sections:");
+                    console.log(sections);
+
+                    return sections;
+                },
+                ingredientsSectionStarters() {
+				    return this.ingredientsInitial.filter(ing => ing.IsFirstInSection);
+                }
 			},
 			methods: {
 				displayIngredient: function(ingredient) {
