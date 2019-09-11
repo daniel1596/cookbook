@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    <div id="vue-recipe-detail" class="container mt-5" data-recipe-name="{{recipe.Name}}">
-        <article class="card text-black">
-            <div class="card-header bg-dark d-flex justify-content-between">
+	<div id="vue-recipe-detail" class="container mt-5" data-recipe-name="{{recipe.Name}}">
+		<article class="card text-black">
+			<div class="card-header bg-dark d-flex justify-content-between">
 				<h2>{{ recipe.Name }}</h2>
 				<div>
 					<button class="btn btn-secondary" @click="multiplyIngredientAmountBy(2)">Double</button>
@@ -11,34 +11,34 @@
 					<button class="btn btn-secondary" @click="multiplyIngredientAmountBy(3)">Triple</button>
 					<button class="btn btn-secondary" @click="multiplyIngredientAmountBy(1/3)">Third</button>
 				</div>
-            </div>
-            <div class="card-body text-body">               
+			</div>
+			<div class="card-body text-body">
 				<div class="row">
 					<div class="col bg-light">
-		                <h4>Ingredients:</h4>
-                        <!-- I'm handling all this with Vue, rather than in Flask, because the ingredient quantities
-                              are dynamic (if one halves/doubles/etc. the recipe).
-                             This changes ingredient properties in the front-end while leaving the data layer alone. -->
-		                <ul v-if="!ingredientsSectionStarters.length" id="ingredients">
+						<h4>Ingredients:</h4>
+						<!-- I'm handling all this with Vue, rather than in Flask, because the ingredient quantities
+							  are dynamic (if one halves/doubles/etc. the recipe).
+							 This changes ingredient properties in the front-end while leaving the data layer alone. -->
+						<ul v-if="!ingredientsSectionStarters.length" id="ingredients">
 							<li v-for="ingredient of ingredients">
 								[[ displayIngredient(ingredient) ]]
 							</li>
-		                </ul>
-                        <section v-else v-for="section of ingredientSections">
-                            <h6>[[ section[0].SectionName ]]</h6>
-                            <ul>
-                                <li v-for="ingredient of section">[[ displayIngredient(ingredient) ]]</li>
-                            </ul>
-                            <hr v-if="!isLastInArray(section, ingredientSections) "/>
-                        </section>
+						</ul>
+						<section v-else v-for="section of ingredientSections">
+							<h6>[[ section[0].SectionName ]]</h6>
+							<ul>
+								<li v-for="ingredient of section">[[ displayIngredient(ingredient) ]]</li>
+							</ul>
+							<hr v-if="!isLastInArray(section, ingredientSections) "/>
+						</section>
 					</div>
 					<div class="col-8">
-		                <h4>Steps:</h4>
-                        <!-- Non-ingredient recipe properties are static and thus can be loaded via Flask/Jinja -->
-		                <ul>
-		                    {% for step in recipe.Steps %}
-		                        <li>{{ step }}</li>
-		                    {% endfor %}
+						<h4>Steps:</h4>
+						<!-- Non-ingredient recipe properties are static and thus can be loaded via Flask/Jinja -->
+						<ul>
+							{% for step in recipe.Steps %}
+								<li>{{ step }}</li>
+							{% endfor %}
 						</ul>
 						{% if recipe.AdditionalInfo %}
 							<h5>Additional information</h5>
@@ -52,9 +52,9 @@
 						{% endif %}
 					</div>
 				</div>
-            </div>
-        </article>
-    </div>
+			</div>
+		</article>
+	</div>
 {% endblock %}
 
 {% block end_scripts %}
@@ -65,52 +65,52 @@
 			delimiters: ['[[', ']]'],  // the default is curly braces, but this would conflict with Jinja syntax
 			data: {
 				recipe: [],
-                ingredientsInitial: [],
+				ingredientsInitial: [],
 			},
 			computed: {
 				ingredients() {
-                    const ingredients = this.ingredientsInitial;
+					const ingredients = this.ingredientsInitial;
 
-                    ingredients.forEach((ing) => {
+					ingredients.forEach((ing) => {
 						ing.QuantityUI = ing.Quantity > 0 ? new Fraction(ing.Quantity).toFraction(true) : "";
 					});
 
 					return ingredients;
 				},
-                ingredientSections() {
-                    const ingredients = this.ingredients;
+				ingredientSections() {
+					const ingredients = this.ingredients;
 
-                    const indiciesFirstInSection = ingredients
-                        .filter(ing => ing.IsFirstInSection)
-                        .map(ing => ing.IngredientID)
-                        .map(ingID => ingredients.findIndex(ing => ing.IngredientID === ingID));
+					const indiciesFirstInSection = ingredients
+						.filter(ing => ing.IsFirstInSection)
+						.map(ing => ing.IngredientID)
+						.map(ingID => ingredients.findIndex(ing => ing.IngredientID === ingID));
 
-                    // A bit of a kludge, but this logic should work for 2 or 3 ingredient sections
-                    // Though it hasn't been tested on more than 2 sections so far
-                    let sections = [];
+					// A bit of a kludge, but this logic should work for 2 or 3 ingredient sections
+					// Though it hasn't been tested on more than 2 sections so far
+					let sections = [];
 
-                    sections.push(ingredients.slice(indiciesFirstInSection[0], indiciesFirstInSection[1]));
+					sections.push(ingredients.slice(indiciesFirstInSection[0], indiciesFirstInSection[1]));
 
-                    if (indiciesFirstInSection[2])
-                        sections.push(ingredients.slice(indiciesFirstInSection[1], indiciesFirstInSection[2]));
-                    else
-                        sections.push(ingredients.slice(indiciesFirstInSection[1]));
+					if (indiciesFirstInSection[2])
+						sections.push(ingredients.slice(indiciesFirstInSection[1], indiciesFirstInSection[2]));
+					else
+						sections.push(ingredients.slice(indiciesFirstInSection[1]));
 
-                    return sections;
-                },
-                ingredientsSectionStarters() {
-				    return this.ingredientsInitial.filter(ing => ing.IsFirstInSection);
-                }
+					return sections;
+				},
+				ingredientsSectionStarters() {
+					return this.ingredientsInitial.filter(ing => ing.IsFirstInSection);
+				}
 			},
 			methods: {
 				displayIngredient: function(ingredient) {
 					return `${ingredient.QuantityUI} ${ingredient.UnitOfMeasure} ${ingredient.FoodItem.toLowerCase()}`;
 				},
-                isLastInArray: function(item, array) {
-				    // this could be put this method into a base Vue class, but that's not necessary at this time
-                    // if I want to do that in the future, though: https://medium.com/js-dojo/extending-vuejs-components-42fefefc688b
-                    return array.findIndex(_ => _ === item) === (array.length - 1);
-                },
+				isLastInArray: function(item, array) {
+					// this could be put this method into a base Vue class, but that's not necessary at this time
+					// if I want to do that in the future, though: https://medium.com/js-dojo/extending-vuejs-components-42fefefc688b
+					return array.findIndex(_ => _ === item) === (array.length - 1);
+				},
 				loadData: async function() {
 					this.recipe = (await axios.get(`/api/recipes/{{ recipe.Name }}`)).data;
 					this.ingredientsInitial = this.recipe.Ingredients["py/seq"]; // seems hacky but JSON.parse() didn't work so just leave it as is

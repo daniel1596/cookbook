@@ -13,6 +13,7 @@ session = scoped_session(sessionmaker(bind=engine))
 Base = declarative_base()
 Base.query = session.query_property()
 
+
 def reset_data():
 	# I don't know why, but putting this in a separate method and then calling it seemed to work.
 	# It should have automatically run on app creation, I would have thought... weird.

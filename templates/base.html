@@ -3,22 +3,22 @@
 <html lang="en">
 	<head>
 		<title>Index</title> <!-- intentionally obfuscated -->
-        <meta charset="utf-8">
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" href="data:,"> <!-- Empty favicon to prevent browser console error -->
+		<link rel="icon" href="data:,"> <!-- Empty favicon to prevent browser console error -->
 		<link rel="stylesheet" href="/static/styles/css/vendor/bootstrap.min.css" />
 		<link rel="stylesheet" href="/static/styles/css/main.css" />
-    </head>
+	</head>
 	<body class="d-flex flex-column h-100 mx-auto p-3">
 		{{ header.make_header() }}
-        <main>
-            {% block main %}{% endblock %}
+		<main>
+			{% block main %}{% endblock %}
 		</main>
 		<!-- <footer class="text-center text-white-50"> <p></p>	</footer> -->
 
-        <!-- Axios and Vue - currently using (or could use) on all templates, so just loading them here for now. -->
+		<!-- Axios and Vue - currently using (or could use) on all templates, so just loading them here for now. -->
 		<script src="/static/scripts/vendor/axios.min.js"></script>
-        <script src="/static/scripts/vendor/{{ vue_file }}"></script>
+		<script src="/static/scripts/vendor/{{ vue_file }}"></script>
 		
 		<!-- Bootstrap JS dependencies - need to be in this order-->
 		<script src="/static/scripts/vendor/jquery-3.3.1.slim.min.js"></script>
