@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    <div id="vue-recipe-detail" class="container mt-5" data-recipe-name="{{recipe.Name}}"> <!--  -->
+    <div id="vue-recipe-detail" class="container mt-5" data-recipe-name="{{recipe.Name}}">
         <article class="card text-black">
             <div class="card-header bg-dark d-flex justify-content-between">
 				<h2>{{ recipe.Name }}</h2>
@@ -16,6 +16,9 @@
 				<div class="row">
 					<div class="col bg-light">
 		                <h4>Ingredients:</h4>
+                        <!-- I'm handling all this with Vue, rather than in Flask, because the ingredient quantities
+                              are dynamic (if one halves/doubles/etc. the recipe).
+                             This changes ingredient properties in the front-end while leaving the data layer alone. -->
 		                <ul v-if="!ingredientsSectionStarters.length" id="ingredients">
 							<li v-for="ingredient of ingredients">
 								[[ displayIngredient(ingredient) ]]
@@ -26,11 +29,12 @@
                             <ul>
                                 <li v-for="ingredient of section">[[ displayIngredient(ingredient) ]]</li>
                             </ul>
-                            <hr /> <!-- todo make v-if this isn't the last section in the list -->
+                            <hr v-if="!isLastInArray(section, ingredientSections) "/>
                         </section>
 					</div>
 					<div class="col-8">
 		                <h4>Steps:</h4>
+                        <!-- Non-ingredient recipe properties are static and thus can be loaded via Flask/Jinja -->
 		                <ul>
 		                    {% for step in recipe.Steps %}
 		                        <li>{{ step }}</li>
@@ -54,23 +58,25 @@
 {% endblock %}
 
 {% block end_scripts %}
-	<script src="https://vuejs.org/js/vue.js"></script>
+	<script src="/static/scripts/vendor/vue.js"></script>
 	<script src="/static/scripts/vendor/fraction.min.js"></script>
 	<script>
 		const recipe_detail = new Vue({
 			el: "#vue-recipe-detail",
-			delimiters: ['[[', ']]'],
+			delimiters: ['[[', ']]'],  // the default is curly braces, but this would conflict with Jinja syntax
 			data: {
 				recipe: [],
                 ingredientsInitial: [],
 			},
 			computed: {
 				ingredients() {
-					this.ingredientsInitial.forEach((ing) => {
+                    const ingredients = this.ingredientsInitial;
+
+                    ingredients.forEach((ing) => {
 						ing.QuantityUI = ing.Quantity > 0 ? new Fraction(ing.Quantity).toFraction(true) : "";
 					});
 
-					return this.ingredientsInitial;
+					return ingredients;
 				},
                 ingredientSections() {
                     const ingredients = this.ingredients;
@@ -80,7 +86,8 @@
                         .map(ing => ing.IngredientID)
                         .map(ingID => ingredients.findIndex(ing => ing.IngredientID === ingID));
 
-                    // A bit of a kludge but should work for 2 or 3 sections
+                    // A bit of a kludge, but this logic should work for 2 or 3 ingredient sections
+                    // Though it hasn't been tested on more than 2 sections so far
                     let sections = [];
 
                     sections.push(ingredients.slice(indiciesFirstInSection[0], indiciesFirstInSection[1]));
@@ -89,9 +96,6 @@
                         sections.push(ingredients.slice(indiciesFirstInSection[1], indiciesFirstInSection[2]));
                     else
                         sections.push(ingredients.slice(indiciesFirstInSection[1]));
-
-                    console.log("Sections:");
-                    console.log(sections);
 
                     return sections;
                 },
@@ -103,9 +107,13 @@
 				displayIngredient: function(ingredient) {
 					return `${ingredient.QuantityUI} ${ingredient.UnitOfMeasure} ${ingredient.FoodItem.toLowerCase()}`;
 				},
+                isLastInArray: function(item, array) {
+				    // this could be put this method into a base Vue class, but that's not necessary at this time
+                    // if I want to do that in the future, though: https://medium.com/js-dojo/extending-vuejs-components-42fefefc688b
+                    return array.findIndex(_ => _ === item) === (array.length - 1);
+                },
 				loadData: async function() {
-					const recipeName = document.querySelector("#vue-recipe-detail").getAttribute("data-recipe-name");
-					this.recipe = (await axios.get(`/api/recipes/${recipeName}`)).data;
+					this.recipe = (await axios.get(`/api/recipes/{{ recipe.Name }}`)).data;
 					this.ingredientsInitial = this.recipe.Ingredients["py/seq"]; // seems hacky but JSON.parse() didn't work so just leave it as is
 				},
 				multiplyIngredientAmountBy: function(factor) {
