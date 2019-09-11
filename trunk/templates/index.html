@@ -68,8 +68,8 @@
 			methods: {
 				loadData: async function() {			
 					[this.allRecipes, this.allIngredients] = (await Promise.all([
-						axios.get("/api/recipes/list"), 
-						axios.get("/api/ingredients/list")
+						axios.get("/api/recipes"),
+						axios.get("/api/ingredients")
 					])).map(res => res.data);
 				},
 				getDetailLink: function(recipe) {

@@ -9,10 +9,11 @@ from py.database.Unit import *
 New way of doing things - importing the session from Setup and not using the lovely contextmanager. At least, for now.
 """
 
-def __make_recipe(name: str, ingredients: List[Ingredient], steps_description: List[str], *, based_on_link: str = "", additional_info: str = ""):
+def __make_recipe(name: str, ingredients: List[Ingredient], steps_description: List[str], *, based_on_link: str = "", notes: List[str] = None):
 	steps = [Step(StepOrder=i, Description=description) for i, description in enumerate(steps_description)]
+	notes_strongly_typed = [Note(s) for s in notes] if notes else []
 
-	recipe = Recipe(Name=name, Steps=steps, Ingredients=ingredients, BasedOnLink=based_on_link, AdditionalInfo=additional_info)
+	recipe = Recipe(Name=name, Steps=steps, Ingredients=ingredients, BasedOnLink=based_on_link, Notes=notes_strongly_typed)
 
 	session.add(recipe)
 	session.commit()
@@ -30,7 +31,6 @@ def insert_all():
 
 	"""
 	Haven't made yet:
-	- granola/trail mix (in progress)
 	- meats (not sure if I'll add all these but we'll see)
 	- pasta 
 	- rice
@@ -61,7 +61,7 @@ def __make_bean_based():
 		"Form the mixture into about 5 patties",
 		"Cook the patties in the oil in a large skillet for a few minutes per side."
 	],
-	additional_info="These save fine a couple days, at least, in the fridge.",
+	notes=["These save fine a couple days, at least, in the fridge."],
 	based_on_link="https,//www.allrecipes.com/recipe/220661/quinoa-black-bean-burgers/")
 
 	__make_recipe("Mexican bean salad", [
@@ -104,12 +104,14 @@ def __make_bean_based():
 		"Spread into a single layer on a baking sheet.",
 		"Roast for about 45 minutes in the oven, stirring occasionally, until nicely browned and slightly crispy."
 	],
-	additional_info="Overall I liked them, but I felt like despite the amount of spice, the flavor didn't really \"soak in\" to the chickpeas.\
-	Apparently some people bake at 400 for 40 minutes (instead of 350) to make them crunchier.\
-	Maybe too much cumin?\
-	But at the same time I wonder if it would be a good idea to let the spices (after being coated) soak in a little more before baking?\
-	Apparently it is actually a good idea not to add the olive oil until partway through baking (and probably spices too). I should try that.\
-	Also - before putting in the oven originally, should rinse the beans and pat them dry.",
+	notes=[
+		"Overall I liked them, but I felt like despite the amount of spice, the flavor didn't really \"soak in\" to the chickpeas.",
+		"Apparently some people bake at 400 for 40 minutes (instead of 350) to make them crunchier.",
+		"Maybe too much cumin?",
+		"I wonder if it would be a good idea to let the spices (after being coated) soak in a little more before baking?",
+		"Apparently it is actually a good idea not to add the olive oil until partway through baking (and probably spices too). I should try that.",
+		"Also - before putting in the oven originally, should rinse the beans and pat them dry."
+	],
 	based_on_link="https,//www.allrecipes.com/recipe/197683/simple-roasted-chickpea-snack")
 
 
@@ -126,8 +128,8 @@ def __make_breads():
 		Ingredient("brown sugar", *OneHalfCup),
 		Ingredient("walnuts", *OneHalfCup),
 		Ingredient("vanilla", *OneTeaspoon),
-		Ingredient("cinnamon", *OneTeaspoon),
-		Ingredient("baking soda" ,*OneTeaspoon),
+		Cinnamon(*OneTeaspoon),
+		BakingSoda(*OneTeaspoon),
 		Ingredient("nutmeg", *OneHalfTeaspoon),
 		Ingredient("salt", *OneHalfTeaspoon)
 	], [
@@ -137,7 +139,7 @@ def __make_breads():
 		"Fold in walnuts/chocolate chips and pour into prepared pan. Bake for 55 minutes."
 	],
 	based_on_link="http,//allrecipes.com/Recipe/Banana-Oatmeal-Bread/",
-	additional_info="Variation on this per Molly Kate's wishes, reducing sugar to 1/4 cup and adding 1/2 cup chocolate chips")
+	notes=["Variation on this per Molly Kate's wishes, reducing sugar to 1/4 cup and adding 1/2 cup chocolate chips"])
 
 	__make_recipe("Cranberry walnut bread", [
 		Ingredient("Cranberries/raisins", *OneHalfCup),
@@ -179,7 +181,7 @@ def __make_breads():
 		"Bake for 60-65 minutes"
 	],
 	based_on_link="http,//cookieandkate.com/2011/whole-wheat-pumpkin-bread/",
-	additional_info="Have not tried this yet with gluten-free flour. Also, should go up to 1/2 tsp nutmeg and maybe ginger or pumpkin pie spice.")
+	notes=["Have not tried this yet with gluten-free flour. Also, should go up to 1/2 tsp nutmeg and maybe ginger or pumpkin pie spice."])
 
 	__make_recipe("Apple bread", [
 		Ingredient("Apples", 2),
@@ -263,7 +265,7 @@ def __make_breakfast():
 		"Serve the pancakes immediately or keep warm in a 200 degree Fahrenheit oven."
 	],
 	based_on_link="https,//cookieandkate.com/pumpkin-oat-pancakes/",
-	additional_info="Have also done this with 3/4 cup pumpkin puree and 1/8 extra cup of almond milk, and that worked fine.")
+	notes=["Have also done this with 3/4 cup pumpkin puree and 1/8 extra cup of almond milk, and that worked fine."])
 
 
 def __make_casseroles():
@@ -309,7 +311,7 @@ def __make_casseroles():
 		"Bake at 350 for for 30 minutes"
 	],
 	based_on_link="http://allrecipes.com/recipe/13717/grandmas-green-bean-casserole/",
-	additional_info="Chicken has generally been 1 cup but I'm putting it at 1.5 for the future")
+	notes=["Chicken has generally been 1 cup but I'm putting it at 1.5 for the future"])
 
 	__make_recipe("Mexican casserole", [
 		Ingredient("Ground meat or substitute", 1, Unit.POUND),
@@ -332,9 +334,11 @@ def __make_casseroles():
 		"Spread cheese on the top",
 		"Bake at 350 for 30 minutes"
 	],
-	additional_info="For next time: could (1) add 2 oz black olives, (2) maybe a bell pepper, (3) any other spices?"
-					"But it also doesn't need a ton of other spices to be tasty - it already has a lot of spices from "
-					"the salsa (mainly) and fire-roasted diced tomatoes.")
+	notes=[
+		"For next time: could (1) add 2 oz black olives, (2) maybe a bell pepper, (3) any other spices?",
+		"But it also doesn't need a ton of other spices to be tasty - it already has a lot of spices from the salsa (mainly)"
+		" and fire-roasted diced tomatoes."
+	])
 
 
 def __make_desserts():
@@ -358,7 +362,10 @@ def __make_desserts():
 		"Bake 9-11 minutes or until golden brown."
 	],
 	based_on_link="https://www.bettycrocker.com/recipes/best-whole-wheat-oatmeal-raisin-cookies/8331bf27-c5f8-4f89-8883-90296373b701",
-	additional_info="The 3/4 cup raisins/chocolate chips is a suggestion for next time. Taking down the sugar to 1/4 cup made it not as tasty as 1/2 haha.")
+	notes=[
+		"The 3/4 cup raisins/chocolate chips is a suggestion for next time.",
+		"Taking down the sugar to 1/4 cup made it not as tasty as 1/2 haha."
+	])
 
 	__make_recipe("Cinnamon apple crumb cake", [
 		# for the cake
@@ -401,7 +408,7 @@ def __make_desserts():
 		"Alternatively, you can bake these in 9 large muffin cups for about 20 minutes at 375 degrees (F) or until a knife inserted in the center comes out clean."
 	],
 	based_on_link="https://www.ibreatheimhungry.com/cinnamon-apple-crumb-cake-low-carb/print/16669/",
-	additional_info="Eat within 5 days. It didn't have a ton of crumb topping, like an apple crisp would, so be prepared for that")
+	notes=["Eat within 5 days. It didn't have a ton of crumb topping, like an apple crisp would, so be prepared for that"])
 
 	__make_recipe("Apple oat cookies", [
 		Oats(*OneCup),
@@ -423,7 +430,7 @@ def __make_desserts():
 		"Drop about a tbsp-sized mound of cookie onto a baking sheet.",
 		"Bake at 350F for 12-15 minutes or until edges of cookies are slightly browned"
 	],
-	additional_info="The amount of sugar is experimental, but 1/2 cup of honey was far too sweet, so this should be decent now.")
+	notes=["The amount of sugar is experimental, but 1/2 cup of honey was far too sweet, so this should be decent now."])
 
 	__make_recipe("Pumpkin chocolate chip cookies", [
 		CanolaOil(*OneHalfCup),
@@ -446,7 +453,7 @@ def __make_desserts():
 		"Bake at 375F for 10-12 minutes"
 	],
 	based_on_link="http://allrecipes.com/Recipe/Pumpkin-Oatmeal-Chocolate-Chip-Cookies",
-	additional_info="Add some vanilla extract or maybe nutmeg or pumpkin pie spice if making again")
+	notes=["Add some vanilla extract or maybe nutmeg or pumpkin pie spice if making again"])
 
 	__make_recipe("Peach crisp", [
 		Ingredient("Peaches", 5, Unit.CUP),
@@ -463,8 +470,10 @@ def __make_desserts():
 		"Bake at 375 for 30 minutes"
 	],
 	based_on_link="http://allrecipes.com/Recipe/Peach-Crisp-III/",
-	additional_info="For next time: Add another 1/4c of oats, use nutmeg, reduce brown sugar to 3/8c, add 2 tbsp flour for 3/8 cup?\
-	 Haven't tried this with apples or any fruit besides peaches (at least, not yet)")
+	notes=[
+		"For next time: Add another 1/4c of oats, use nutmeg, reduce brown sugar to 3/8c, add 2 tbsp flour for 3/8 cup?",
+		"Haven't tried this with apples or any fruit besides peaches (at least, not yet)"
+	])
 
 	__make_recipe("Fruit cobbler", [
 		Ingredient("Fruit, frozen", 12, Unit.DRY_OZ),
@@ -484,7 +493,7 @@ def __make_desserts():
 		"Bake until batter browns and fruit bubbles, 50 to 60 minutes."
 	],
 	based_on_link="https://www.allrecipes.com/recipe/88354/easy-batter-fruit-cobbler/",
-	additional_info="For next time: Possibly add some oats to the top? And possibly substitute oil for butter?")
+	notes=["For next time: Possibly add some oats to the top? And possibly substitute oil for butter?"])
 
 
 def __make_dips():
@@ -502,9 +511,11 @@ def __make_dips():
 		"Refrigerate 1 hour for best flavor, or serve immediately."
 	],
 	based_on_link="https://www.allrecipes.com/recipe/14231/guacamole/",
-	additional_info="Need to add 1/2 tsp cumin next time! Based on what other reviewers have said.\
-	Had a little too much lime flavor - probably take down salt from 1 tsp --> 1/2 tsp. \
-	Didn't use onion in this rendition.")
+	notes=[
+		"Need to add 1/2 tsp cumin next time! Based on what other reviewers have said.",
+		"Had a little too much lime flavor - probably take down salt from 1 tsp --> 1/2 tsp.",
+		"Didn't use onion in this rendition."
+	])
 
 
 def __make_granola():
@@ -526,7 +537,7 @@ def __make_granola():
 	  "Stir in the pan after about 20 minutes",
 	  "Use wax paper on the pan!"
 	],
-	additional_info="Can also sub in 1/2 cup peanuts for 1/4 cup peanut butter; I've switched to peanut butter lately simply so I can buy organic.")
+	notes=["Can also sub in 1/2 cup peanuts for 1/4 cup peanut butter; I've switched to peanut butter lately simply so I can buy organic."])
 
 	__make_recipe("Coconut granola", [
 		RolledOats(*FiveHalvesCup),
@@ -552,7 +563,7 @@ def __make_granola():
 		"Bake 5-7 minutes more, watching carefully as to not let it burn. You'll know it's done when the granola is golden brown and very fragrant."
 	],
 	based_on_link="https://minimalistbaker.com/super-chunky-coconut-granola/",
-	additional_info="Can also sub in 1/2 cup peanuts for 1/4 cup peanut butter; I've switched to peanut butter lately simply so I can buy organic.")
+	notes=["Can also sub in 1/2 cup peanuts for 1/4 cup peanut butter; I've switched to peanut butter lately simply so I can buy organic."])
 
 	__make_recipe("Premium granola", [
 		RolledOats(*ThreeHalvesCup),
@@ -571,7 +582,7 @@ def __make_granola():
 		"Allow pan to sit in freezer for approximately 1 hour."
 	],
 	based_on_link="https://www.inspirededibles.ca/2013/05/blueberry-bliss-breakfast-bars-raw.html",
-	additional_info="Things stuck together well. We used peanut butter instead of almond butter but I imagine either would be fine.")
+	notes=["Things stuck together well. We used peanut butter instead of almond butter but I imagine either would be fine."])
 
 	__make_recipe("Trail mix", [
 		Ingredient("Mixed nuts", *ThreeHalvesCup),
@@ -583,9 +594,11 @@ def __make_granola():
 	], [
 		"Mix together"
 	],
-	additional_info="This wasn't the greatest of all time, but it might be worth another shot at some point."
-					" The nuts mixture was between peanuts (primary), cashews, and almonds."
-					" We didn't notice the cinnamon and salt.")
+	notes=[
+		"This wasn't the greatest of all time, but it might be worth another shot at some point.",
+		"The nuts mixture was between peanuts (primary), cashews, and almonds.",
+		"We didn't notice the cinnamon and salt."
+	])
 
 
 def __make_salads():
@@ -605,10 +618,11 @@ def __make_salads():
 		"Before serving, toss salad with crumbled bacon and sunflower seeds."
 	],
 	based_on_link="https://www.allrecipes.com/recipe/16098/alysons-broccoli-salad/",
-	additional_info="I had written down to sub in 1 tbsp of oil for one of the tbsps of vinegar.\
-		(The original recipe called for white wine vinegar, btw).\
-		Also note that you may need a big sheet pan or two skillets for the bacon. (I've used a sheet pan.)\
-		Also I've wondered before if a tsp of lemon juice or any other spices would help anything. Not sure what we used last time (July 2019).")
+	notes=[
+		"I had written down to sub in 1 tbsp of oil for one of the tbsps of vinegar. (The original recipe called for white wine vinegar, btw).",
+		"Also note that you may need a big sheet pan or two skillets for the bacon. (I've used a sheet pan.)",
+		"Also I've wondered before if a tsp of lemon juice or any other spices would help anything. Not sure what we used last time (July 2019)."
+	])
 
 	__make_recipe("Chicken salad", [
 		Ingredient("Chicken", 9, Unit.DRY_OZ),
@@ -625,9 +639,11 @@ def __make_salads():
 		"Combine ingredients in large mixing bowl and eat."
 	],
 	based_on_link="http://allrecipes.com/Recipe/Holiday-Chicken-Salad/",
-	additional_info="Have done onion w/o green pepper and green pepper w/o onion, or a little bit of both.\
-		Also would be interested in trying this with a meat substitute some time.\
-		Haven't tried toasting the walnuts, although that could be fun. Not sure how noticeable though.")
+	notes=[
+		"Have done onion w/o green pepper and green pepper w/o onion, or a little bit of both.",
+		"Also would be interested in trying this with a meat substitute some time.",
+		"Haven't tried toasting the walnuts, although that could be fun. Not sure how noticeable though."
+	])
 
 	__make_recipe("Greek salad", [
 		Ingredient("Cucumber", 1, "large"),
