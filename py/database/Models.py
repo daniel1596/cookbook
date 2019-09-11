@@ -45,6 +45,8 @@ class Ingredient(Base):
     RecipeID = IntegerForeignKey(Recipe, nullable=True)
     Recipe = relationship("Recipe", back_populates="Ingredients")
 
+    # I'm not including a __repr__(self) method override here because Vue is handling the UI part
+
 
 class Step(Base):
     __tablename__ = "Step"
@@ -57,4 +59,4 @@ class Step(Base):
     Recipe = relationship("Recipe", back_populates="Steps")
 
     def __repr__(self):
-        return self.Description
+        return self.Description  # leave this in - this method is used on the front-end
