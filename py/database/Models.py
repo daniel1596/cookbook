@@ -12,14 +12,13 @@ class Recipe(Base):
 
 	RecipeID = PrimaryKey()
 	Name = StringNotNull()
-	# Todo at some point: add images to the db? Probably good to do, presumably just the file path of the images.
-	#  Also a little concerned about taking up a bunch of space in RiouxSVN with images... maybe I'd need the Pi, then, as a home server
+	BasedOnLink = Column(String, nullable=True)
+
+	# At some point: add image file paths to the db? Might have to store the actual images on a server...
 
 	Ingredients = relationship("Ingredient", back_populates="Recipe")
 	Steps = relationship("Step", back_populates="Recipe")
-
-	BasedOnLink = Column(String, nullable=True)
-	AdditionalInfo = Column(String, nullable=True)  # todo - make this a list of items with 1-many relationship, and render them in HTML as a <ul>
+	Notes = relationship("Note", back_populates="Recipe")
 
 
 class Ingredient(Base):
@@ -60,3 +59,25 @@ class Step(Base):
 
 	def __repr__(self):
 		return self.Description  # leave this in - this method is used on the front-end
+
+
+class Note(Base):
+	"""
+	This class is necessary and not overkill because it allows recipes to have a list of "note" items
+	 that will be a bullet-separated list in the markup.
+	Otherwise, we wouldn't be able to have a list of items stored in the database.
+	"""
+
+	__tablename__ = "Note"
+
+	NoteID = PrimaryKey()
+	Text = StringNotNull()
+
+	RecipeID = IntegerForeignKey(Recipe, nullable=True)
+	Recipe = relationship("Recipe", back_populates="Notes")
+
+	def __init__(self, text: str):
+		self.Text = text
+
+	def __repr__(self):
+		return self.Text

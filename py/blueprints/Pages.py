@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 
 from py.Config import Config
-from py.database.Main import get_recipe_by_name
+from py.database.Queries import get_recipe_by_name
 
 
 Pages = Blueprint("Pages", __name__)

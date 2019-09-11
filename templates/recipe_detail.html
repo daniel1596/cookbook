@@ -35,14 +35,18 @@
 					<div class="col-8">
 						<h4>Steps:</h4>
 						<!-- Non-ingredient recipe properties are static and thus can be loaded via Flask/Jinja -->
-						<ul>
+						<ul class="mb-4">
 							{% for step in recipe.Steps %}
 								<li>{{ step }}</li>
 							{% endfor %}
 						</ul>
-						{% if recipe.AdditionalInfo %}
-							<h5>Additional information</h5>
-							<p>{{ recipe.AdditionalInfo }}</p>
+						{% if recipe.Notes %}
+							<h5>Notes</h5>
+							<ul>
+								{% for note in recipe.Notes %}
+									<li>{{ note }}</li>
+								{% endfor %}
+							</ul>
 						{% else %}
 							<!-- <img src="https://placekitten.com/480/240" alt="480x240 kitten" /> -->
 						{% endif %}
