@@ -6,7 +6,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from py.Config import Config
 
 
-engine = create_engine(Config.DB_LOCATION.value, echo=False)
+engine = create_engine(Config.database_location, echo=False)
 
 session = scoped_session(sessionmaker(bind=engine))
 
@@ -22,11 +22,11 @@ def reset_data():
 
 """
 This is currently unused; currently what's happening is that the session is created on program start,
-and then closed
+and then closed on app teardown I think. Somehow it works; that part is abstracted away.
 """
 @contextmanager
 def create_session(*, is_init: bool = False) -> scoped_session:
-	engine = create_engine(Config.DB_LOCATION.value, echo=True)  # "echo" is verbose mode (default: False)
+	engine = create_engine(Config.database_location, echo=True)  # "echo" is verbose mode (default: False)
 
 	# I'm keeping the defaults of autoflush=True and autocommit=False.
 	session = scoped_session(sessionmaker(bind=engine))
