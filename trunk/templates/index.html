@@ -7,30 +7,30 @@
 			<h4 class="mb-3">Search by recipe name or ingredient:</h4>
 			<input id="searchBox" type="text" class="form-control mx-auto w-50" v-model="recipeNameSearch" />
 		</div>
-        <div id="searchResults" class="d-none">
-            <h5 class="mb-2">Search results</h5>
-            <!-- I had thought about separating the results by recipe name and ingredient name, but I'm not sure if
-                  I actually want to do that. In a way, I don't mind having all the results together.
-                Either way, that wouldn't be difficult to fix if I decide it's a need after beta testing haha. -->
-            <div v-if="!recipeNameSearch">
-                <p class="text-white-50"><em>Please enter search text.</em></p>
-            </div>
-            <div v-else-if="filteredResults && filteredResults.length > 0 && filteredResults.length <= maxResultsToDisplay">
-                <div v-for="recipe in filteredResults">
-                    <a class="index-ingredient-link" :href="getDetailLink(recipe)">[[ recipe.Name ]]</a>
-                </div>
-            </div>
-            <div v-else-if="filteredResults && filteredResults.length > maxResultsToDisplay">
-                <p class="text-white-50"><em>[[ helperTextTooManyResults ]]</em></p>
-            </div>
-            <div v-else>
-                <p>There were no results.</p>
-            </div>
-        </div>
-        <p v-if="filteredResults.length == 1" class="mt-4 text-white-50">
-            <em>(Hit the "Enter" button to view this recipe.)</em>
-        </p>
-    </div>
+		<div id="searchResults" class="d-none">
+			<h5 class="mb-2">Search results</h5>
+			<!-- I had thought about separating the results by recipe name and ingredient name, but I'm not sure if
+				  I actually want to do that. In a way, I don't mind having all the results together.
+				Either way, that wouldn't be difficult to fix if I decide it's a need after beta testing haha. -->
+			<div v-if="!recipeNameSearch">
+				<p class="text-white-50"><em>Please enter search text.</em></p>
+			</div>
+			<div v-else-if="filteredResults && filteredResults.length > 0 && filteredResults.length <= maxResultsToDisplay">
+				<div v-for="recipe in filteredResults">
+					<a class="index-ingredient-link" :href="getDetailLink(recipe)">[[ recipe.Name ]]</a>
+				</div>
+			</div>
+			<div v-else-if="filteredResults && filteredResults.length > maxResultsToDisplay">
+				<p class="text-white-50"><em>[[ helperTextTooManyResults ]]</em></p>
+			</div>
+			<div v-else>
+				<p>There were no results.</p>
+			</div>
+		</div>
+		<p v-if="filteredResults.length == 1" class="mt-4 text-white-50">
+			<em>(Hit the "Enter" button to view this recipe.)</em>
+		</p>
+	</div>
 {% endblock %}
 
 {% block end_scripts %}
@@ -39,8 +39,8 @@
 			el: "#vue-homepage",
 			delimiters: ['[[', ']]'],
 			data: {
-			    helperTextTooManyResults: "More than 15 recipes matched your query. Please refine your search.",
-			    maxResultsToDisplay: 15,
+				helperTextTooManyResults: "More than 15 recipes matched your query. Please refine your search.",
+				maxResultsToDisplay: 15,
 				recipeNameSearch: "",
 
 				// these need to be initialized, but can't be initialized as AJAX-acquired results, according to Vue docs
