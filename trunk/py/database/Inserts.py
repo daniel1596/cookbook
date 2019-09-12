@@ -28,12 +28,12 @@ def insert_all():
 	__make_desserts()
 	__make_dips()
 	__make_granola()
+	# holding off on meat-based entrees for now
+	__make_pasta()
+	__make_rice_based()
 
 	"""
 	Haven't made yet:
-	- meats (not sure if I'll add all these but we'll see)
-	- pasta 
-	- rice
 	- smoothies
 	- soups
 	"""
@@ -368,8 +368,7 @@ def __make_desserts():
 	])
 
 	__make_recipe("Cinnamon apple crumb cake", [
-		# for the cake
-		Ingredient("Butter", 6, Unit.TBSP),
+		Butter(6, Unit.TBSP, is_first_in_section=True, section_name="Cake layer"),
 		Ingredient("Sugar", *OneThirdCup),
 		Egg(2),
 		Ingredient("Vanilla extract", *OneTeaspoon),
@@ -381,9 +380,7 @@ def __make_desserts():
 		Ingredient("Ground flaxseed", *OneTablespoon),
 		BakingPowder(*TwoTeaspoons),
 		AlmondMilk(*OneHalfCup),
-
-		# for the streusel layer
-		Butter(*ThreeTablespoons),
+		Butter(*ThreeTablespoons, is_first_in_section=True, section_name="Streusel layer"),
 		Ingredient("Granny smith apples, peeled and chopped into 1/2 inch pieces", *OneCup),
 		Sugar(*OneQuarterCup),
 		Cinnamon(*OneTeaspoon),
@@ -391,14 +388,14 @@ def __make_desserts():
 		Walnuts(*OneQuarterCup),
 		Salt(None, "A pinch")
 	], [
-		"TO MAKE THE CAKE LAYER:",
+		"-- Cake layer --",
 		"Cream the butter and sweetener together until smooth and fluffy.",
 		"Add the eggs one at a time, beating well after each, then add the vanilla extract.",
 		"In a medium-sized bowl, combine the almond flour, coconut flour, cinnamon, baking powder, xanthan gum and salt and mix well.",
 		"Add the dry ingredients to the wet ingredients and mix.",
 		"Pour in the almond milk and mix until just blended.",
 		"Spread the batter into a greased 9×9 baking pan.",
-		"TO MAKE THE APPLE STREUSEL LAYER:",
+		"-- Streusel layer --",
 		"Melt the butter in a medium skillet.",
 		"Add the apples, cinnamon and sweetener and cook for 2 minutes, stirring the entire time.",
 		"Remove from the heat and stir in the almond flour, pinch of salt and chopped walnuts. Stir well until a crumbly dough forms.",
@@ -599,6 +596,35 @@ def __make_granola():
 		"The nuts mixture was between peanuts (primary), cashews, and almonds.",
 		"We didn't notice the cinnamon and salt."
 	])
+
+
+def __make_pasta():
+	__make_recipe("Pesto pasta", [
+		Ingredient("Pasta (not sure which kind I used but it's supposed to be bow-tie)", 13, Unit.DRY_OZ),
+		GarlicCloves(2),
+		Ingredient("Boneless skinless chicken breasts", 2, None),
+		Ingredient("Crushed red pepper flakes", None, "To taste"),
+		Ingredient("Sun-dried tomatoes, oil-packed, drained/cut into strips", *OneThirdCup),
+		Ingredient("Pesto sauce", *OneCup)
+	], [
+		"Cook the pasta for about 8-10 minutes or until al dente",
+		"Heat oil from sun-dried tomatoes (maybe a few TBSP) in a large skillet over medium heat.",
+		"Saute garlic until tender, then stir in chicken. Season with red pepper flakes.",
+		"Cook until chicken is golden, and cooked through.",
+		"Combine everything in a large bowl.",
+		"Top each bowl with some parmesan"
+	],
+	based_on_link="https://www.allrecipes.com/recipe/46982/pesto-pasta-with-chicken/",
+	notes=[
+		"I made this recipe only once, several years ago, but would love to try again with gluten-free pasta.",
+		"At that time, I ommitted the sun-dried tomatoes, for reasons unknown to me. Maybe I had not yet acquired a taste for them.",
+		"I also wonder about using sun-dried tomato pesto, which might be an option. Not sure how that would taste."
+	])
+
+
+def __make_rice_based():
+	# todo
+	pass
 
 
 def __make_salads():
