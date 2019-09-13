@@ -602,7 +602,7 @@ def __make_pasta():
 	__make_recipe("Pesto pasta", [
 		Ingredient("Pasta (not sure which kind I used but it's supposed to be bow-tie)", 13, Unit.DRY_OZ),
 		GarlicCloves(2),
-		Ingredient("Boneless skinless chicken breasts", 2, None),
+		Ingredient("Boneless skinless chicken breasts", 2),
 		Ingredient("Crushed red pepper flakes", None, "To taste"),
 		Ingredient("Sun-dried tomatoes, oil-packed, drained/cut into strips", *OneThirdCup),
 		Ingredient("Pesto sauce", *OneCup)
