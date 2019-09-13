@@ -30,7 +30,7 @@ def insert_all():
 	__make_granola()
 	# holding off on meat-based entrees for now
 	__make_pasta()
-	__make_rice_based()
+	__make_rice_quinoa_based()
 
 	"""
 	Haven't made yet:
@@ -622,9 +622,34 @@ def __make_pasta():
 	])
 
 
-def __make_rice_based():
-	# todo
-	pass
+def __make_rice_quinoa_based():
+	__make_recipe("Quinoa and black beans", [
+		CanolaOil(*OneTeaspoon),
+		DicedOnion(1),
+		GarlicCloves(3),
+		Quinoa(*ThreeQuartersCup),
+		VegetableBroth(*ThreeHalvesCup),
+		Cumin(*OneTeaspoon),
+		CayennePepper(*OneQuarterTeaspoon),
+		Salt(None, "to taste"),
+		Pepper(None, "to taste"),
+		Ingredient("Frozen corn kernels", *OneCup),
+		Ingredient("Black beans", 2, "15-oz cans"),
+		Cilantro(*OneHalfCup, is_fresh=True)
+	], [
+		"Heat oil in a saucepan over medium heat; cook and stir onion and garlic until lightly browned, about 10 minutes.",
+		"Mix quinoa into onion mixture and cover with vegetable broth; season with cumin, cayenne pepper, salt, and pepper.",
+		"Bring the mixture to a boil.",
+		"Cover, reduce heat, and simmer until quinoa is tender and broth is absorbed, about 20 minutes",
+		"Stir frozen corn into the saucepan, and continue to simmer until heated through, about 5 minutes; mix in the black beans and cilantro."
+	],
+	based_on_link="https://www.allrecipes.com/recipe/49552/quinoa-and-black-beans/",
+	notes=[
+		"Probably more of a side than a main, but could go either way potentially.",
+		"Had a bit of kick."
+	])
+
+	# todo 2 more here - jambalaya(?) and bibimbap
 
 
 def __make_salads():

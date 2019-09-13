@@ -48,6 +48,21 @@ def DriedFruit(quantity: Optional[float], unit_of_measure="", *, does_scale=True
 # endregion
 
 
+# region Grains
+
+def Oats(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Oats", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
+def RolledOats(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Rolled oats", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
+
+def Quinoa(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Quinoa", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
+# endregion
+
+
 # region Ingredients with no units of measure
 
 def Avocado(quantity: float, is_first_in_section: bool=False, section_name: str=""):
@@ -120,17 +135,6 @@ def Walnuts(quantity: Optional[float], unit_of_measure="", *, does_scale=True, i
 # endregion
 
 
-# region Oats
-
-def Oats(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
-	return Ingredient("Oats", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
-
-def RolledOats(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
-	return Ingredient("Rolled oats", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
-
-# endregion
-
-
 # region Spices and baking soda/powder
 
 def BakingPowder(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
@@ -155,6 +159,9 @@ def Cinnamon(quantity: Optional[float], unit_of_measure="", *, does_scale=True, 
 
 def Cloves(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Cloves", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
+def Cumin(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Cumin", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
 
 def GarlicCloves(quantity: Optional[float], *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
