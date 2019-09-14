@@ -368,7 +368,7 @@ def __make_desserts():
 	])
 
 	__make_recipe("Cinnamon apple crumb cake", [
-		Butter(6, Unit.TBSP, is_first_in_section=True, section_name="Cake layer"),
+		Butter(5, Unit.TBSP, is_first_in_section=True, section_name="Cake layer"),
 		Ingredient("Sugar", *OneThirdCup),
 		Egg(2),
 		Ingredient("Vanilla extract", *OneTeaspoon),
@@ -391,13 +391,13 @@ def __make_desserts():
 		"-- Cake layer --",
 		"Cream the butter and sweetener together until smooth and fluffy.",
 		"Add the eggs one at a time, beating well after each, then add the vanilla extract.",
-		"In a medium-sized bowl, combine the almond flour, coconut flour, cinnamon, baking powder, xanthan gum and salt and mix well.",
+		"In a medium-sized bowl, combine the flours, gf baking mix, cinnamon, baking powder, and salt and mix well.",
 		"Add the dry ingredients to the wet ingredients and mix.",
 		"Pour in the almond milk and mix until just blended.",
 		"Spread the batter into a greased 9×9 baking pan.",
 		"-- Streusel layer --",
 		"Melt the butter in a medium skillet.",
-		"Add the apples, cinnamon and sweetener and cook for 2 minutes, stirring the entire time.",
+		"Add the apples, cinnamon and sugar and cook for 2 minutes, stirring the entire time.",
 		"Remove from the heat and stir in the almond flour, pinch of salt and chopped walnuts. Stir well until a crumbly dough forms.",
 		"Spoon the topping evenly over the cake batter and spread out.",
 		"Bake the cake in a 375 degree oven for 35 minutes. If you find the topping getting too brown, cover it loosely with parchment or aluminum foil for the final 10 minutes.",
@@ -405,7 +405,7 @@ def __make_desserts():
 		"Alternatively, you can bake these in 9 large muffin cups for about 20 minutes at 375 degrees (F) or until a knife inserted in the center comes out clean."
 	],
 	based_on_link="https://www.ibreatheimhungry.com/cinnamon-apple-crumb-cake-low-carb/print/16669/",
-	notes=["Eat within 5 days. It didn't have a ton of crumb topping, like an apple crisp would, so be prepared for that"])
+	notes=["It didn't have a ton of crumb topping, like an apple crisp would, so be prepared for that.", "Eat within 5 days."])
 
 	__make_recipe("Apple oat cookies", [
 		Oats(*OneCup),
