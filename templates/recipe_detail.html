@@ -16,8 +16,8 @@
 				<div class="row">
 					<div class="col bg-light">
 						<h4>Ingredients:</h4>
-						<!-- I'm handling all this with Vue, rather than in Flask, because the ingredient quantities
-							  are dynamic (if one halves/doubles/etc. the recipe).
+						<!-- I'm handling all this with Vue, rather than in Flask,
+						       because the ingredient quantities are dynamic (if one halves/doubles/etc. the recipe).
 							 This changes ingredient properties in the front-end while leaving the data layer alone. -->
 						<ul v-if="!ingredientsSectionStarters.length" id="ingredients">
 							<li v-for="ingredient of ingredients">
@@ -25,7 +25,9 @@
 							</li>
 						</ul>
 						<section v-else v-for="section of ingredientSections">
-							<h6>[[ section[0].SectionName ]]</h6>
+							<!-- Get the section name from the first ingredient in the section (0-indexed),
+							      which is the only ingredient in the section that will have that attribute set. -->
+                            <h6>[[ section[0].SectionName ]]</h6>
 							<ul>
 								<li v-for="ingredient of section">[[ displayIngredient(ingredient) ]]</li>
 							</ul>
@@ -34,7 +36,7 @@
 					</div>
 					<div class="col-8">
 						<h4>Steps:</h4>
-						<!-- Non-ingredient recipe properties are static and thus can be loaded via Flask/Jinja -->
+						<!-- Non-ingredient recipe properties are unchanging and thus can be loaded via Flask/Jinja -->
 						<ul class="mb-4">
 							{% for step in recipe.Steps %}
 								<li>{{ step }}</li>
@@ -44,12 +46,11 @@
 							<h5>Notes</h5>
 							<ul>
 								{% for note in recipe.Notes %}
-									<li>{{ note }}</li>
-								{% endfor %}
+                                    <li>{{ note }}</li>
+                                {% endfor %}
 							</ul>
-						{% else %}
-							<!-- <img src="https://placekitten.com/480/240" alt="480x240 kitten" /> -->
 						{% endif %}
+                        <!-- Not sure if I want to load the recipe image here perhaps? -->
 						{% if recipe.BasedOnLink %}
 							<hr />	
 							<p>Based on <a href="{{ recipe.BasedOnLink }}" target="_blank">this</a>.</p>
@@ -74,10 +75,17 @@
 			computed: {
 				ingredients() {
 					const ingredients = this.ingredientsInitial;
+					const quantitiesKeepDecimal = [5.3];
 
 					ingredients.forEach((ing) => {
-						ing.QuantityUI = ing.Quantity > 0 ? new Fraction(ing.Quantity).toFraction(true) : "";
-					});
+                        if (quantitiesKeepDecimal.includes(ing.Quantity)) {
+                            ing.QuantityUI = ing.Quantity;
+                        } else if (ing.Quantity > 0) {
+                            ing.QuantityUI = new Fraction(ing.Quantity).toFraction(true);
+                        } else {
+                            ing.QuantityUI = "";
+                        }
+                    });
 
 					return ingredients;
 				},
@@ -108,7 +116,12 @@
 			},
 			methods: {
 				displayIngredient: function(ingredient) {
-					return `${ingredient.QuantityUI} ${ingredient.UnitOfMeasure} ${ingredient.FoodItem.toLowerCase()}`;
+                    const wordsKeepUpperCase = ["Greek"];
+                    const foodItem = wordsKeepUpperCase.some(word => ingredient.FoodItem.includes(word))
+                        ? ingredient.FoodItem
+                        : ingredient.FoodItem.toLowerCase();
+
+					return `${ingredient.QuantityUI} ${ingredient.UnitOfMeasure} ${foodItem}`;
 				},
 				isLastInArray: function(item, array) {
 					// this could be put this method into a base Vue class, but that's not necessary at this time

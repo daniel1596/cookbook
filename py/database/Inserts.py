@@ -2,7 +2,7 @@ from typing import List
 
 from py.database.Ingredients import *
 from py.database.Models import *
-from py.database.Setup import reset_data, session
+from py.database.core.Setup import reset_data, session
 from py.database.Unit import *
 
 """ 
@@ -28,16 +28,11 @@ def insert_all():
 	__make_desserts()
 	__make_dips()
 	__make_granola()
-	# holding off on meat-based entrees for now
 	__make_pasta()
 	__make_rice_quinoa_based()
-
-	"""
-	Haven't made yet:
-	- smoothies
-	- soups
-	"""
 	__make_salads()
+	__make_smoothies()
+	__make_soups()
 
 
 def __make_bean_based():
@@ -367,7 +362,7 @@ def __make_desserts():
 		"Taking down the sugar to 1/4 cup made it not as tasty as 1/2 haha."
 	])
 
-	__make_recipe("Cinnamon apple crumb cake", [
+	__make_recipe("Cinnamon apple coffee cake", [
 		Butter(5, Unit.TBSP, is_first_in_section=True, section_name="Cake layer"),
 		Ingredient("Sugar", *OneThirdCup),
 		Egg(2),
@@ -405,7 +400,13 @@ def __make_desserts():
 		"Alternatively, you can bake these in 9 large muffin cups for about 20 minutes at 375 degrees (F) or until a knife inserted in the center comes out clean."
 	],
 	based_on_link="https://www.ibreatheimhungry.com/cinnamon-apple-crumb-cake-low-carb/print/16669/",
-	notes=["It didn't have a ton of crumb topping, like an apple crisp would, so be prepared for that.", "Eat within 5 days."])
+	notes=[
+		"I think I want to add another cup or so of apples next time to the topping. Maybe take down the flour a bit somewhere?"
+		" It is heavy on flour/sugar/butter, so it tastes more bread-y than I might like. Sticks together well, though.",
+		"Might also try to substitute some in canola oil for some of the butter.",
+		"I made this most recently in an 8x8 and that was fine, although a 9x9 might be optimal so it's less thick",
+		"Eat within 5 days (ideally 3)."
+	])
 
 	__make_recipe("Apple oat cookies", [
 		Oats(*OneCup),
@@ -649,8 +650,6 @@ def __make_rice_quinoa_based():
 		"Had a bit of kick."
 	])
 
-	# todo 2 more here - jambalaya(?) and bibimbap
-
 
 def __make_salads():
 	__make_recipe("Broccoli salad", [
@@ -726,4 +725,99 @@ def __make_salads():
 	- I'm curious if it would be good as a chicken marinade or something like that, or maybe in stir fry? Hmm.
 	"""
 
+	__make_recipe("Tahini-based salad dressing", [
+		Tahini(*OneHalfCup),
+		OliveOil(*OneHalfCup),
+		Ingredient("Water", *OneHalfCup),
+		SoySauce(*OneQuarterCup),
+		Ingredient("Red wine (or apple cider, which is probably what I used) vinegar", *TwoTablespoons),
+		LemonJuice(*TwoTablespoons),
+		MincedGarlic(*TwoTeaspoons),  # = 2 cloves
+		Ginger(None, "A few sprinkles"),
+		Pepper(None, "A tiny bit")
+	], [
+		"Blend everything together in a blender until smooth."
+	],
+	based_on_link="https://www.allrecipes.com/recipe/215069/tasteful-tahini-salad-dressing/",
+	notes=[
+		"Next time, don't try to be a hero and use only a bowl to mix things in - use the blender!"
+		" Otherwise, it won't mix very well and the consistency will be off (some parts too liquid-y, some too thick).",
+		"Beyond that, it didn't taste bad, but it didn't taste like a salad dressing I'm used to having on spinach."
+		" It was pretty good dipping carrots into it. Other reviewers on Allrecipes suggest dipping cucumbers/zucchini in it,"
+		" or using on veggie burgers. I am also curious if it would work well in stir fry or with marinating tofu/meat."
+	])
 
+
+def __make_smoothies():
+	__make_recipe("Spinach berry smoothie", [
+		FrozenMixedBerries(*OneCup),
+		Spinach(*OneCup),
+		Water(*OneCup),
+		Banana(1)
+	], [
+		"Combine the water and spinach. Puree until smooth.",
+		"Add the fruit and blend it all again"
+	],
+	based_on_link="https://simplegreensmoothies.com/recipes/green-smoothies/spinach-berry-smoothie",
+	notes=[
+		"The original recipe says you can substitute 1/2 an avocado for the banana if you want to cut the sugar"
+		" but still want the creaminess the banana provides. I'm intruiged by that but have not tried it yet.",
+		"Using a frozen banana will make the smoothie colder and icier, more of a smoothie consistency and like a juice.",
+		"I also found an alternative recipe that is pretty similar, subbing in an apple for the frozen berries and"
+		" adding in a few extra tbsp/tsp of oats, flaxseed, and cinnamon. See here:"
+		" https://thewateringmouth.com/apple-cinnamon-green-smoothie-recipe-video/"
+	])
+
+
+def __make_soups():
+	__make_recipe("Taco soup", [
+		GroundTurkey(1, Unit.POUND),
+		Ingredient("Pinto beans", 1, "can"),
+		Ingredient("Frozen corn", None),
+		DicedTomatoes(1, "can"),
+		Ingredient("Tomato sauce", None),
+		Ingredient("Hidden Valley Ranch dressing mix", None),
+		Ingredient("McCormick Brand Taco Seasoning", None),
+		DicedOnion(1),
+		Ingredient("Lentils maybe?", None)
+	], [
+		"Make this in the Crock pot. To my knowledge you mostly put everything in and just put it on low for 8 hours.",
+		"Might have to check with MK on that though."
+	],
+	notes=[
+		"Recipe was originally from Dr. Selby, modified slightly.",
+		"Need to double-check ingredients with Molly Kate whenever she makes this next",
+		"At some point we want to get away from seasoning packets, or at least I do... but I'm not sure what we would"
+		" need to make that work to use fresher ingredients or whatever.",
+		"Also I had previously used a turkey chili recipe that comes pretty close to this, but subbed in an onion for"
+		" the corn and that was mostly the only difference. See http://allrecipes.com/recipe/80969/simple-turkey-chili/"
+	])
+
+	__make_recipe("Tomato soup", [
+		Tomato(4),
+		DicedOnion(1),
+		Basil(*ThreeHalvesTablespoons, is_fresh=False),
+		GarlicCloves(3),
+		Ingredient("Greek yogurt", 5.3, Unit.DRY_OZ),
+		Cloves(None, "several shakes"),
+		Salt(*OneHalfTeaspoon),
+		Sugar(*OneQuarterTeaspoon),
+		CayennePepper(2, "shakes")
+	], [
+		"Sautee garlic and then add the diced/minced onions (they'll be blended later regardless) and sautee those too.",
+		"Chop 3 tomatoes (no need to dice) and add them to the mix. Bring to a boil (tomato juice will be primarily what boils).",
+		"Add 2 cups chicken broth and cook at a low boil for 20 minutes.(Meanwhile, do dishes or get other ingredients out.)",
+		"At that time, take the pot off the burner to let it cool a bit and stir in 3 / 2 tbsp dried basil.(add other spices here? or later?)",
+		"Pour into a blender and blend it all.",
+		"Put the pan back on the stove and melt 2 tbsp butter.",
+		"Add 2 tbsp flour to make a roux.",
+		"Add the Greek yogurt slowly to the roux.",
+		"Slowly pour the blended tomato mixture back into the pot and stir.",
+		"Add the rest of the spices (here or step 4?), salt, and sugar, and maybe a shake of black pepper next time too."
+	],
+	based_on_link="https://www.allrecipes.com/recipe/39544/garden-fresh-tomato-soup/",
+	notes=[
+		"I did this with 3 tomatoes last time but am upping it to 4 so it will seem more tomato-y and last longer."
+		" With 3, it was wonderfully flavorful, but the tomato flavor didn't shine through as much."
+		" I hate to mess with a good thing, but it may be worth it here.",
+	])
