@@ -775,9 +775,9 @@ def __make_soups():
 		Ingredient("Pinto beans", 1, "can"),
 		Ingredient("Frozen corn", None),
 		DicedTomatoes(1, "can"),
-		Ingredient("Tomato sauce", None),
-		Ingredient("Hidden Valley Ranch dressing mix", None),
-		Ingredient("McCormick Brand Taco Seasoning", None),
+		Ingredient("Tomato sauce (how much?)", None),
+		Ingredient("Hidden Valley ranch dressing mix", None),
+		Ingredient("McCormick Brand taco seasoning", None),
 		DicedOnion(1),
 		Ingredient("Lentils maybe?", None)
 	], [
