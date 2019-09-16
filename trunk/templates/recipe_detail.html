@@ -19,7 +19,7 @@
 						<!-- I'm handling all this with Vue, rather than in Flask,
 						       because the ingredient quantities are dynamic (if one halves/doubles/etc. the recipe).
 							 This changes ingredient properties in the front-end while leaving the data layer alone. -->
-						<ul v-if="!ingredientsSectionStarters.length" id="ingredients">
+						<ul v-if="!sectionStarterIngredients.length" id="ingredients">
 							<li v-for="ingredient of ingredients">
 								[[ displayIngredient(ingredient) ]]
 							</li>
@@ -97,6 +97,9 @@
 						.map(ing => ing.IngredientID)
 						.map(ingID => ingredients.findIndex(ing => ing.IngredientID === ingID));
 
+					if (!indiciesFirstInSection)
+					    return [];  // this is mystifyingly not working... hmm. may need to investigate.
+
 					// A bit of a kludge, but this logic should work for 2 or 3 ingredient sections
 					// Though it hasn't been tested on more than 2 sections so far
 					let sections = [];
@@ -110,18 +113,22 @@
 
 					return sections;
 				},
-				ingredientsSectionStarters() {
+				sectionStarterIngredients() {
 					return this.ingredientsInitial.filter(ing => ing.IsFirstInSection);
 				}
 			},
 			methods: {
 				displayIngredient: function(ingredient) {
-                    const wordsKeepUpperCase = ["Greek"];
-                    const foodItem = wordsKeepUpperCase.some(word => ingredient.FoodItem.includes(word))
+				    const titleCaseWords = ["Greek", "Hidden Valley", "McCormick"];  // Not sure if this is how I want to do this long-term... we'll see.
+                    const keepIngredientCasing =
+                        titleCaseWords.some(word => ingredient.FoodItem.includes(word))
+                        || (!ingredient.QuantityUI && !ingredient.UnitOfMeasure);
+
+                    const foodItemUI = keepIngredientCasing
                         ? ingredient.FoodItem
                         : ingredient.FoodItem.toLowerCase();
 
-					return `${ingredient.QuantityUI} ${ingredient.UnitOfMeasure} ${foodItem}`;
+					return `${ingredient.QuantityUI} ${ingredient.UnitOfMeasure} ${foodItemUI}`;
 				},
 				isLastInArray: function(item, array) {
 					// this could be put this method into a base Vue class, but that's not necessary at this time
