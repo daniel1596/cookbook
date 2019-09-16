@@ -2,8 +2,8 @@ from sqlalchemy import Column, String, Boolean
 from sqlalchemy.orm import relationship
 from typing import Optional
 
-from py.database.Columns import PrimaryKey, IntegerForeignKey, IntegerNotNull, FloatNotNull, StringNotNull
-from py.database.Setup import Base
+from py.database.core.Columns import PrimaryKey, IntegerForeignKey, IntegerNotNull, FloatNotNull, StringNotNull
+from py.database.core.Setup import Base
 from py.database.Unit import Unit
 
 

@@ -3,10 +3,15 @@ from typing import Optional
 from py.database.Models import Ingredient
 
 """
-These are just some shortcuts for common ingredients
-They actually do help as far as 
+The purpose of these methods is:
+(1) When adding/modifying recipes, I can use auto-complete to add ingredients faster
+(2) They also make the recipe inserts code a little more readable, perhaps
+(3) I don't want to create a separate FoodItem table in the database and reference that every time I create an ingredient.
+		Much better for scripting purposes to keep these methods in memory.
+		
+It is not the most elegant solution - I would love to have a more generic way of doing this - but it will work.
+	And at the moment, that's all I care about. I don't need to spend R&D time implementing an elegant way right now.
 """
-
 
 
 # region Butter and oils
@@ -26,10 +31,17 @@ def CoconutOil(quantity: Optional[float], unit_of_measure="", *, does_scale=True
 def OliveOil(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Olive oil", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
+def Tahini(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Tahini", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
 # endregion
 
 
 # region Canned ingredients
+
+# Not sure what I want to do about beans - if I'm going to default to dried vs canned in some situations, etc.
+def MixedBeans(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Mixed beans", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
 def DicedTomatoes(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Diced tomatoes", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
@@ -42,8 +54,14 @@ def FireRoastedDicedTomatoes(quantity: Optional[float], unit_of_measure="", *, d
 
 # region Fruit
 
+def Banana(quantity: Optional[float], *, is_first_in_section: bool=False, section_name: str=""):
+	return IngredientWithoutUnits("Banana", quantity, is_first_in_section=is_first_in_section, section_name=section_name)
+
 def DriedFruit(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Dried fruit", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
+def FrozenMixedBerries(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Frozen mixed berries", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
 # endregion
 
@@ -74,13 +92,6 @@ def Egg(quantity: float, is_first_in_section: bool=False, section_name: str=""):
 def Tomato(quantity: float, is_first_in_section: bool=False, section_name: str=""):
 	return IngredientWithoutUnits("Tomato", quantity, is_first_in_section=is_first_in_section, section_name=section_name)
 
-def IngredientWithoutUnits(name: str, quantity: float, is_first_in_section: bool=False, section_name: str="") -> Ingredient:
-	name_possibly_pluralized = name if quantity == 1 \
-		else f"{name}s" if not name.endswith("o") \
-		else f"{name}es"
-
-	return Ingredient(name_possibly_pluralized, quantity, does_scale=True, is_first_in_section=is_first_in_section, section_name=section_name)
-
 # endregion
 
 
@@ -105,8 +116,22 @@ def LimeJuice(quantity: Optional[float], unit_of_measure="", *, does_scale=True,
 def MapleSyrup(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Maple syrup", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
+def SoySauce(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Soy sauce", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
 def VegetableBroth(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Vegetable broth", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
+def Water(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Water", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
+# endregion
+
+
+# endregion Meats
+
+def GroundTurkey(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Ground turkey", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
 # endregion
 
@@ -185,7 +210,7 @@ def Salt(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_f
 
 
 def get_name_fresh_or_dried(name: str, is_fresh: bool) -> str:
-	return f"Cilantro, {('fresh' if is_fresh else 'dried')}"
+	return f"{name}, {('fresh' if is_fresh else 'dried')}"
 
 # endregion
 
@@ -226,6 +251,9 @@ def Sugar(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_
 def DicedOnion(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Onion, diced", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
+def Spinach(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Spinach", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
 # endregion
 
 
@@ -235,3 +263,11 @@ def UnsweetenedCoconutFlakes(quantity: Optional[float], unit_of_measure="", *, d
 	return Ingredient("Unsweetened coconut flakes", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
 # endregion
+
+
+def IngredientWithoutUnits(name: str, quantity: float, is_first_in_section: bool=False, section_name: str="") -> Ingredient:
+	name_possibly_pluralized = name if quantity == 1 \
+		else f"{name}s" if not name.endswith("o") \
+		else f"{name}es"
+
+	return Ingredient(name_possibly_pluralized, quantity, does_scale=True, is_first_in_section=is_first_in_section, section_name=section_name)
