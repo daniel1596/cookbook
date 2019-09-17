@@ -405,7 +405,7 @@ def __make_desserts():
 		" It is heavy on flour/sugar/butter, so it tastes more bread-y than I might like. Sticks together well, though.",
 		"Might also try to substitute some in canola oil for some of the butter.",
 		"I made this most recently in an 8x8 and that was fine, although a 9x9 might be optimal so it's less thick",
-		"Eat within 5 days (ideally 3)."
+		"Eat within 4 days (ideally 3)."
 	])
 
 	__make_recipe("Apple oat cookies", [
@@ -624,6 +624,29 @@ def __make_pasta():
 
 
 def __make_rice_quinoa_based():
+	__make_recipe("Burrito bowls", [
+		BrownRice(4, "servings (so says the recipe)"),
+		LimeJuice(*OneTablespoon),
+		Cilantro(*OneHalfCup, is_fresh=True),
+		OliveOil(4/3, Unit.TBSP),
+		ChunkedChicken(*OnePound),
+		Oregano(*ThreeHalvesTeaspoons),
+		Cumin(*OneHalfTeaspoon),
+		Salt(*OneHalfTeaspoon),
+		Pepper(*OneHalfTeaspoon),
+		DicedOnion(1/2),
+		Ingredient("Shredded cheese (recipe recommended Monterey Jack)", *ThreeHalvesCup),
+		Tomato(2)
+	], [
+		"In a large bowl, combine the rice, lime juice, cilantro and a teaspoon of olive oil."
+		" Evenly distribute it among four bowls/containers.",
+		"In the large bowl, toss the raw chicken pieces with oregano, cumin, salt, and pepper until well coated.",
+		"In a large skillet, heat remaining 1 tbsp olive oil over medium heat. Sautee onion about 2-3 minutes,"
+		" then add the chicken until it is no longer pink on the inside (about 5 minutes).",
+		"Divide the chicken/onion mixture over the rice portions, then top with Monterey Jack and tomatoes."
+	],
+	notes=["Would be interested in trying this with a meat substitute, too, but haven't done that yet."])
+
 	__make_recipe("Quinoa and black beans", [
 		CanolaOil(*OneTeaspoon),
 		DicedOnion(1),
@@ -693,6 +716,28 @@ def __make_salads():
 		"Have done onion w/o green pepper and green pepper w/o onion, or a little bit of both.",
 		"Also would be interested in trying this with a meat substitute some time.",
 		"Haven't tried toasting the walnuts, although that could be fun. Not sure how noticeable though."
+	])
+
+	__make_recipe("Chickpea salad", [
+		Ingredient("Chickpeas, dried (about the same as a 15-oz can)", *TwoCups),
+		Cucumber(1),
+		RedBellPepper(1),
+		DicedOnion(1/2),
+		OliveOil(*ThreeTablespoons),
+		AppleCiderVinegar(*TwoTablespoons),
+		GarlicCloves(2),
+		Basil(*OneHalfCup, is_fresh=True),
+		Salt(*ToTaste),
+		Pepper(*ToTaste)
+	], [
+		"In a large bowl, toss together the chickpeas, cucumber, bell pepper, and onion.",
+		"In a small jar with a tight-fitting lid, combine the olive oil, vinegar, garlic, and basil. Shake to emulsify.",
+		"Pour the dressing over the chickpea mixture, season with salt and pepper to taste, and toss to combine.",
+		"Eat or store in the fridge for up to 5 days."
+	],
+	notes=[
+		"The original recipe called for red wine vinegar instead of apple cider vinegar, but other than that"
+		"  I haven't made any changes to the original recipe (from a photo of a cookbook found at a bookstore)."
 	])
 
 	__make_recipe("Greek salad", [

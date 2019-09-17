@@ -44,3 +44,8 @@ OneTeaspoon = (1, Unit.TSP)
 OneHalfTeaspoon = (1/2, Unit.TSP)
 OneQuarterTeaspoon = (1/4, Unit.TSP)
 OneEighthTeaspoon = (1/8, Unit.TSP)
+
+TwoPounds = (2, Unit.POUND)
+OnePound = (1, Unit.POUND)
+
+ToTaste = (None, "to taste")
