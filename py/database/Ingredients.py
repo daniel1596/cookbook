@@ -68,12 +68,14 @@ def FrozenMixedBerries(quantity: Optional[float], unit_of_measure="", *, does_sc
 
 # region Grains
 
+def BrownRice(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Brown rice", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
 def Oats(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Oats", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
 def RolledOats(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Rolled oats", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
-
 
 def Quinoa(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Quinoa", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
@@ -104,6 +106,9 @@ def Milk(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_f
 	return Ingredient("Milk", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
 
+def AppleCiderVinegar(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Apple cider vinegar", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
 def Honey(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Honey", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
@@ -129,6 +134,9 @@ def Water(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_
 
 
 # endregion Meats
+
+def ChunkedChicken(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Chicken, cut into chunks", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
 def GroundTurkey(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Ground turkey", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
@@ -160,7 +168,7 @@ def Walnuts(quantity: Optional[float], unit_of_measure="", *, does_scale=True, i
 # endregion
 
 
-# region Spices and baking soda/powder
+# region Spices, herbs, and baking soda/powder
 
 def BakingPowder(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Baking powder", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
@@ -201,6 +209,9 @@ def Ginger(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is
 
 def Nutmeg(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Nutmeg", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
+def Oregano(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Oregano", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
 def Pepper(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Pepper", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
@@ -248,8 +259,17 @@ def Sugar(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_
 
 # region Vegetables
 
+def Cucumber(quantity: Optional[float], *, is_first_in_section: bool=False, section_name: str=""):
+	return IngredientWithoutUnits("Cucumber", quantity, is_first_in_section=is_first_in_section, section_name=section_name)
+
 def DicedOnion(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Onion, diced", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
+def GreenBellPepper(quantity: Optional[float], *, is_first_in_section: bool=False, section_name: str=""):
+	return IngredientWithoutUnits("Green bell pepper", quantity, is_first_in_section=is_first_in_section, section_name=section_name)
+
+def RedBellPepper(quantity: Optional[float], *, is_first_in_section: bool=False, section_name: str=""):
+	return IngredientWithoutUnits("Red bell pepper", quantity, is_first_in_section=is_first_in_section, section_name=section_name)
 
 def Spinach(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Spinach", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)

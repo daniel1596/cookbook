@@ -87,6 +87,11 @@
                         }
                     });
 
+					ingredients.forEach((ing) => {
+					   if (ing.Quantity > 1 && ing.UnitOfMeasure === "cup")
+					       ing.UnitOfMeasure = "cups";
+                    });
+
 					return ingredients;
 				},
 				ingredientSections() {
