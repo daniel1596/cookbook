@@ -13,7 +13,6 @@ It is not the most elegant solution - I would love to have a more generic way of
 	And at the moment, that's all I care about. I don't need to spend R&D time implementing an elegant way right now.
 """
 
-
 # region Butter and oils
 
 def Butter(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
@@ -52,10 +51,24 @@ def FireRoastedDicedTomatoes(quantity: Optional[float], unit_of_measure="", *, d
 # endregion
 
 
+# region Flour
+
+def AlmondFlour(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Almond flour", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
+def CoconutFlour(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Coconut flour", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
+# endregion
+
+
 # region Fruit
 
 def Banana(quantity: Optional[float], *, is_first_in_section: bool=False, section_name: str=""):
 	return IngredientWithoutUnits("Banana", quantity, is_first_in_section=is_first_in_section, section_name=section_name)
+
+def Blueberries(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Blueberries", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
 def DriedFruit(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Dried fruit", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
@@ -281,6 +294,9 @@ def Spinach(quantity: Optional[float], unit_of_measure="", *, does_scale=True, i
 
 def UnsweetenedCoconutFlakes(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
 	return Ingredient("Unsweetened coconut flakes", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
+
+def VanillaExtract(quantity: Optional[float], unit_of_measure="", *, does_scale=True, is_first_in_section: bool=False, section_name: str=""):
+	return Ingredient("Vanilla extract", quantity, unit_of_measure, does_scale, is_first_in_section, section_name)
 
 # endregion
 

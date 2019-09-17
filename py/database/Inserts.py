@@ -203,6 +203,32 @@ def __make_breads():
 
 
 def __make_breakfast():
+	__make_recipe("Blueberry coconut muffins", [
+		CoconutFlour(*OneCup),
+		Egg(6),
+		CoconutOil(*OneHalfCup),
+		Blueberries(*OneCup),
+		VanillaExtract(*TwoTeaspoons),
+		BakingSoda(*OneHalfTeaspoon),
+		Salt(*ThreeQuartersTeaspoon)
+	], [
+		"Preheat oven to 350 degrees and grease a 12-cup muffin tin.",
+		"In a mixing bowl, whisk together the coconut flour, salt, and baking soda.",
+		"In a smaller bowl, beat together with fork the eggs, coconut oil, and vanilla.",
+		"Add the liquid ingredients to the dry ingredients and mix with a hand mixer on medium speed"
+		" for about one minute or until well combined.",
+		"Stir in the blueberries.",
+		"Spoon the batter evenly into the muffin cups.",
+		"Bake for 20-25 minutes until a fork inserted in center of a muffin comes out clean"
+		" (unless it hits a blueberry).",
+		"Let the muffins cool in the pan for about 10 minutes, then transfer to a wire rack to cool completely."
+	],
+	notes=[
+		"This is fairly egg-y to compensate for the amount of coconut flour in the recipe. This bothered me less than"
+		" it bothered Molly Kate. However, I would consider doing 5 eggs next time or 4 and putting in a little"
+		" almond milk, possibly? Or maybe adding a binder as well (e.g. flaxseed or tapioca starch)?"
+	])
+
 	__make_recipe("Berry-oatmeal bake", [
 		Ingredient("Unsalted butter", *TwoTablespoons, is_first_in_section=True, section_name="Oatmeal"),
 		Ingredient("Rolled oats", *FiveFourthsCup),
