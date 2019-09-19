@@ -23,4 +23,4 @@ class ProductionConfig(ConfigBase):
 
 
 # global object for imports
-Config = DevelopmentConfig()
+Config = DevelopmentConfig()  # not sure when this might go to "production", but for now let's just say development
