@@ -341,7 +341,7 @@ def __make_casseroles():
 		Ingredient("Canned beans", *OneCup),
 		Ingredient("Greek yogurt", 5.3, Unit.DRY_OZ),
 		Ingredient("Mexican cheese", *TwoCups),
-		Ingredient("Diced onion", 1/2, "large onion"),
+		Ingredient("onion, diced", 1/2, "large"),
 		Ingredient("Tomatoes, diced, fire-roasted", 1, "can"),
 		Ingredient("Garlic/powder", None, "several sprinkles (of powder) or a few cloves"),
 		Ingredient("Pepper and other spices (last time was: negligable amounts of cumin, Italian seasoning, and cayenne)", None, "as desired")
