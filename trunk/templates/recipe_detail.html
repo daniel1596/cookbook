@@ -133,9 +133,15 @@
                         titleCaseWords.some(word => ingredient.FoodItem.includes(word))
                         || (!ingredient.QuantityUI && !ingredient.UnitOfMeasure);
 
-                    const foodItemUI = keepIngredientCasing
+                    let foodItemUI = keepIngredientCasing
                         ? ingredient.FoodItem
                         : ingredient.FoodItem.toLowerCase();
+						
+					if (!ingredient.QuantityUI) {
+						// capitalize first letter of food item, then return alternative format
+						foodItemUI = foodItemUI[0].toUpperCase() + foodItemUI.substring(1);
+						return `${foodItemUI}, ${ingredient.UnitOfMeasure}`;
+					}
 
 					return `${ingredient.QuantityUI} ${ingredient.UnitOfMeasure} ${foodItemUI}`;
 				},
