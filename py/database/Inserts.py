@@ -589,7 +589,7 @@ def __make_granola():
 	based_on_link="https://minimalistbaker.com/super-chunky-coconut-granola/",
 	notes=["Can also sub in 1/2 cup peanuts for 1/4 cup peanut butter; I've switched to peanut butter lately simply so I can buy organic."])
 
-	__make_recipe("Premium granola", [
+	__make_recipe("Premium granola bars", [
 		RolledOats(*ThreeHalvesCup),
 		Almonds(*ThreeQuartersCup),
 		DriedFruit(*OneHalfCup),
@@ -597,12 +597,16 @@ def __make_granola():
 		GroundFlaxSeed(*OneThirdCup),
 		Walnuts(*OneThirdCup),
 		PumpkinSeeds(*OneThirdCup),
+		SunflowerSeeds(*OneQuarterCup),
+		Ingredient("Honey or maple syrup", *OneThirdCup),
+		Ingredient("Unsweetened applesauce", *OneQuarterCup),
+		AlmondButter(*OneCup)
 	], [
 		"Line an 8x8 (or so) baking pan with parchment paper",
 		"Combine the dry ingredients in a large bowl and mix to combine.",
 		"Add maple syrup or honey and apple sauce and mix to combine.",
 		"Add almond butter to mixture and mix until combined.",
-		"Place batter in prepared pan pressing down firmly with palm of hands (or mini-roller if you have one) and distributing as evenly as possible.",
+		"Place batter in prepared pan, pressing down firmly with palm of hands and distributing evenly.",
 		"Allow pan to sit in freezer for approximately 1 hour."
 	],
 	based_on_link="https://www.inspirededibles.ca/2013/05/blueberry-bliss-breakfast-bars-raw.html",
