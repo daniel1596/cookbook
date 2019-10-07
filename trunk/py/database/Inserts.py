@@ -57,7 +57,7 @@ def __make_bean_based():
 		"Cook the patties in the oil in a large skillet for a few minutes per side."
 	],
 	notes=["These save fine a couple days, at least, in the fridge."],
-	based_on_link="https,//www.allrecipes.com/recipe/220661/quinoa-black-bean-burgers/")
+	based_on_link="https://www.allrecipes.com/recipe/220661/quinoa-black-bean-burgers/")
 
 	__make_recipe("Mexican bean salad", [
 		Ingredient("Canned beans (Simple Truth organic three-bean)", 2, "cans"),
@@ -82,7 +82,7 @@ def __make_bean_based():
 		"Mix the lower half of the ingredients (wet + spices/herbs) together in a small bowl.",
 		"Pour wet over dry and stir."
 	],
-	based_on_link="http,//allrecipes.com/recipe/14169/mexican-bean-salad/")
+	based_on_link="http://allrecipes.com/recipe/14169/mexican-bean-salad/")
 
 	__make_recipe("Roasted chickpeas", [
 		Ingredient("Chickpeas", *TwoCups),
@@ -107,7 +107,7 @@ def __make_bean_based():
 		"Apparently it is actually a good idea not to add the olive oil until partway through baking (and probably spices too). I should try that.",
 		"Also - before putting in the oven originally, should rinse the beans and pat them dry."
 	],
-	based_on_link="https,//www.allrecipes.com/recipe/197683/simple-roasted-chickpea-snack")
+	based_on_link="https://www.allrecipes.com/recipe/197683/simple-roasted-chickpea-snack")
 
 
 def __make_breads():
@@ -133,7 +133,7 @@ def __make_breads():
 		"Add all dry ingredients, alternating with bananas and milk.",
 		"Fold in walnuts/chocolate chips and pour into prepared pan. Bake for 55 minutes."
 	],
-	based_on_link="http,//allrecipes.com/Recipe/Banana-Oatmeal-Bread/",
+	based_on_link="http://allrecipes.com/Recipe/Banana-Oatmeal-Bread/",
 	notes=["Variation on this per Molly Kate's wishes, reducing sugar to 1/4 cup and adding 1/2 cup chocolate chips"])
 
 	__make_recipe("Cranberry walnut bread", [
@@ -175,7 +175,7 @@ def __make_breads():
 		"Stir in the water and mix well",
 		"Bake for 60-65 minutes"
 	],
-	based_on_link="http,//cookieandkate.com/2011/whole-wheat-pumpkin-bread/",
+	based_on_link="http://cookieandkate.com/2011/whole-wheat-pumpkin-bread/",
 	notes=["Have not tried this yet with gluten-free flour. Also, should go up to 1/2 tsp nutmeg and maybe ginger or pumpkin pie spice."])
 
 	__make_recipe("Apple bread", [
@@ -199,7 +199,7 @@ def __make_breads():
 		"Add wet to dry. Fold in apples and walnuts.",
 		"Pour batter into loaf pan. Bake for 45 minutes."
 	],
-	based_on_link="https,//www.wellplated.com/apple-bread/")
+	based_on_link="https://www.wellplated.com/apple-bread/")
 
 
 def __make_breakfast():
@@ -253,7 +253,7 @@ def __make_breakfast():
 		"To assemble, Pour the oatmeal into the prepared baking dish. Arrange the berries (including any juices) over the oatmeal. Sprinkle with the topping.\
 		 Bake until lightly browned and just set, about 50 minutes. Let cool on a rack for 10 to 15 minutes. Serve warm with a dollop of yogurt or a splash of milk if using."
 	],
-	based_on_link="https,//www.foodnetwork.com/recipes/food-network-kitchen/berry-oatmeal-bake-3362604")
+	based_on_link="https://www.foodnetwork.com/recipes/food-network-kitchen/berry-oatmeal-bake-3362604")
 
 	__make_recipe("Pumpkin oat pancakes", [
 		Ingredient("Pumpkin puree", *OneCup),
@@ -285,7 +285,7 @@ def __make_breakfast():
 		 You may need to adjust the heat up or down at this point.",
 		"Serve the pancakes immediately or keep warm in a 200 degree Fahrenheit oven."
 	],
-	based_on_link="https,//cookieandkate.com/pumpkin-oat-pancakes/",
+	based_on_link="https://cookieandkate.com/pumpkin-oat-pancakes/",
 	notes=["Have also done this with 3/4 cup pumpkin puree and 1/8 extra cup of almond milk, and that worked fine."])
 
 
